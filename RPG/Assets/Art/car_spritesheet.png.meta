@@ -1,28 +1,19 @@
 fileFormatVersion: 2
-guid: 59980a944ed9089428a9b1ea72e031c5
+guid: 71e15968149db7441a9290eb46e68e20
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 6933498987125531172
-    second: toybox-tileset-2nd-ver_1
+      213: 5495412397436416559
+    second: car_spritesheet_0
   - first:
-      213: 5351259471010698329
-    second: toybox-tileset-2nd-ver_2
+      213: -377271330607528281
+    second: car_spritesheet_2
   - first:
-      213: -2597194409376294109
-    second: toybox-tileset-2nd-ver_4
+      213: 5580340340981291197
+    second: car_spritesheet_4
   - first:
-      213: 1915136315141658755
-    second: toybox-tileset-2nd-ver_5
-  - first:
-      213: 4767386671378340545
-    second: toybox-tileset-2nd-ver_12
-  - first:
-      213: -2229031434578914111
-    second: toybox-tileset-2nd-ver_15
-  - first:
-      213: -176496846938123529
-    second: toybox-tileset-2nd-ver_18
+      213: 5024222418389652535
+    second: car_spritesheet_5
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -67,7 +58,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 48
+  spritePixelsToUnits: 16
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -112,148 +103,85 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: toybox-tileset-2nd-ver_1
-      rect:
-        serializedVersion: 2
-        x: 160
-        y: 160
-        width: 64
-        height: 32
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 422e522f79cb83060800000000000000
-      internalID: 6933498987125531172
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: toybox-tileset-2nd-ver_2
-      rect:
-        serializedVersion: 2
-        x: 96
-        y: 96
-        width: 64
-        height: 63
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 954998ef22e734a40800000000000000
-      internalID: 5351259471010698329
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: toybox-tileset-2nd-ver_4
-      rect:
-        serializedVersion: 2
-        x: 160
-        y: 96
-        width: 32
-        height: 64
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 32bde78f179e4fbd0800000000000000
-      internalID: -2597194409376294109
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: toybox-tileset-2nd-ver_5
-      rect:
-        serializedVersion: 2
-        x: 192
-        y: 96
-        width: 64
-        height: 64
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 3881870f45ee39a10800000000000000
-      internalID: 1915136315141658755
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: toybox-tileset-2nd-ver_12
+      name: car_spritesheet_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 96
-        height: 96
+        width: 32
+        height: 32
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 1ca107e3be8292240800000000000000
-      internalID: 4767386671378340545
+      spriteID: f22b973a570a34c40800000000000000
+      internalID: 5495412397436416559
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: toybox-tileset-2nd-ver_15
+      name: car_spritesheet_2
       rect:
         serializedVersion: 2
-        x: 96
+        x: 57
         y: 0
-        width: 96
-        height: 96
+        width: 32
+        height: 32
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 1c49ebc58b3e011e0800000000000000
-      internalID: -2229031434578914111
+      spriteID: 7a6033349b9a3caf0800000000000000
+      internalID: -377271330607528281
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: toybox-tileset-2nd-ver_18
+      name: car_spritesheet_4
       rect:
         serializedVersion: 2
-        x: 192
+        x: 115
         y: 0
-        width: 96
-        height: 96
+        width: 32
+        height: 32
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 7f2d6468d05fc8df0800000000000000
-      internalID: -176496846938123529
+      spriteID: db8d8f569f9517d40800000000000000
+      internalID: 5580340340981291197
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: car_spritesheet_5
+      rect:
+        serializedVersion: 2
+        x: 173
+        y: 0
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7345ba88baf99b540800000000000000
+      internalID: 5024222418389652535
       vertices: []
       indices: 
       edges: []
