@@ -8,6 +8,7 @@ TagManager:
   - killBox
   - Enemy
   - BattleCamera
+  - LevelEnd
   layers:
   - Default
   - TransparentFX

@@ -123,5 +123,10 @@ public class PlayerController : MonoBehaviour
         {
             transform.position = StartPosition;
         }
+
+        if (collision.gameObject.tag == "LevelEnd")
+        {
+            SceneManager.LoadScene("EndGame");
+        }
     }
 }
