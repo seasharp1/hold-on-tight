@@ -128,6 +128,7 @@ public class PlayerController : MonoBehaviour
         {
             SceneManager.LoadScene("EndGame");
             mainCamera.SetActive(false);
+            gameObject.SetActive(false);
         }
     }
 }
