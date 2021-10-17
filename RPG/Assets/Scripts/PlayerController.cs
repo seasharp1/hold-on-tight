@@ -15,12 +15,30 @@ public class PlayerController : MonoBehaviour
 
     public Animator myAnim;
 
+    SpriteRenderer myRender;
+    bool isLeft = false;
+    bool isRight = true;
+
+    public static PlayerController instance;
+    public string areaTransitionName;
+
     // Start is called before the first frame update
     void Start()
     {
+        if (instance == null)
+        {
+            instance = this;
+        }
+        else
+        {
+            Destroy(gameObject); //if there is more than 1 player, it destroys the new one
+        }
+
+        DontDestroyOnLoad(gameObject);
         rb = GetComponent<Rigidbody2D>();
         StartPosition = transform.position;
-        
+        myRender = GetComponent<SpriteRenderer>();
+
     }
 
     // Update is called once per frame
@@ -36,6 +54,11 @@ public class PlayerController : MonoBehaviour
 
     void Move()
     {
+        if (myAnim.GetFloat("lastMoveX") == 0)
+        {
+            isRight = true;
+            isLeft = false;
+        }
         float x = Input.GetAxisRaw("Horizontal");
         float moveBy = x * speed;
         rb.velocity = new Vector2(moveBy, rb.velocity.y);
@@ -44,20 +67,36 @@ public class PlayerController : MonoBehaviour
         {
             myAnim.SetFloat("lastMoveX", Input.GetAxisRaw("Horizontal"));
         }
+        if (myAnim.GetFloat("lastMoveX") < -0.5 && isRight == true) //checks to see if player is facing left
+        {
+            Vector3 myVec = new Vector3(0f, 180f, 0f);
+            gameObject.transform.Rotate(myVec);
+            isRight = false;
+            isLeft = true;
+        }
+        if (myAnim.GetFloat("lastMoveX") > 0.5 && isLeft == true) //checks to see if player is facing right
+        {
+            Vector3 myVec = new Vector3(0f, 180f, 0f);
+            gameObject.transform.Rotate(myVec);
+            isRight = true;
+            isLeft = false;
+        }
     }
     void Jump()
     {
-        if (Input.GetKeyDown(KeyCode.Space) && isGrounded)
+        if (Input.GetKey(KeyCode.Space) && isGrounded)
         {
             rb.velocity = new Vector2(rb.velocity.x, jumpForce);
+            myAnim.SetBool("isJumping", true);
         }
     }
     void CheckIfGrounded()
     {
         Collider2D collider = Physics2D.OverlapCircle(isGroundedChecker.position, checkGroundRadius, groundLayer);
-        if(collider != null)
+        if (collider != null)
         {
             isGrounded = true;
+            myAnim.SetBool("isJumping", false);
         }
         else
         {

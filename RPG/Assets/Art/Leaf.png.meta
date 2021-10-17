@@ -1,40 +1,25 @@
 fileFormatVersion: 2
-guid: 3a3ce5ca52b58e44386ccd1afe23bdad
+guid: 211b72a7223eff24c8d1850d72b05b3e
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 1201679026180010321
-    second: HOT-leaf-concept-sprites-walk_0
+      213: 7647240639167449756
+    second: Leaf_0
   - first:
-      213: 2664674408875902812
-    second: HOT-leaf-concept-sprites-walk_1
+      213: 7778570650710507745
+    second: Leaf_1
   - first:
-      213: -5476705881431320516
-    second: HOT-leaf-concept-sprites-walk_2
+      213: -1451028164899545391
+    second: Leaf_2
   - first:
-      213: -3869239762976167993
-    second: HOT-leaf-concept-sprites-walk_3
+      213: -4328694197753508652
+    second: Leaf_3
   - first:
-      213: 3595437552255915658
-    second: HOT-leaf-concept-sprites-walk_4
+      213: 7066227016008939017
+    second: Leaf_4
   - first:
-      213: 414409354488877296
-    second: HOT-leaf-concept-sprites-walk_5
-  - first:
-      213: -111017163065607837
-    second: HOT-leaf-concept-sprites-walk_6
-  - first:
-      213: 7413725771962292436
-    second: HOT-leaf-concept-sprites-walk_7
-  - first:
-      213: -8337579540407246682
-    second: HOT-leaf-concept-sprites-walk_8
-  - first:
-      213: -5266006176453538589
-    second: HOT-leaf-concept-sprites-walk_9
-  - first:
-      213: -1482873165517549048
-    second: HOT-leaf-concept-sprites-walk_10
+      213: 6732178780036697699
+    second: Leaf_5
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -124,112 +109,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: HOT-leaf-concept-sprites-walk_0
-      rect:
-        serializedVersion: 2
-        x: 0
-        y: 96
-        width: 32
-        height: 32
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 1513f7125b83da010800000000000000
-      internalID: 1201679026180010321
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: HOT-leaf-concept-sprites-walk_1
-      rect:
-        serializedVersion: 2
-        x: 64
-        y: 96
-        width: 32
-        height: 32
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: c574f1fb143daf420800000000000000
-      internalID: 2664674408875902812
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: HOT-leaf-concept-sprites-walk_2
-      rect:
-        serializedVersion: 2
-        x: 0
-        y: 64
-        width: 32
-        height: 32
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: c385ef58405def3b0800000000000000
-      internalID: -5476705881431320516
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: HOT-leaf-concept-sprites-walk_3
-      rect:
-        serializedVersion: 2
-        x: 32
-        y: 64
-        width: 32
-        height: 32
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 7c72df88fe2bd4ac0800000000000000
-      internalID: -3869239762976167993
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: HOT-leaf-concept-sprites-walk_4
-      rect:
-        serializedVersion: 2
-        x: 64
-        y: 64
-        width: 32
-        height: 32
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: a865052876f85e130800000000000000
-      internalID: 3595437552255915658
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: HOT-leaf-concept-sprites-walk_5
+      name: Leaf_0
       rect:
         serializedVersion: 2
         x: 0
@@ -237,20 +117,20 @@ TextureImporter:
         width: 32
         height: 32
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 0f098edbc1740c500800000000000000
-      internalID: 414409354488877296
+      spriteID: c9ac18138d4702a60800000000000000
+      internalID: 7647240639167449756
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: HOT-leaf-concept-sprites-walk_6
+      name: Leaf_1
       rect:
         serializedVersion: 2
         x: 32
@@ -258,20 +138,20 @@ TextureImporter:
         width: 32
         height: 32
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 369b0877a76957ef0800000000000000
-      internalID: -111017163065607837
+      spriteID: 1e001ef4bc803fb60800000000000000
+      internalID: 7778570650710507745
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: HOT-leaf-concept-sprites-walk_7
+      name: Leaf_2
       rect:
         serializedVersion: 2
         x: 64
@@ -279,20 +159,20 @@ TextureImporter:
         width: 32
         height: 32
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 4d898fb5f48d2e660800000000000000
-      internalID: 7413725771962292436
+      spriteID: 1de53186299ecdbe0800000000000000
+      internalID: -1451028164899545391
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: HOT-leaf-concept-sprites-walk_8
+      name: Leaf_3
       rect:
         serializedVersion: 2
         x: 0
@@ -300,20 +180,20 @@ TextureImporter:
         width: 32
         height: 32
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 6a026771597fa4c80800000000000000
-      internalID: -8337579540407246682
+      spriteID: 4dc8b91cf836de3c0800000000000000
+      internalID: -4328694197753508652
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: HOT-leaf-concept-sprites-walk_9
+      name: Leaf_4
       rect:
         serializedVersion: 2
         x: 32
@@ -321,20 +201,20 @@ TextureImporter:
         width: 32
         height: 32
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 3ec497378436be6b0800000000000000
-      internalID: -5266006176453538589
+      spriteID: 9063b775808401260800000000000000
+      internalID: 7066227016008939017
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: HOT-leaf-concept-sprites-walk_10
+      name: Leaf_5
       rect:
         serializedVersion: 2
         x: 64
@@ -342,14 +222,14 @@ TextureImporter:
         width: 32
         height: 32
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 8021e5a66b6cb6be0800000000000000
-      internalID: -1482873165517549048
+      spriteID: 36e828c8ee08d6d50800000000000000
+      internalID: 6732178780036697699
       vertices: []
       indices: 
       edges: []
