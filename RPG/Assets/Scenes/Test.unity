@@ -2041,7 +2041,7 @@ GameObject:
   - component: {fileID: 1363542685}
   m_Layer: 0
   m_Name: Camera
-  m_TagString: Untagged
+  m_TagString: MainCamera
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2193,6 +2193,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: OverworldToyCar
       objectReference: {fileID: 0}
+    - target: {fileID: 6975569215709168434, guid: 91177f5b035d64545a0928638971c3dd, type: 3}
+      propertyPath: m_TagString
+      value: Enemy
+      objectReference: {fileID: 0}
     - target: {fileID: 6975569215709168438, guid: 91177f5b035d64545a0928638971c3dd, type: 3}
       propertyPath: m_RootOrder
       value: 3
@@ -2254,6 +2258,10 @@ PrefabInstance:
     - target: {fileID: 6975569215709168434, guid: 91177f5b035d64545a0928638971c3dd, type: 3}
       propertyPath: m_Name
       value: OverworldToyCar (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 6975569215709168434, guid: 91177f5b035d64545a0928638971c3dd, type: 3}
+      propertyPath: m_TagString
+      value: Enemy
       objectReference: {fileID: 0}
     - target: {fileID: 6975569215709168435, guid: 91177f5b035d64545a0928638971c3dd, type: 3}
       propertyPath: m_Enabled
@@ -3608,6 +3616,10 @@ PrefabInstance:
     - target: {fileID: 6975569215709168434, guid: 91177f5b035d64545a0928638971c3dd, type: 3}
       propertyPath: m_Name
       value: ToyBox car enemy
+      objectReference: {fileID: 0}
+    - target: {fileID: 6975569215709168434, guid: 91177f5b035d64545a0928638971c3dd, type: 3}
+      propertyPath: m_TagString
+      value: Enemy
       objectReference: {fileID: 0}
     - target: {fileID: 6975569215709168438, guid: 91177f5b035d64545a0928638971c3dd, type: 3}
       propertyPath: m_RootOrder
