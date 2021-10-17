@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public enum BattleState { START, PLAYERTURN, ENEMYTURN, WON, LOST }
 
@@ -22,11 +23,14 @@ public class BattleSystem : MonoBehaviour
     public BattleHUD playerHUD;
     public BattleHUD enemyHUD;
 
+    public GameObject originalCamera;
+
     public BattleState state;
 
     // Start is called before the first frame update
     void Start()
     {
+        originalCamera = PlayerController.mainCamera;
         state = BattleState.START;
         StartCoroutine(SetupBattle());
     }
@@ -75,6 +79,8 @@ public class BattleSystem : MonoBehaviour
         if (state == BattleState.WON)
         {
             dialogueText.text = "The battle was won!";
+            SceneManager.UnloadSceneAsync("Battle");
+            originalCamera.SetActive(true);
         }
         else if (state == BattleState.LOST)
         {

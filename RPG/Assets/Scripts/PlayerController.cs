@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerController : MonoBehaviour
 {
@@ -12,6 +13,8 @@ public class PlayerController : MonoBehaviour
     public Transform isGroundedChecker;
     public float checkGroundRadius;
     public LayerMask groundLayer;
+
+    public static GameObject mainCamera;
 
     public Animator myAnim;
 
@@ -25,6 +28,8 @@ public class PlayerController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        mainCamera = GameObject.FindGameObjectWithTag("MainCamera");
+
         if (instance == null)
         {
             instance = this;
@@ -35,6 +40,7 @@ public class PlayerController : MonoBehaviour
         }
 
         DontDestroyOnLoad(gameObject);
+        DontDestroyOnLoad(mainCamera);
         rb = GetComponent<Rigidbody2D>();
         StartPosition = transform.position;
         myRender = GetComponent<SpriteRenderer>();
@@ -48,9 +54,6 @@ public class PlayerController : MonoBehaviour
         Jump();
         CheckIfGrounded();
     }
-
-
-
 
     void Move()
     {
@@ -103,6 +106,17 @@ public class PlayerController : MonoBehaviour
             isGrounded = false;
         }
     }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.tag == "Enemy")
+        {
+            Destroy(collision.gameObject);
+            SceneManager.LoadScene("Battle", LoadSceneMode.Additive);
+            mainCamera.SetActive(false);
+        }
+    }
+
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.tag == "killBox")

@@ -1,8 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
-public class NewBehaviourScript : MonoBehaviour
+public class PlayerAttack : MonoBehaviour
 {
     public Animator animator;
 
@@ -17,7 +18,6 @@ public class NewBehaviourScript : MonoBehaviour
         {
             Attack();
         }
-        //transform.position.gameObject;
     }
 
     void Attack()
@@ -28,7 +28,9 @@ public class NewBehaviourScript : MonoBehaviour
 
         for (int i = 0; i < hitEnemies.Length; ++i)
         {
+            SceneManager.LoadScene("Battle", LoadSceneMode.Additive);
             Destroy(hitEnemies[i].gameObject);
+            PlayerController.mainCamera.SetActive(false);
         }
 
         foreach (Collider2D enemy in hitEnemies)
