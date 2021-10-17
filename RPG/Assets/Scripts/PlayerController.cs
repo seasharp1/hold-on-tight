@@ -127,6 +127,7 @@ public class PlayerController : MonoBehaviour
         if (collision.gameObject.tag == "LevelEnd")
         {
             SceneManager.LoadScene("EndGame");
+            mainCamera.SetActive(false);
         }
     }
 }
