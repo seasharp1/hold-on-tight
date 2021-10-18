@@ -132,7 +132,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 34768769}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: CombatButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -162,6 +162,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 425999736339045691, guid: 3cceb11cdcb79274da70ab44c991b685, type: 3}
+      propertyPath: m_SortingLayer
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 425999736339045691, guid: 3cceb11cdcb79274da70ab44c991b685, type: 3}
+      propertyPath: m_SortingLayerID
+      value: -474600581
+      objectReference: {fileID: 0}
     - target: {fileID: 5183507302034568619, guid: 3cceb11cdcb79274da70ab44c991b685, type: 3}
       propertyPath: m_Name
       value: ToyBox Platform (1)
@@ -715,8 +723,8 @@ TilemapRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: -474600581
+  m_SortingLayer: 2
   m_SortingOrder: 0
   m_ChunkSize: {x: 32, y: 32, z: 32}
   m_ChunkCullingBounds: {x: 0.5, y: 0.5, z: 0}
@@ -1926,6 +1934,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 425999736339045691, guid: 3cceb11cdcb79274da70ab44c991b685, type: 3}
+      propertyPath: m_SortingLayer
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 425999736339045691, guid: 3cceb11cdcb79274da70ab44c991b685, type: 3}
+      propertyPath: m_SortingLayerID
+      value: -474600581
+      objectReference: {fileID: 0}
     - target: {fileID: 5183507302034568619, guid: 3cceb11cdcb79274da70ab44c991b685, type: 3}
       propertyPath: m_Name
       value: ToyBox Platform
@@ -3304,7 +3320,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1946787795}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: DialogueText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
