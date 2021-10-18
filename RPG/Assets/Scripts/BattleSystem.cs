@@ -63,6 +63,11 @@ public class BattleSystem : MonoBehaviour
         dialogueText.text = "The attack hit for " + playerUnit.damage + " damage!";
         if (isDead == true)
         {
+            enemyHUD.SetHP(enemyUnit.currentHP);
+            enemyHUD.SetHUD(enemyUnit);
+            yield return new WaitForSeconds(1f);
+            dialogueText.text = enemyUnit.unitName + " was defeated!";
+            yield return new WaitForSeconds(1f);
             state = BattleState.WON;
             EndBattle();
         }
@@ -103,6 +108,7 @@ public class BattleSystem : MonoBehaviour
 
         if (isDead)
         {
+            yield return new WaitForSeconds(1f);
             state = BattleState.LOST;
             EndBattle();
         }
@@ -157,11 +163,11 @@ public class BattleSystem : MonoBehaviour
     {
         if(state != BattleState.PLAYERTURN)
         {
-            print("false");
+            //print("false");
             return;
         }
-        print("working");
+        //print("working");
         anim.SetBool("CombatSwing", true);
-        print("True");
+        //print("True");
     }
 }
