@@ -9,6 +9,7 @@ TagManager:
   - Enemy
   - BattleCamera
   - LevelEnd
+  - CombatLeaf
   layers:
   - Default
   - TransparentFX

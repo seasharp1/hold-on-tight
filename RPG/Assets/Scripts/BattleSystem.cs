@@ -35,6 +35,7 @@ public class BattleSystem : MonoBehaviour
         originalCamera = PlayerController.mainCamera;
         state = BattleState.START;
         StartCoroutine(SetupBattle());
+        anim = GameObject.FindWithTag("CombatLeaf").GetComponent<Animator>(); //this fixes the combat animation
     }
 
     IEnumerator SetupBattle()
@@ -118,7 +119,7 @@ public class BattleSystem : MonoBehaviour
 
     IEnumerator PlayerHeal()
     {
-        playerUnit.Heal(5);
+        playerUnit.Heal(5 );
 
         playerHUD.SetHP(playerUnit.currentHP);
         playerHUD.SetHUD(playerUnit);
@@ -156,10 +157,11 @@ public class BattleSystem : MonoBehaviour
     {
         if(state != BattleState.PLAYERTURN)
         {
-            //print("false");
+            print("false");
             return;
         }
+        print("working");
         anim.SetBool("CombatSwing", true);
-        //print("True");
+        print("True");
     }
 }
