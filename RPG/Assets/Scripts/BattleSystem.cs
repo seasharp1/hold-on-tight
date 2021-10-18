@@ -27,6 +27,8 @@ public class BattleSystem : MonoBehaviour
 
     public BattleState state;
 
+    public Animator anim;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -149,5 +151,15 @@ public class BattleSystem : MonoBehaviour
             return;
         }
         StartCoroutine(PlayerHeal());
+    }
+    public void swingAnim()
+    {
+        if(state != BattleState.PLAYERTURN)
+        {
+            //print("false");
+            return;
+        }
+        anim.SetBool("CombatSwing", true);
+        //print("True");
     }
 }
