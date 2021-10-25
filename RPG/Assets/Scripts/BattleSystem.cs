@@ -24,10 +24,14 @@ public class BattleSystem : MonoBehaviour
     public BattleHUD enemyHUD;
 
     public GameObject originalCamera;
+    //public GameObject originalCharacter;
 
     public BattleState state;
 
     public Animator anim;
+
+    Unit GameUnit;  //holds player health
+    PlayerController lastLocation;
 
     // Start is called before the first frame update
     void Start()
@@ -36,13 +40,14 @@ public class BattleSystem : MonoBehaviour
         state = BattleState.START;
         StartCoroutine(SetupBattle());
         anim = GameObject.FindWithTag("CombatLeaf").GetComponent<Animator>(); //this fixes the combat animation
+        //GameObject LeafCombatPrefab = (GameObject)Resources.Load("LeafCombat");
+        //GameObject LeafCombatScene = (GameObject)Instantiate(LeafCombatPrefab);
     }
 
     IEnumerator SetupBattle()
     {
         GameObject playerGO = Instantiate(playerPrefab, playerBattleStation);
         playerUnit = playerGO.GetComponent<Unit>();
-
         GameObject enemyGO = Instantiate(enemyPrefab, enemyBattleStation);
         enemyUnit = enemyGO.GetComponent<Unit>();
 
@@ -87,8 +92,23 @@ public class BattleSystem : MonoBehaviour
         if (state == BattleState.WON)
         {
             dialogueText.text = "The battle was won!";
-            SceneManager.UnloadSceneAsync("Battle");
+            GameObject leafUnitHealth = GameObject.Find("LeafUnit");
+            GameUnit = leafUnitHealth.GetComponent<Unit>();
+            GameUnit.currentHP = playerUnit.getHP();
+
+            GameObject leaf = GameObject.Find("Leaf");
+            lastLocation = leaf.GetComponent<PlayerController>();
+            leaf.transform.position = lastLocation.CombatLastLocation;
+            SceneManager.LoadScene("Test");
+
+
+            //load player to last location
+            //transform.position = CombatLastLocation;
+
             originalCamera.SetActive(true);
+
+            //originalCharacter.SetActive(true);
+
         }
         else if (state == BattleState.LOST)
         {
@@ -125,7 +145,7 @@ public class BattleSystem : MonoBehaviour
 
     IEnumerator PlayerHeal()
     {
-        playerUnit.Heal(5 );
+        playerUnit.Heal(5);
 
         playerHUD.SetHP(playerUnit.currentHP);
         playerHUD.SetHUD(playerUnit);
@@ -161,7 +181,7 @@ public class BattleSystem : MonoBehaviour
     }
     public void swingAnim()
     {
-        if(state != BattleState.PLAYERTURN)
+        if (state != BattleState.PLAYERTURN)
         {
             //print("false");
             return;

@@ -33,4 +33,8 @@ public class Unit : MonoBehaviour
             currentHP = maxHP;
         }
     }
+    public int getHP()
+    {
+        return currentHP;
+    }
 }

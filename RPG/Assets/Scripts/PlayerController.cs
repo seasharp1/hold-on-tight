@@ -6,6 +6,7 @@ using UnityEngine.SceneManagement;
 public class PlayerController : MonoBehaviour
 {
     Vector3 StartPosition;
+    public Vector3 CombatLastLocation;
     Rigidbody2D rb;
     public float speed;
     public float jumpForce;
@@ -15,6 +16,8 @@ public class PlayerController : MonoBehaviour
     public LayerMask groundLayer;
 
     public static GameObject mainCamera;
+    //public static GameObject playerCharacter;
+
 
     public Animator myAnim;
 
@@ -29,6 +32,8 @@ public class PlayerController : MonoBehaviour
     void Start()
     {
         mainCamera = GameObject.FindGameObjectWithTag("MainCamera");
+        //playerCharacter = GameObject.FindGameObjectWithTag("Player");
+
 
         if (instance == null)
         {
@@ -44,7 +49,6 @@ public class PlayerController : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         StartPosition = transform.position;
         myRender = GetComponent<SpriteRenderer>();
-
     }
 
     // Update is called once per frame
@@ -111,9 +115,12 @@ public class PlayerController : MonoBehaviour
     {
         if (collision.gameObject.tag == "Enemy")
         {
+            //save position
+            CombatLastLocation = transform.position;
             Destroy(collision.gameObject);
-            SceneManager.LoadScene("Battle", LoadSceneMode.Additive);
+            SceneManager.LoadScene("Battle");
             mainCamera.SetActive(false);
+            //playerCharacter.SetActive(false);
         }
     }
 

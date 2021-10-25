@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &6339702228701385413
+--- !u!1 &8828294100301395274
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,10 +8,10 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 2716101438452668819}
-  - component: {fileID: 3080285176057633060}
-  - component: {fileID: 358005622702694331}
-  - component: {fileID: 4674232361844673687}
+  - component: {fileID: 8828294100301395278}
+  - component: {fileID: 8828294100301395277}
+  - component: {fileID: 8828294100301395276}
+  - component: {fileID: 8828294100301395275}
   m_Layer: 0
   m_Name: LeafCombat
   m_TagString: CombatLeaf
@@ -19,13 +19,13 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &2716101438452668819
+--- !u!4 &8828294100301395278
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6339702228701385413}
+  m_GameObject: {fileID: 8828294100301395274}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 1.12, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
@@ -33,13 +33,13 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &3080285176057633060
+--- !u!114 &8828294100301395277
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6339702228701385413}
+  m_GameObject: {fileID: 8828294100301395274}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 50aedcc7fb7387140a8e5d33e815fa51, type: 3}
@@ -50,14 +50,14 @@ MonoBehaviour:
   damage: 10
   maxHP: 50
   currentHP: 45
---- !u!95 &358005622702694331
+--- !u!95 &8828294100301395276
 Animator:
   serializedVersion: 3
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6339702228701385413}
+  m_GameObject: {fileID: 8828294100301395274}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
   m_Controller: {fileID: 9100000, guid: 45b5a7fff5bd5af4ea161e70e8500387, type: 2}
@@ -69,13 +69,13 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!212 &4674232361844673687
+--- !u!212 &8828294100301395275
 SpriteRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6339702228701385413}
+  m_GameObject: {fileID: 8828294100301395274}
   m_Enabled: 1
   m_CastShadows: 0
   m_ReceiveShadows: 0
