@@ -64,7 +64,8 @@ public class BattleSystem : MonoBehaviour
         enemyHUD.SetHUD(enemyUnit);
 
         staticHealth = GameObject.Find("GameManager").GetComponent<ScriptManager>();
-        playerHUD.SetHP(staticHealth.health);
+        playerHUD.SetHP(staticHealth.health, playerUnit);
+        playerHUD.SetHP(staticHealth.health, playerUnit);
         playerUnit.currentHP = staticHealth.health;
 
         Debug.Log("Player start health " + staticHealth.health);
@@ -81,7 +82,7 @@ public class BattleSystem : MonoBehaviour
         dialogueText.text = "The attack hit for " + playerUnit.damage + " damage!";
         if (isDead == true)
         {
-            enemyHUD.SetHP(enemyUnit.currentHP);
+            enemyHUD.SetHP(enemyUnit.currentHP, enemyUnit);
             enemyHUD.SetHUD(enemyUnit);
             yield return new WaitForSeconds(1f);
             dialogueText.text = enemyUnit.unitName + " was defeated!";
@@ -95,7 +96,7 @@ public class BattleSystem : MonoBehaviour
             StartCoroutine(EnemyTurn());
         }
 
-        enemyHUD.SetHP(enemyUnit.currentHP);
+        enemyHUD.SetHP(enemyUnit.currentHP, enemyUnit);
         enemyHUD.SetHUD(enemyUnit);
 
         yield return new WaitForSeconds(1f);
@@ -117,6 +118,7 @@ public class BattleSystem : MonoBehaviour
             levelUp();
 
             staticHealth = GameObject.Find("GameManager").GetComponent<ScriptManager>();
+            staticHealth.health = GameUnit.currentHP;
 
             Debug.Log("player health at end of battle is " + GameUnit.currentHP);
             SceneManager.UnloadSceneAsync("Battle");
@@ -135,7 +137,7 @@ public class BattleSystem : MonoBehaviour
         bool isDead = playerUnit.TakeDamage(enemyUnit.damage);
         playerHUD.SetHUD(playerUnit);
 
-        playerHUD.SetHP(playerUnit.currentHP);
+        playerHUD.SetHP(playerUnit.currentHP, playerUnit);
         yield return new WaitForSeconds(1f);
 
         if (isDead)
@@ -160,7 +162,7 @@ public class BattleSystem : MonoBehaviour
     {
         playerUnit.Heal(5);
 
-        playerHUD.SetHP(playerUnit.currentHP);
+        playerHUD.SetHP(playerUnit.currentHP, playerUnit);
         playerHUD.SetHUD(playerUnit);
         if (playerUnit.currentHP == playerUnit.maxHP)
         {
@@ -170,7 +172,7 @@ public class BattleSystem : MonoBehaviour
         {
             dialogueText.text = "You healed for 5 HP!";
         }
-        playerHUD.SetHP(playerUnit.currentHP);
+        playerHUD.SetHP(playerUnit.currentHP, playerUnit);
         state = BattleState.ENEMYTURN;
         StartCoroutine(EnemyTurn());
         yield return new WaitForSeconds(2f);

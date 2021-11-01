@@ -28,9 +28,12 @@ public class PlayerAttack : MonoBehaviour
 
         for (int i = 0; i < hitEnemies.Length; ++i)
         {
-            SceneManager.LoadScene("Battle", LoadSceneMode.Additive);
             Destroy(hitEnemies[i].gameObject);
+
+            SceneManager.LoadScene("Battle", LoadSceneMode.Additive);
             PlayerController.mainCamera.SetActive(false);
+            PlayerController.playerCharacter.SetActive(false);
+            PlayerController.eventSystem.SetActive(false);
         }
 
         foreach (Collider2D enemy in hitEnemies)
