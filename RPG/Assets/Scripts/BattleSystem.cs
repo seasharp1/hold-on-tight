@@ -24,19 +24,27 @@ public class BattleSystem : MonoBehaviour
     public BattleHUD enemyHUD;
 
     public GameObject originalCamera;
-    //public GameObject originalCharacter;
+    public GameObject originalCharacter;
+    public GameObject originalEventSystem;
+
+    public int playerHealth;
+    public ScriptManager staticHealth;
 
     public BattleState state;
 
     public Animator anim;
 
     Unit GameUnit;  //holds player health
-    PlayerController lastLocation;
 
     // Start is called before the first frame update
     void Start()
     {
+        playerHealth = originalCharacter.GetComponent<PlayerController>().health;
+
         originalCamera = PlayerController.mainCamera;
+        originalCharacter = PlayerController.playerCharacter;
+        originalEventSystem = PlayerController.eventSystem;
+
         state = BattleState.START;
         StartCoroutine(SetupBattle());
         anim = GameObject.FindWithTag("CombatLeaf").GetComponent<Animator>(); //this fixes the combat animation
@@ -55,6 +63,17 @@ public class BattleSystem : MonoBehaviour
 
         playerHUD.SetHUD(playerUnit);
         enemyHUD.SetHUD(enemyUnit);
+
+        //playerUnit.currentHP = playerHealth;
+        //playerHUD.SetHP(playerHealth);
+
+        staticHealth = GameObject.Find("GameManager").GetComponent<ScriptManager>();
+        playerHUD.SetHP(staticHealth.health);
+        playerUnit.currentHP = staticHealth.health;
+
+        Debug.Log("Player start health " + staticHealth.health);
+
+        //playerHUD.SetHP(player.health);
 
         yield return new WaitForSeconds(1f);
 
@@ -87,6 +106,7 @@ public class BattleSystem : MonoBehaviour
 
         yield return new WaitForSeconds(1f);
     }
+
     void EndBattle()
     {
         if (state == BattleState.WON)
@@ -96,18 +116,19 @@ public class BattleSystem : MonoBehaviour
             GameUnit = leafUnitHealth.GetComponent<Unit>();
             GameUnit.currentHP = playerUnit.getHP();
 
-            GameObject leaf = GameObject.Find("Leaf");
-            lastLocation = leaf.GetComponent<PlayerController>();
-            leaf.transform.position = lastLocation.CombatLastLocation;
-            SceneManager.LoadScene("Test");
-
-
-            //load player to last location
-            //transform.position = CombatLastLocation;
-
             originalCamera.SetActive(true);
+            originalCharacter.SetActive(true);
+            originalEventSystem.SetActive(true);
 
-            //originalCharacter.SetActive(true);
+            staticHealth = GameObject.Find("GameManager").GetComponent<ScriptManager>();
+            //staticHealth.health = GameUnit.currentHP;
+
+            //playerHealth = GameUnit.currentHP;
+            Debug.Log("player health at end of battle is" + GameUnit.currentHP);
+            SceneManager.UnloadSceneAsync("Battle");
+
+
+
 
         }
         else if (state == BattleState.LOST)
@@ -115,6 +136,7 @@ public class BattleSystem : MonoBehaviour
             dialogueText.text = "The battle was lost...";
         }
     }
+
     IEnumerator EnemyTurn()
     {
         yield return new WaitForSeconds(1f);
@@ -138,6 +160,7 @@ public class BattleSystem : MonoBehaviour
             PlayerTurn();
         }
     }
+
     void PlayerTurn()
     {
         dialogueText.text = "Choose an action:";

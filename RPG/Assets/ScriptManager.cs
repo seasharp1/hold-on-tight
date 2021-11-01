@@ -11,6 +11,6 @@ public class ScriptManager : MonoBehaviour
     {
         DontDestroyOnLoad(this.gameObject);
         maxHealth = 50;
-        health = 45;
+        health = 50;
     }
 }

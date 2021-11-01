@@ -16,8 +16,10 @@ public class PlayerController : MonoBehaviour
     public LayerMask groundLayer;
 
     public static GameObject mainCamera;
-    //public static GameObject playerCharacter;
+    public static GameObject playerCharacter;
+    public static GameObject eventSystem;
 
+    public int health;
 
     public Animator myAnim;
 
@@ -31,9 +33,11 @@ public class PlayerController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        mainCamera = GameObject.FindGameObjectWithTag("MainCamera");
-        //playerCharacter = GameObject.FindGameObjectWithTag("Player");
+        health = 50;
 
+        mainCamera = GameObject.FindGameObjectWithTag("MainCamera");
+        playerCharacter = GameObject.FindGameObjectWithTag("Player");
+        eventSystem = GameObject.Find("EventSystem");
 
         if (instance == null)
         {
@@ -46,6 +50,7 @@ public class PlayerController : MonoBehaviour
 
         DontDestroyOnLoad(gameObject);
         DontDestroyOnLoad(mainCamera);
+        DontDestroyOnLoad(eventSystem);
         rb = GetComponent<Rigidbody2D>();
         StartPosition = transform.position;
         myRender = GetComponent<SpriteRenderer>();
@@ -66,10 +71,12 @@ public class PlayerController : MonoBehaviour
             isRight = true;
             isLeft = false;
         }
+
         float x = Input.GetAxisRaw("Horizontal");
         float moveBy = x * speed;
         rb.velocity = new Vector2(moveBy, rb.velocity.y);
         myAnim.SetFloat("moveX", rb.velocity.x);
+
         if (Input.GetAxisRaw("Horizontal") == 1 || Input.GetAxisRaw("Horizontal") == -1)
         {
             myAnim.SetFloat("lastMoveX", Input.GetAxisRaw("Horizontal"));
@@ -89,6 +96,7 @@ public class PlayerController : MonoBehaviour
             isLeft = false;
         }
     }
+
     void Jump()
     {
         if (Input.GetKey(KeyCode.Space) && isGrounded)
@@ -97,6 +105,7 @@ public class PlayerController : MonoBehaviour
             myAnim.SetBool("isJumping", true);
         }
     }
+
     void CheckIfGrounded()
     {
         Collider2D collider = Physics2D.OverlapCircle(isGroundedChecker.position, checkGroundRadius, groundLayer);
@@ -115,12 +124,12 @@ public class PlayerController : MonoBehaviour
     {
         if (collision.gameObject.tag == "Enemy")
         {
-            //save position
-            CombatLastLocation = transform.position;
             Destroy(collision.gameObject);
-            SceneManager.LoadScene("Battle");
+
+            SceneManager.LoadScene("Battle", LoadSceneMode.Additive);
             mainCamera.SetActive(false);
-            //playerCharacter.SetActive(false);
+            playerCharacter.SetActive(false);
+            eventSystem.SetActive(false);
         }
     }
 

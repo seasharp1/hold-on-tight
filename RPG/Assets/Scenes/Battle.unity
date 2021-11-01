@@ -1784,6 +1784,10 @@ MonoBehaviour:
   playerHUD: {fileID: 875843145}
   enemyHUD: {fileID: 1794169586}
   originalCamera: {fileID: 1149963664}
+  originalCharacter: {fileID: 1384027665069696234, guid: 0f267a8e3822f0a488c4e26a8f2057a1, type: 3}
+  originalEventSystem: {fileID: 0}
+  playerHealth: 50
+  staticHealth: {fileID: 0}
   state: 0
   anim: {fileID: 8828294100301395276, guid: 6c32d204386f83743b2d01b3a3c20fbe, type: 3}
 --- !u!1 &1047848418

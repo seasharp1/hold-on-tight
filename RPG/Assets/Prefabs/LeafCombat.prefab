@@ -49,7 +49,7 @@ MonoBehaviour:
   unitLevel: 5
   damage: 10
   maxHP: 50
-  currentHP: 45
+  currentHP: 50
 --- !u!95 &8828294100301395276
 Animator:
   serializedVersion: 3
