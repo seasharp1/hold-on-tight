@@ -29,6 +29,7 @@ public class BattleSystem : MonoBehaviour
 
     public int playerHealth;
     public ScriptManager staticHealth;
+    public int addExp;
 
     public BattleState state;
 
@@ -48,8 +49,6 @@ public class BattleSystem : MonoBehaviour
         state = BattleState.START;
         StartCoroutine(SetupBattle());
         anim = GameObject.FindWithTag("CombatLeaf").GetComponent<Animator>(); //this fixes the combat animation
-        //GameObject LeafCombatPrefab = (GameObject)Resources.Load("LeafCombat");
-        //GameObject LeafCombatScene = (GameObject)Instantiate(LeafCombatPrefab);
     }
 
     IEnumerator SetupBattle()
@@ -64,16 +63,11 @@ public class BattleSystem : MonoBehaviour
         playerHUD.SetHUD(playerUnit);
         enemyHUD.SetHUD(enemyUnit);
 
-        //playerUnit.currentHP = playerHealth;
-        //playerHUD.SetHP(playerHealth);
-
         staticHealth = GameObject.Find("GameManager").GetComponent<ScriptManager>();
         playerHUD.SetHP(staticHealth.health);
         playerUnit.currentHP = staticHealth.health;
 
         Debug.Log("Player start health " + staticHealth.health);
-
-        //playerHUD.SetHP(player.health);
 
         yield return new WaitForSeconds(1f);
 
@@ -120,16 +114,12 @@ public class BattleSystem : MonoBehaviour
             originalCharacter.SetActive(true);
             originalEventSystem.SetActive(true);
 
+            levelUp();
+
             staticHealth = GameObject.Find("GameManager").GetComponent<ScriptManager>();
-            //staticHealth.health = GameUnit.currentHP;
 
-            //playerHealth = GameUnit.currentHP;
-            Debug.Log("player health at end of battle is" + GameUnit.currentHP);
+            Debug.Log("player health at end of battle is " + GameUnit.currentHP);
             SceneManager.UnloadSceneAsync("Battle");
-
-
-
-
         }
         else if (state == BattleState.LOST)
         {
@@ -194,6 +184,7 @@ public class BattleSystem : MonoBehaviour
         }
         StartCoroutine(PlayerAttack());
     }
+
     public void OnHealButton()
     {
         if (state != BattleState.PLAYERTURN)
@@ -202,6 +193,7 @@ public class BattleSystem : MonoBehaviour
         }
         StartCoroutine(PlayerHeal());
     }
+
     public void swingAnim()
     {
         if (state != BattleState.PLAYERTURN)
@@ -212,5 +204,12 @@ public class BattleSystem : MonoBehaviour
         //print("working");
         anim.SetBool("CombatSwing", true);
         //print("True");
+    }
+
+    public void levelUp()
+    {
+        addExp = 10;
+        originalCharacter.GetComponent<LevelUpSystem>().currExp += addExp;
+        Debug.Log("Player gained " + addExp + " experience.");
     }
 }
