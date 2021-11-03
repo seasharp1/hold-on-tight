@@ -29,13 +29,14 @@ public class BattleSystem : MonoBehaviour
 
     public int playerHealth;
     public ScriptManager staticHealth;
-    public int addExp;
 
     public BattleState state;
 
     public Animator anim;
 
     Unit GameUnit;  //holds player health
+
+    PlayerAttack firstStrikeCheck;
 
     // Start is called before the first frame update
     void Start()
@@ -49,30 +50,66 @@ public class BattleSystem : MonoBehaviour
         state = BattleState.START;
         StartCoroutine(SetupBattle());
         anim = GameObject.FindWithTag("CombatLeaf").GetComponent<Animator>(); //this fixes the combat animation
+        //GameObject LeafCombatPrefab = (GameObject)Resources.Load("LeafCombat");
+        //GameObject LeafCombatScene = (GameObject)Instantiate(LeafCombatPrefab);
     }
 
     IEnumerator SetupBattle()
     {
+
         GameObject playerGO = Instantiate(playerPrefab, playerBattleStation);
         playerUnit = playerGO.GetComponent<Unit>();
         GameObject enemyGO = Instantiate(enemyPrefab, enemyBattleStation);
         enemyUnit = enemyGO.GetComponent<Unit>();
 
-        dialogueText.text = "A wild " + enemyUnit.unitName + " approaches...";
-
         playerHUD.SetHUD(playerUnit);
         enemyHUD.SetHUD(enemyUnit);
 
+        //playerUnit.currentHP = playerHealth;
+        //playerHUD.SetHP(playerHealth);
+
         staticHealth = GameObject.Find("GameManager").GetComponent<ScriptManager>();
-        playerHUD.SetHP(staticHealth.health, playerUnit);
         playerHUD.SetHP(staticHealth.health, playerUnit);
         playerUnit.currentHP = staticHealth.health;
 
         Debug.Log("Player start health " + staticHealth.health);
 
+        //playerHUD.SetHP(player.health);
+
+        dialogueText.text = "A wild " + enemyUnit.unitName + " approaches...";
+
         yield return new WaitForSeconds(1f);
 
         state = BattleState.PLAYERTURN;
+        GameObject tempLeaf = GameObject.Find("Leaf"); //added this
+
+        if(tempLeaf != null)
+        {
+            Debug.Log("Leaf is not null");
+            firstStrikeCheck = tempLeaf.GetComponent<PlayerAttack>();
+            if (firstStrikeCheck.firstStrike == true)
+            {
+                firstStrikeCheck = GameObject.Find("Leaf").GetComponent<PlayerAttack>();
+
+
+                Debug.Log("extra damage!");
+                anim.SetBool("CombatSwing", true);
+                dialogueText.text = "First Strike for 10 damage";
+                bool isDead = enemyUnit.TakeDamage(playerUnit.damage);
+                enemyHUD.SetHP(enemyUnit.currentHP, enemyUnit);
+                enemyHUD.SetHUD(enemyUnit);
+                yield return new WaitForSeconds(1f);
+                firstStrikeCheck.firstStrike = false;
+            }
+        }
+        else
+        {
+            Debug.Log("Leaf is null!");
+        }
+
+        
+        
+
         PlayerTurn();
     }
 
@@ -115,13 +152,16 @@ public class BattleSystem : MonoBehaviour
             originalCharacter.SetActive(true);
             originalEventSystem.SetActive(true);
 
-            levelUp();
-
             staticHealth = GameObject.Find("GameManager").GetComponent<ScriptManager>();
             staticHealth.health = GameUnit.currentHP;
 
-            Debug.Log("player health at end of battle is " + GameUnit.currentHP);
+            //playerHealth = GameUnit.currentHP;
+            Debug.Log("player health at end of battle is" + GameUnit.currentHP);
             SceneManager.UnloadSceneAsync("Battle");
+
+
+
+
         }
         else if (state == BattleState.LOST)
         {
@@ -160,7 +200,7 @@ public class BattleSystem : MonoBehaviour
 
     IEnumerator PlayerHeal()
     {
-        playerUnit.Heal(5);
+        playerUnit.Heal(10);
 
         playerHUD.SetHP(playerUnit.currentHP, playerUnit);
         playerHUD.SetHUD(playerUnit);
@@ -170,7 +210,7 @@ public class BattleSystem : MonoBehaviour
         }
         else
         {
-            dialogueText.text = "You healed for 5 HP!";
+            dialogueText.text = "You healed for 10 HP!";
         }
         playerHUD.SetHP(playerUnit.currentHP, playerUnit);
         state = BattleState.ENEMYTURN;
@@ -186,7 +226,6 @@ public class BattleSystem : MonoBehaviour
         }
         StartCoroutine(PlayerAttack());
     }
-
     public void OnHealButton()
     {
         if (state != BattleState.PLAYERTURN)
@@ -195,7 +234,6 @@ public class BattleSystem : MonoBehaviour
         }
         StartCoroutine(PlayerHeal());
     }
-
     public void swingAnim()
     {
         if (state != BattleState.PLAYERTURN)
@@ -206,12 +244,5 @@ public class BattleSystem : MonoBehaviour
         //print("working");
         anim.SetBool("CombatSwing", true);
         //print("True");
-    }
-
-    public void levelUp()
-    {
-        addExp = 10;
-        originalCharacter.GetComponent<LevelUpSystem>().currExp += addExp;
-        Debug.Log("Player gained " + addExp + " experience.");
     }
 }

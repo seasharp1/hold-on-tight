@@ -11,6 +11,8 @@ public class PlayerAttack : MonoBehaviour
     public float attackRange = 0.5f;
     public LayerMask enemies;
 
+    public bool firstStrike = false;
+
     // Update is called once per frame
     void Update()
     {
@@ -32,13 +34,16 @@ public class PlayerAttack : MonoBehaviour
 
             SceneManager.LoadScene("Battle", LoadSceneMode.Additive);
             PlayerController.mainCamera.SetActive(false);
-            PlayerController.playerCharacter.SetActive(false);
-            PlayerController.eventSystem.SetActive(false);
+            //PlayerController.playerCharacter.SetActive(false);
+            //PlayerController.eventSystem.SetActive(false);
+
+
         }
 
         foreach (Collider2D enemy in hitEnemies)
         {
             Debug.Log("Attack");
+            firstStrike = true;
         }
     }
 

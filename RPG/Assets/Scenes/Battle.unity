@@ -1790,6 +1790,7 @@ MonoBehaviour:
   staticHealth: {fileID: 0}
   state: 0
   anim: {fileID: 8828294100301395276, guid: 6c32d204386f83743b2d01b3a3c20fbe, type: 3}
+  firstStrikeCheck: {fileID: 5347988032617184185, guid: 976972d1eb5dd2640a62a9d32f151c34, type: 3}
 --- !u!1 &1047848418
 GameObject:
   m_ObjectHideFlags: 0

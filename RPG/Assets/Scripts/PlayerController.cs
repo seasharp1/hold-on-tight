@@ -128,7 +128,7 @@ public class PlayerController : MonoBehaviour
 
             SceneManager.LoadScene("Battle", LoadSceneMode.Additive);
             mainCamera.SetActive(false);
-            playerCharacter.SetActive(false);
+            playerCharacter.SetActive(false); //commented out for now
             eventSystem.SetActive(false);
         }
     }

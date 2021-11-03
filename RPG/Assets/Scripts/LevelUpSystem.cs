@@ -27,7 +27,7 @@ public class LevelUpSystem : MonoBehaviour
 
     //public void instantiateText()
     //{
-        //Instantiate(textPrefab, myTransform.position, myTransform.rotation);
+    //Instantiate(textPrefab, myTransform.position, myTransform.rotation);
     //}
 
     // Start is called before the first frame update
@@ -35,7 +35,7 @@ public class LevelUpSystem : MonoBehaviour
     {
         //if (!textPrefab)
         //{
-            //Debug.Log("Add 3DTextPrefab");
+        //Debug.Log("Add 3DTextPrefab");
         //}
 
         GameObject go = GameObject.FindGameObjectWithTag("Player");
@@ -46,7 +46,7 @@ public class LevelUpSystem : MonoBehaviour
     {
         windowRect = GUI.Window(2, windowRect, LevelWdw2Function, "Display Level");
 
-        if(expBarEnabled == true)
+        if (expBarEnabled == true)
         {
             GUI.Box(new Rect(20, Screen.height - 40, expBarLength, 20), currExp + "/" + maxExp);
         }
@@ -74,7 +74,7 @@ public class LevelUpSystem : MonoBehaviour
     {
         if (changeLevel)
         {
-            for(int i = 0; i < currLevel; ++i)
+            for (int i = 0; i < currLevel; ++i)
             {
                 expToLevel += ((currLevel + 1) * 10);
                 staticNeededExp = expToLevel - currExp;
@@ -85,7 +85,7 @@ public class LevelUpSystem : MonoBehaviour
         dynamicNeededExp = expToLevel - currExp;
         maxExp = expToLevel;
 
-        if(currExp >= expToLevel && currLevel < maxLevel)
+        if (currExp >= expToLevel && currLevel < maxLevel)
         {
             ++currLevel;
             changeLevel = true;
@@ -101,18 +101,19 @@ public class LevelUpSystem : MonoBehaviour
         }
 
         #region Exp
-        if(currExp > maxExp)
+        if (currExp > maxExp)
         {
             currExp = maxExp;
         }
-        if(currLevel > maxLevel)
+        if (currLevel > maxLevel)
         {
             currLevel = maxLevel;
         }
-        if(currLevel < 1)
+        if (currLevel < 1)
         {
             currLevel = 1;
         }
         #endregion
     }
 }
+
