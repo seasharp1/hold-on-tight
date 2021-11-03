@@ -18,6 +18,7 @@ public class PlayerController : MonoBehaviour
     public static GameObject mainCamera;
     public static GameObject playerCharacter;
     public static GameObject eventSystem;
+    public static LevelUpSystem levelUpScript;
 
     public int health;
 
@@ -38,6 +39,7 @@ public class PlayerController : MonoBehaviour
         mainCamera = GameObject.FindGameObjectWithTag("MainCamera");
         playerCharacter = GameObject.FindGameObjectWithTag("Player");
         eventSystem = GameObject.Find("EventSystem");
+        levelUpScript = playerCharacter.GetComponent<LevelUpSystem>();
 
         if (instance == null)
         {
@@ -145,6 +147,13 @@ public class PlayerController : MonoBehaviour
             SceneManager.LoadScene("EndGame");
             mainCamera.SetActive(false);
             gameObject.SetActive(false);
+        }
+
+        if (collision.gameObject.tag == "Collectible")
+        {
+            levelUpScript.currExp += 5;
+            Debug.Log("Collectible Acquired!");
+            Destroy(collision.gameObject);
         }
     }
 }
