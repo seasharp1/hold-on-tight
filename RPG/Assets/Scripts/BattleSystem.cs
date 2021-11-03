@@ -60,12 +60,12 @@ public class BattleSystem : MonoBehaviour
 
         dialogueText.text = "A wild " + enemyUnit.unitName + " approaches...";
 
-        playerHUD.SetHUD(playerUnit);
-        enemyHUD.SetHUD(enemyUnit);
+        playerHUD.SetHUD_Start(playerUnit, true);
+        enemyHUD.SetHUD_Start(enemyUnit, false);
 
         staticHealth = GameObject.Find("GameManager").GetComponent<ScriptManager>();
-        playerHUD.SetHP(staticHealth.health, playerUnit);
-        playerHUD.SetHP(staticHealth.health, playerUnit);
+        playerHUD.SetHP_Start(staticHealth.health, playerUnit, true);
+        //enemyHUD.SetHP(staticHealth.health, enemyUnit, false);
         playerUnit.currentHP = staticHealth.health;
 
         Debug.Log("Player start health " + staticHealth.health);
@@ -126,6 +126,9 @@ public class BattleSystem : MonoBehaviour
         else if (state == BattleState.LOST)
         {
             dialogueText.text = "The battle was lost...";
+            originalCamera.SetActive(false);
+            SceneManager.UnloadSceneAsync("Battle");
+            SceneManager.LoadScene("BattleLost");
         }
     }
 

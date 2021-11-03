@@ -64,7 +64,7 @@ public class LevelUpSystem : MonoBehaviour
         displayLevel = "Current Level: " + currLevel +
             "\nExp to Level: " + expToLevel +
             "\nCurrent Exp: " + currExp +
-            "\nExp Acquired: " + dynamicNeededExp;
+            "\nExp Needed: " + dynamicNeededExp;
         levelModifier();
 
         expBarLength = (Screen.width - 40) * ((currExp - expToLevel + staticNeededExp) / (float)staticNeededExp);

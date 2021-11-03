@@ -10,7 +10,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1384027665069696239}
   - component: {fileID: 1384027665069696238}
-  - component: {fileID: 1384027665069696233}
   - component: {fileID: 1384027665069696232}
   - component: {fileID: 1384027665069696235}
   - component: {fileID: 1384027665069696236}
@@ -90,22 +89,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!58 &1384027665069696233
-CircleCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1384027665069696234}
-  m_Enabled: 0
-  m_Density: 1
-  m_Material: {fileID: 6200000, guid: 686bb69cf7020154db6aeeacf1eba2e9, type: 2}
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: -0.5}
-  serializedVersion: 2
-  m_Radius: 0.5
 --- !u!50 &1384027665069696232
 Rigidbody2D:
   serializedVersion: 4
@@ -158,6 +141,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6fa0053e52f0e6f469f5f2748a0b1f9c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  CombatLastLocation: {x: 0, y: 0, z: 0}
   speed: 6
   jumpForce: 7
   isGroundedChecker: {fileID: 1384027665191157355}
@@ -165,6 +149,7 @@ MonoBehaviour:
   groundLayer:
     serializedVersion: 2
     m_Bits: 64
+  health: 0
   myAnim: {fileID: 1384027665069696235}
   areaTransitionName: 
 --- !u!61 &1384027665069696237

@@ -3425,6 +3425,40 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 1384027665069696239, guid: 0f267a8e3822f0a488c4e26a8f2057a1, type: 3}
   m_PrefabInstance: {fileID: 1384027665922025522}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1612888805 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1384027665069696234, guid: 0f267a8e3822f0a488c4e26a8f2057a1, type: 3}
+  m_PrefabInstance: {fileID: 1384027665922025522}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1612888812
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1612888805}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9f3935842d4d044692702a0d581063d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  myTransform: {fileID: 0}
+  windowRect:
+    serializedVersion: 2
+    x: 20
+    y: 157
+    width: 210
+    height: 125
+  maxExp: 0
+  expToLevel: 0
+  currExp: 0
+  dynamicNeededExp: 0
+  staticNeededExp: 0
+  maxLevel: 20
+  currLevel: 1
+  changeLevel: 1
+  expBarEnabled: 1
+  expBarLength: 0
 --- !u!1001 &1617349117
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5127,7 +5161,7 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents:
-    - {fileID: 1384027665069696233, guid: 0f267a8e3822f0a488c4e26a8f2057a1, type: 3}
+    - {fileID: 0}
   m_SourcePrefab: {fileID: 100100000, guid: 0f267a8e3822f0a488c4e26a8f2057a1, type: 3}
 --- !u!1001 &6975569215556749032
 PrefabInstance:
