@@ -34,7 +34,7 @@ public class PlayerAttack : MonoBehaviour
 
             SceneManager.LoadScene("Battle", LoadSceneMode.Additive);
             PlayerController.mainCamera.SetActive(false);
-            PlayerController.playerCharacter.SetActive(false);
+            //PlayerController.playerCharacter.SetActive(false);
             PlayerController.eventSystem.SetActive(false);
 
 
