@@ -37,6 +37,8 @@ public class BattleSystem : MonoBehaviour
 
     Unit GameUnit;  //holds player health
 
+    PlayerAttack firstStrikeCheck;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -68,11 +70,39 @@ public class BattleSystem : MonoBehaviour
         //enemyHUD.SetHP(staticHealth.health, enemyUnit, false);
         playerUnit.currentHP = staticHealth.health;
 
-        Debug.Log("Player start health " + staticHealth.health);
+        //Debug.Log("Player start health " + staticHealth.health);
 
-        yield return new WaitForSeconds(1f);
+        //yield return new WaitForSeconds(1f);
 
         state = BattleState.PLAYERTURN;
+        GameObject tempLeaf = GameObject.Find("Leaf"); //added this
+        if (tempLeaf != null)
+        {
+            Debug.Log("Leaf is not null");
+            firstStrikeCheck = tempLeaf.GetComponent<PlayerAttack>();
+            if (firstStrikeCheck.firstStrike == true)
+            {
+                Debug.Log("extra damage!");
+
+                PlayerController.playerCharacter.SetActive(false);
+                yield return new WaitForSeconds(1f);
+
+                anim.SetBool("CombatSwing", true);
+
+                dialogueText.text = "First Strike for 10 damage";
+                bool isDead = enemyUnit.TakeDamage(playerUnit.damage);
+                enemyHUD.SetHP(enemyUnit.currentHP, enemyUnit);
+                enemyHUD.SetHUD(enemyUnit);
+                yield return new WaitForSeconds(1f);
+                firstStrikeCheck.firstStrike = false;
+            }
+        }
+        else
+        {
+            PlayerController.playerCharacter.SetActive(false);
+            yield return new WaitForSeconds(1f);
+            Debug.Log("Leaf is null!");
+        }
         PlayerTurn();
     }
 
