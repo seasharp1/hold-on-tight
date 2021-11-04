@@ -82,6 +82,9 @@ public class BattleSystem : MonoBehaviour
         dialogueText.text = "The attack hit for " + playerUnit.damage + " damage!";
         if (isDead == true)
         {
+            GameObject.Find("AttackButton").GetComponent<Button>().interactable = false;
+            GameObject.Find("HealButton").GetComponent<Button>().interactable = false;
+
             enemyHUD.SetHP(enemyUnit.currentHP, enemyUnit);
             enemyHUD.SetHUD(enemyUnit);
             yield return new WaitForSeconds(1f);
@@ -183,32 +186,38 @@ public class BattleSystem : MonoBehaviour
 
     public void OnAttackButton()
     {
-        if (state != BattleState.PLAYERTURN)
+        if (state == BattleState.PLAYERTURN)
+        {
+            StartCoroutine(PlayerAttack());
+        }
+        else
         {
             return;
         }
-        StartCoroutine(PlayerAttack());
     }
 
     public void OnHealButton()
     {
-        if (state != BattleState.PLAYERTURN)
+        if (state == BattleState.PLAYERTURN)
+        {
+            StartCoroutine(PlayerHeal());
+        }
+        else
         {
             return;
         }
-        StartCoroutine(PlayerHeal());
     }
 
     public void swingAnim()
     {
-        if (state != BattleState.PLAYERTURN)
+        if (state == BattleState.PLAYERTURN)
         {
-            //print("false");
+            anim.SetBool("CombatSwing", true);
+        }
+        else
+        {
             return;
         }
-        //print("working");
-        anim.SetBool("CombatSwing", true);
-        //print("True");
     }
 
     public void levelUp()
