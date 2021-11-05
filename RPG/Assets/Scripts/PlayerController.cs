@@ -52,7 +52,7 @@ public class PlayerController : MonoBehaviour
 
         DontDestroyOnLoad(gameObject);
         DontDestroyOnLoad(mainCamera);
-        DontDestroyOnLoad(eventSystem);
+        //DontDestroyOnLoad(eventSystem);
         rb = GetComponent<Rigidbody2D>();
         StartPosition = transform.position;
         myRender = GetComponent<SpriteRenderer>();

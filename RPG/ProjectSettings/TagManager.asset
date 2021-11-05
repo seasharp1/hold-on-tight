@@ -10,6 +10,7 @@ TagManager:
   - BattleCamera
   - LevelEnd
   - CombatLeaf
+  - Collectible
   layers:
   - Default
   - TransparentFX
@@ -58,4 +59,7 @@ TagManager:
     locked: 0
   - name: Player
     uniqueID: 3683511171
+    locked: 0
+  - name: UI
+    uniqueID: 2871926419
     locked: 0
