@@ -108,8 +108,10 @@ public class BattleSystem : MonoBehaviour
 
     IEnumerator PlayerAttack()
     {
+        playerUnit.damage = getDamage();
         bool isDead = enemyUnit.TakeDamage(playerUnit.damage);
         dialogueText.text = "The attack hit for " + playerUnit.damage + " damage!";
+
         if (isDead == true)
         {
             GameObject.Find("AttackButton").GetComponent<Button>().interactable = false;
@@ -168,6 +170,7 @@ public class BattleSystem : MonoBehaviour
     IEnumerator EnemyTurn()
     {
         yield return new WaitForSeconds(1f);
+        enemyUnit.damage = getDamage();
         dialogueText.text = enemyUnit.unitName + " attacks for " + enemyUnit.damage + " damage!";
 
         bool isDead = playerUnit.TakeDamage(enemyUnit.damage);
@@ -250,10 +253,43 @@ public class BattleSystem : MonoBehaviour
         }
     }
 
+    // Used to gain exp at end of combat
     public void levelUp()
     {
         addExp = 10;
         originalCharacter.GetComponent<LevelUpSystem>().currExp += addExp;
         Debug.Log("Player gained " + addExp + " experience.");
+    }
+
+    // Returns random number within specified range for damage and allows for critical hits
+    public int getDamage()
+    {
+        int damage = 0;
+        int multiplier = 1;
+        int critChance = Random.Range(1, 101);
+
+        // Set crit chance here...
+        if (critChance >= 97)
+        {
+            multiplier = 2;
+            Debug.Log("Critical Hit!");
+        }
+
+        // For enemy damage
+        if (enemyUnit.unitName == "Toy Car")
+        {
+            damage = Random.Range(1, 6);
+        } else if (enemyUnit.unitName == "Toy Soldier") // For use when implemented...
+        {
+            damage = Random.Range(2, 8);
+        } // Add more enemies just as done above and specify damage range...
+
+        // For player damage
+        if (state == BattleState.PLAYERTURN)
+        {
+            damage = Random.Range(2, 8) * multiplier;
+        }
+
+        return damage;
     }
 }
