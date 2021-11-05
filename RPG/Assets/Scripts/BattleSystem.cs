@@ -246,6 +246,7 @@ public class BattleSystem : MonoBehaviour
         if (state == BattleState.PLAYERTURN)
         {
             anim.SetBool("CombatSwing", true);
+
         }
         else
         {
