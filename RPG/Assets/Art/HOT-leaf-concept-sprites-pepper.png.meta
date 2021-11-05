@@ -1,0 +1,513 @@
+fileFormatVersion: 2
+guid: 3b00a76dafddfe947bffe6403be93b35
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 3578894296917107110
+    second: HOT-leaf-concept-sprites-pepper_16
+  - first:
+      213: 2666887958914930904
+    second: HOT-leaf-concept-sprites-pepper_17
+  - first:
+      213: 7617086068551534001
+    second: HOT-leaf-concept-sprites-pepper_18
+  - first:
+      213: -7905420046763172456
+    second: HOT-leaf-concept-sprites-pepper_19
+  - first:
+      213: 6139463798746403471
+    second: HOT-leaf-concept-sprites-pepper_20
+  - first:
+      213: 8378484313897779268
+    second: HOT-leaf-concept-sprites-pepper_21
+  - first:
+      213: 3896487354509673810
+    second: HOT-leaf-concept-sprites-pepper_22
+  - first:
+      213: -4344411367344104342
+    second: HOT-leaf-concept-sprites-pepper_23
+  - first:
+      213: -4691144213563413860
+    second: HOT-leaf-concept-sprites-pepper_32
+  - first:
+      213: -1538231949216212232
+    second: HOT-leaf-concept-sprites-pepper_33
+  - first:
+      213: -881160822202997446
+    second: HOT-leaf-concept-sprites-pepper_34
+  - first:
+      213: 7095794642137248414
+    second: HOT-leaf-concept-sprites-pepper_36
+  - first:
+      213: -7544324269981181703
+    second: HOT-leaf-concept-sprites-pepper_37
+  - first:
+      213: 6286191824237025279
+    second: HOT-leaf-concept-sprites-pepper_38
+  - first:
+      213: -9201422367339813839
+    second: HOT-leaf-concept-sprites-pepper_48
+  - first:
+      213: -5250002099783332738
+    second: HOT-leaf-concept-sprites-pepper_49
+  - first:
+      213: -3524960553666611486
+    second: HOT-leaf-concept-sprites-pepper_50
+  - first:
+      213: 2581895811453653915
+    second: HOT-leaf-concept-sprites-pepper_51
+  - first:
+      213: -4781403601893043402
+    second: HOT-leaf-concept-sprites-pepper_52
+  - first:
+      213: -8926562840203903390
+    second: HOT-leaf-concept-sprites-pepper_53
+  - first:
+      213: 3858313496423850932
+    second: HOT-leaf-concept-sprites-pepper_54
+  - first:
+      213: -5654969556653678911
+    second: HOT-leaf-concept-sprites-pepper_55
+  - first:
+      213: -1833669982022808471
+    second: HOT-leaf-concept-sprites-pepper_56
+  - first:
+      213: -6365886091745668847
+    second: HOT-leaf-concept-sprites-pepper_57
+  - first:
+      213: 9024072253105012800
+    second: HOT-leaf-concept-sprites-pepper_58
+  - first:
+      213: -9210518658369262634
+    second: HOT-leaf-concept-sprites-pepper_59
+  - first:
+      213: -8547929763294758262
+    second: HOT-leaf-concept-sprites-pepper_60
+  - first:
+      213: -6477276647690922424
+    second: HOT-leaf-concept-sprites-pepper_61
+  - first:
+      213: 1480706757444035310
+    second: HOT-leaf-concept-sprites-pepper_62
+  - first:
+      213: -6768963629894129947
+    second: HOT-leaf-concept-sprites-pepper_63
+  externalObjects: {}
+  serializedVersion: 11
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 16
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  platformSettings:
+  - serializedVersion: 3
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: HOT-leaf-concept-sprites-pepper_32
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 160
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c9a6c684135b5eeb0800000000000000
+      internalID: -4691144213563413860
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HOT-leaf-concept-sprites-pepper_33
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 160
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8fa9fcc213a17aae0800000000000000
+      internalID: -1538231949216212232
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HOT-leaf-concept-sprites-pepper_34
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 160
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a35699a96ec75c3f0800000000000000
+      internalID: -881160822202997446
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HOT-leaf-concept-sprites-pepper_36
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 160
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e92f5b3c1a3597260800000000000000
+      internalID: 7095794642137248414
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HOT-leaf-concept-sprites-pepper_37
+      rect:
+        serializedVersion: 2
+        x: 160
+        y: 160
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9f8d9694c0d2d4790800000000000000
+      internalID: -7544324269981181703
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HOT-leaf-concept-sprites-pepper_38
+      rect:
+        serializedVersion: 2
+        x: 192
+        y: 160
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ff7dc91982a0d3750800000000000000
+      internalID: 6286191824237025279
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HOT-leaf-concept-sprites-pepper_48
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 96
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 134606eab1bfd4080800000000000000
+      internalID: -9201422367339813839
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HOT-leaf-concept-sprites-pepper_49
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 96
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e7c0c5ce7ee3427b0800000000000000
+      internalID: -5250002099783332738
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HOT-leaf-concept-sprites-pepper_50
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 96
+        width: 64
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2e6ff6f6d03d41fc0800000000000000
+      internalID: -3524960553666611486
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HOT-leaf-concept-sprites-pepper_52
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 96
+        width: 64
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 633546dc1ca05adb0800000000000000
+      internalID: -4781403601893043402
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HOT-leaf-concept-sprites-pepper_54
+      rect:
+        serializedVersion: 2
+        x: 192
+        y: 96
+        width: 64
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4b3607aceab7b8530800000000000000
+      internalID: 3858313496423850932
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HOT-leaf-concept-sprites-pepper_56
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 64
+        width: 64
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 96ccb36ddde7d86e0800000000000000
+      internalID: -1833669982022808471
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HOT-leaf-concept-sprites-pepper_58
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 64
+        width: 64
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 04088c117e1fb3d70800000000000000
+      internalID: 9024072253105012800
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HOT-leaf-concept-sprites-pepper_60
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 64
+        width: 64
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a8ab3dd4b27af5980800000000000000
+      internalID: -8547929763294758262
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HOT-leaf-concept-sprites-pepper_62
+      rect:
+        serializedVersion: 2
+        x: 192
+        y: 64
+        width: 64
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ee2e8f563f68c8410800000000000000
+      internalID: 1480706757444035310
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+  spritePackingTag: 
+  pSDRemoveMatte: 0
+  pSDShowRemoveMatteOption: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
