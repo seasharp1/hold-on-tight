@@ -31,6 +31,11 @@ public class PlayerController : MonoBehaviour
     public static PlayerController instance;
     public string areaTransitionName;
 
+    [SerializeField] private DialogueUI dialogueUI;
+    public DialogueUI DialogueUI => dialogueUI;
+
+    public IInteractable Interactiable { get; set; }
+
     // Start is called before the first frame update
     void Start()
     {
@@ -61,9 +66,14 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (dialogueUI.IsOpen) return;
         Move();
         Jump();
         CheckIfGrounded();
+        if (Input.GetKeyDown(KeyCode.E))
+        {
+            Interactiable?.Interact(this);
+        }
     }
 
     void Move()

@@ -10,13 +10,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6051a42f62c8eab4cb99fb54b9249893, type: 3}
-  m_Name: New Dialogue Object
+  m_Name: Yes
   m_EditorClassIdentifier: 
   dialogue:
-  - Ey, bro.
-  - Is this a dialogue test?
-  responses:
-  - responseText: Yes
-    dialogueObject: {fileID: 11400000, guid: 18b942c455fd3784db365fcfc26de460, type: 2}
-  - responseText: No
-    dialogueObject: {fileID: 11400000, guid: 854f8f0c75aa3324e9ae17fd5a5d1c4f, type: 2}
+  - Oh god, then i'm not real...
+  responses: []
