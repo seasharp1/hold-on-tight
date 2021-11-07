@@ -40,10 +40,27 @@ public class BattleSystem : MonoBehaviour
     PlayerAttack firstStrikeCheck;
 
     public AudioClip playerAttackSE;
+    public AudioClip playerHealSE;
+
+    public PlayerController player;
+
+    public GameObject enemy1;
+    public GameObject enemy2;
 
     // Start is called before the first frame update
     void Start()
     {
+        player = GameObject.FindWithTag("Player").GetComponent<PlayerController>();
+        if(player.isToyCar == true)
+        {
+            enemyPrefab = enemy1;
+            player.isToyCar = false;
+        }
+        if (player.isToySoldier == true)
+        {
+            enemyPrefab = enemy2;
+            player.isToySoldier = false;
+        }
         playerHealth = originalCharacter.GetComponent<PlayerController>().health;
 
         originalCamera = PlayerController.mainCamera;
@@ -203,6 +220,8 @@ public class BattleSystem : MonoBehaviour
     IEnumerator PlayerHeal()
     {
         playerUnit.Heal(5);
+
+        AudioSource.PlayClipAtPoint(playerHealSE, transform.position);
 
         playerHUD.SetHP(playerUnit.currentHP, playerUnit);
         playerHUD.SetHUD(playerUnit);

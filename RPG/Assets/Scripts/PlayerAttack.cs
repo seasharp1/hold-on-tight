@@ -16,8 +16,13 @@ public class PlayerAttack : MonoBehaviour
     public bool firstStrike = false;
 
     public AudioClip swordSwing;
+    public PlayerController player;
 
     // Update is called once per frame
+    private void Start()
+    {
+        player = GameObject.FindWithTag("Player").GetComponent<PlayerController>();
+    }
     void Update()
     {
         if (Input.GetButtonDown("Fire1"))
@@ -44,6 +49,15 @@ public class PlayerAttack : MonoBehaviour
             //PlayerController.playerCharacter.SetActive(false);
             PlayerController.eventSystem.SetActive(false);
         }
+        for (int i = 0; i < hitSoldiers.Length; ++i)
+        {
+            Destroy(hitSoldiers[i].gameObject);
+
+            SceneManager.LoadScene("Battle", LoadSceneMode.Additive);
+            PlayerController.mainCamera.SetActive(false);
+            //PlayerController.playerCharacter.SetActive(false);
+            PlayerController.eventSystem.SetActive(false);
+        }
         for (int i = 0; i < hitBreak.Length; ++i)
         {
             Destroy(hitBreak[i].gameObject);
@@ -62,6 +76,13 @@ public class PlayerAttack : MonoBehaviour
         foreach (Collider2D enemy in hitEnemies)
         {
             Debug.Log("Attack");
+            player.isToyCar = true;
+            firstStrike = true;
+        }
+        foreach (Collider2D enemy in hitSoldiers)
+        {
+            Debug.Log("Attack");
+            player.isToySoldier = true;
             firstStrike = true;
         }
     }

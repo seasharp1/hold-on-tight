@@ -37,7 +37,6 @@ public class LevelUpSystem : MonoBehaviour
         //{
         //Debug.Log("Add 3DTextPrefab");
         //}
-
         GameObject go = GameObject.FindGameObjectWithTag("Player");
         myTransform = go.transform;
     }

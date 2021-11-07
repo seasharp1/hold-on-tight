@@ -39,6 +39,9 @@ public class PlayerController : MonoBehaviour
     public AudioClip coin;
     public AudioClip jumpingSE;
 
+    public bool isToyCar = false;
+    public bool isToySoldier = false;
+
 
     // Start is called before the first frame update
     void Start()
@@ -142,19 +145,21 @@ public class PlayerController : MonoBehaviour
         if (collision.gameObject.tag == "Enemy")
         {
             Destroy(collision.gameObject);
+            isToyCar = true;
 
             SceneManager.LoadScene("Battle", LoadSceneMode.Additive);
             mainCamera.SetActive(false);
-            playerCharacter.SetActive(false); //commented out for now
+            //playerCharacter.SetActive(false); //commented out for now
             eventSystem.SetActive(false);
         }
         if (collision.gameObject.tag == "Toy Soldier Enemy")
         {
             Destroy(collision.gameObject);
+            isToySoldier = true;
 
-            SceneManager.LoadScene("Battle(Toy Soldier)", LoadSceneMode.Additive);
+            SceneManager.LoadScene("Battle", LoadSceneMode.Additive);
             mainCamera.SetActive(false);
-            playerCharacter.SetActive(false); //commented out for now
+            //playerCharacter.SetActive(false); //commented out for now
             eventSystem.SetActive(false);
         }
     }

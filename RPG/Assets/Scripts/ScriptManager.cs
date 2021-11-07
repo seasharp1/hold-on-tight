@@ -9,7 +9,7 @@ public class ScriptManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        DontDestroyOnLoad(this.gameObject);
+        //DontDestroyOnLoad(this.gameObject);
         maxHealth = 50;
         health = 50;
     }
