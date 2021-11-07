@@ -104,7 +104,11 @@ public class BattleSystem : MonoBehaviour
                 Debug.Log("extra damage!");
 
                 PlayerController.playerCharacter.SetActive(false);
-                yield return new WaitForSeconds(1f);
+
+                GameObject.Find("AttackButton").GetComponent<Button>().interactable = false;
+                GameObject.Find("HealButton").GetComponent<Button>().interactable = false;
+
+                yield return new WaitForSeconds(.1f);
 
                 anim.SetBool("CombatSwing", true);
                 AudioSource.PlayClipAtPoint(playerAttackSE, transform.position);
@@ -113,7 +117,10 @@ public class BattleSystem : MonoBehaviour
                 bool isDead = enemyUnit.TakeDamage(playerUnit.damage);
                 enemyHUD.SetHP(enemyUnit.currentHP, enemyUnit);
                 enemyHUD.SetHUD(enemyUnit);
+                
                 yield return new WaitForSeconds(1f);
+                GameObject.Find("AttackButton").GetComponent<Button>().interactable = true;
+                GameObject.Find("HealButton").GetComponent<Button>().interactable = true;
                 firstStrikeCheck.firstStrike = false;
             }
         }
