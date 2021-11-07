@@ -27,6 +27,9 @@ public class BattleSystem : MonoBehaviour
     public GameObject originalCharacter;
     public GameObject originalEventSystem;
 
+    public LevelUpSystem levelUpSystem;
+    public ScriptManager scriptManager;
+
     public int playerHealth;
     public ScriptManager staticHealth;
     public int addExp;
@@ -46,6 +49,9 @@ public class BattleSystem : MonoBehaviour
         originalCharacter = PlayerController.playerCharacter;
         originalEventSystem = PlayerController.eventSystem;
 
+        levelUpSystem = originalCharacter.GetComponent<LevelUpSystem>();
+        scriptManager = GameObject.Find("GameManager").GetComponent<ScriptManager>();
+
         state = BattleState.START;
         StartCoroutine(SetupBattle());
         anim = GameObject.FindWithTag("CombatLeaf").GetComponent<Animator>(); //this fixes the combat animation
@@ -63,7 +69,7 @@ public class BattleSystem : MonoBehaviour
         playerHUD.SetHUD_Start(playerUnit, true);
         enemyHUD.SetHUD_Start(enemyUnit, false);
 
-        staticHealth = GameObject.Find("GameManager").GetComponent<ScriptManager>();
+        staticHealth = scriptManager;
         playerHUD.SetHP_Start(staticHealth.health, playerUnit, true);
         //enemyHUD.SetHP(staticHealth.health, enemyUnit, false);
         playerUnit.currentHP = staticHealth.health;
@@ -117,7 +123,7 @@ public class BattleSystem : MonoBehaviour
 
             levelUp();
 
-            staticHealth = GameObject.Find("GameManager").GetComponent<ScriptManager>();
+            staticHealth = scriptManager;
             staticHealth.health = GameUnit.currentHP;
 
             Debug.Log("player health at end of battle is " + GameUnit.currentHP);
@@ -214,7 +220,19 @@ public class BattleSystem : MonoBehaviour
     public void levelUp()
     {
         addExp = 10;
-        originalCharacter.GetComponent<LevelUpSystem>().currExp += addExp;
-        Debug.Log("Player gained " + addExp + " experience.");
+
+        if ((levelUpSystem.currExp + addExp) >= levelUpSystem.maxExp)
+        {
+            levelUpSystem.currExp += addExp;
+
+            scriptManager.maxHealth += (5 * levelUpSystem.currLevel);
+            scriptManager.health = scriptManager.maxHealth;
+
+            Debug.Log("Player gained " + addExp + " experience and leveled up!");
+        } else
+        {
+            levelUpSystem.currExp += addExp;
+            Debug.Log("Player gained " + addExp + " experience.");
+        }
     }
 }
