@@ -154,6 +154,9 @@ MonoBehaviour:
   health: 0
   myAnim: {fileID: 7583251841637049396}
   areaTransitionName: 
+  dialogueUI: {fileID: 0}
+  coin: {fileID: 8300000, guid: cbcec6b3c4939654bae40db7b19e9b86, type: 3}
+  jumpingSE: {fileID: 8300000, guid: 1bd8a7b696b0bc6438dabe6cca8f189f, type: 3}
 --- !u!61 &9052260457792923304
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -199,6 +202,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 128
   firstStrike: 1
+  swordSwing: {fileID: 8300000, guid: b950eadf83ae83c44b15358fd7158b41, type: 3}
 --- !u!114 &4404656571729895546
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -1,0 +1,35 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6051a42f62c8eab4cb99fb54b9249893, type: 3}
+  m_Name: TB- Ball npc
+  m_EditorClassIdentifier: 
+  dialogue:
+  - 'Pepper-
+
+    Hey, whatchu got there?'
+  - 'Ball-
+
+    This is a family heirloom passed down to my father from my fathers
+    father and eventually to me.'
+  - 'Pepper-
+
+    Oh cool, I guess. Can we use it?'
+  - "Ball-\nOh, you\u2019re lucky my dad didn\u2019t hear you say that. He believes
+    that this slingshot is the key to our family\u2019s success and survival."
+  - "Pepper-\nHuh, interesting. So I guess you won\u2019t let us use it."
+  - "Ball-\nOh, you can use it, I don\u2019t believe in all that nonsense."
+  - "Ball-\nSay, if you clear out all those enemies down there then I\u2019ll let
+    you use it."
+  - 'Pepper-
+
+    Deal!'
+  responses: []

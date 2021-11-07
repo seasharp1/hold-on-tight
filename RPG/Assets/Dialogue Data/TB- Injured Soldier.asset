@@ -1,0 +1,47 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6051a42f62c8eab4cb99fb54b9249893, type: 3}
+  m_Name: TB- Injured Soldier
+  m_EditorClassIdentifier: 
+  dialogue:
+  - 'Pepper-
+
+    Hey Mr Soldier, I was wondering if you have seen anything new drop
+    by recently?'
+  - "Pepper-\nThere\u2019s this object that me and my friend here are searching for,
+    can you point us in the right direction?"
+  - 'Injured Soldier-
+
+    The horrors I just witnessed. Friends and family turning
+    against each other.'
+  - "Pepper-\nOk, that was totally not on topic at all\u2026 What\u2019s going on
+    with you?"
+  - 'Injured Soldier-
+
+    Just a few days ago everything was perfectly peaceful,
+    all us toys got along just fine.'
+  - 'Injured Soldier-
+
+    Then, that...thing...came along and started to create
+    an army of toys and take over the land.'
+  - 'Pepper-
+
+    Oh my, is that how you got injured?'
+  - "Injured Soldier-\nNah, some dog chewed my leg off a few weeks ago, but I'm more
+    traumatised by what\u2019s going on right now than that."
+  - "Injured Soldier-\nLook, if you\u2019re going in there, be careful. I recommend
+    you don\u2019t but I feel like you\u2019re gonna go in there no matter what I
+    say."
+  - 'Pepper-
+
+    Yeah, you right.'
+  responses: []

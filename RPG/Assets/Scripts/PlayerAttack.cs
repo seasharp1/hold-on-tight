@@ -13,6 +13,8 @@ public class PlayerAttack : MonoBehaviour
 
     public bool firstStrike = false;
 
+    public AudioClip swordSwing;
+
     // Update is called once per frame
     void Update()
     {
@@ -25,6 +27,7 @@ public class PlayerAttack : MonoBehaviour
     void Attack()
     {
         animator.SetBool("Attack", true);
+        AudioSource.PlayClipAtPoint(swordSwing, transform.position);
 
         Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(attackLocation.position, attackRange, enemies);
 

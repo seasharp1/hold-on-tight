@@ -36,6 +36,10 @@ public class PlayerController : MonoBehaviour
 
     public IInteractable Interactiable { get; set; }
 
+    public AudioClip coin;
+    public AudioClip jumpingSE;
+
+
     // Start is called before the first frame update
     void Start()
     {
@@ -113,6 +117,7 @@ public class PlayerController : MonoBehaviour
     {
         if (Input.GetKey(KeyCode.Space) && isGrounded)
         {
+            AudioSource.PlayClipAtPoint(jumpingSE, transform.position);
             rb.velocity = new Vector2(rb.velocity.x, jumpForce);
             myAnim.SetBool("isJumping", true);
         }
@@ -164,6 +169,7 @@ public class PlayerController : MonoBehaviour
             levelUpScript.currExp += 5;
             Debug.Log("Collectible Acquired!");
             Destroy(collision.gameObject);
+            AudioSource.PlayClipAtPoint(coin, transform.position);
         }
     }
 }

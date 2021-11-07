@@ -39,6 +39,8 @@ public class BattleSystem : MonoBehaviour
 
     PlayerAttack firstStrikeCheck;
 
+    public AudioClip playerAttackSE;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -88,6 +90,7 @@ public class BattleSystem : MonoBehaviour
                 yield return new WaitForSeconds(1f);
 
                 anim.SetBool("CombatSwing", true);
+                AudioSource.PlayClipAtPoint(playerAttackSE, transform.position);
 
                 dialogueText.text = "First Strike for 10 damage";
                 bool isDead = enemyUnit.TakeDamage(playerUnit.damage);
@@ -246,7 +249,7 @@ public class BattleSystem : MonoBehaviour
         if (state == BattleState.PLAYERTURN)
         {
             anim.SetBool("CombatSwing", true);
-
+            AudioSource.PlayClipAtPoint(playerAttackSE, transform.position);
         }
         else
         {
@@ -288,7 +291,7 @@ public class BattleSystem : MonoBehaviour
         // For player damage
         if (state == BattleState.PLAYERTURN)
         {
-            damage = Random.Range(2, 8) * multiplier;
+            damage = Random.Range(4, 8) * multiplier;
         }
 
         return damage;
