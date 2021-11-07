@@ -148,6 +148,15 @@ public class PlayerController : MonoBehaviour
             playerCharacter.SetActive(false); //commented out for now
             eventSystem.SetActive(false);
         }
+        if (collision.gameObject.tag == "Toy Soldier Enemy")
+        {
+            Destroy(collision.gameObject);
+
+            SceneManager.LoadScene("Battle(Toy Soldier)", LoadSceneMode.Additive);
+            mainCamera.SetActive(false);
+            playerCharacter.SetActive(false); //commented out for now
+            eventSystem.SetActive(false);
+        }
     }
 
     private void OnTriggerEnter2D(Collider2D collision)

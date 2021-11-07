@@ -20,4 +20,10 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/BattleLost.unity
     guid: 8175cce32fbbaca4cb73fd06adc940cd
+  - enabled: 1
+    path: Assets/Scenes/Toy Box.unity
+    guid: 0010e369b6190ce4cb349859c24c1c0a
+  - enabled: 1
+    path: Assets/Scenes/Battle(Toy Soldier).unity
+    guid: 27a0659dfdb13b8448d5afbfd6188d2a
   m_configObjects: {}
