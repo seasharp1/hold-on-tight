@@ -6,6 +6,7 @@ public class outsideCombatHeal : MonoBehaviour
 {
     ScriptManager scriptManager;
     bool isTriggered = false;
+    public AudioClip heal;
     private void Start()
     {
         scriptManager = GameObject.FindWithTag("PlayerGameManager").GetComponent<ScriptManager>();
@@ -14,6 +15,7 @@ public class outsideCombatHeal : MonoBehaviour
     {
         if (isTriggered == true && Input.GetKeyDown(KeyCode.E))
         {
+            AudioSource.PlayClipAtPoint(heal, transform.position);
             scriptManager.health = scriptManager.maxHealth;
         }
     }

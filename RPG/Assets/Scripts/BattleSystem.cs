@@ -108,10 +108,10 @@ public class BattleSystem : MonoBehaviour
                 GameObject.Find("AttackButton").GetComponent<Button>().interactable = false;
                 GameObject.Find("HealButton").GetComponent<Button>().interactable = false;
 
-                yield return new WaitForSeconds(.1f);
+                yield return new WaitForSeconds(.01f);
 
                 anim.SetBool("CombatSwing", true);
-                AudioSource.PlayClipAtPoint(playerAttackSE, transform.position);
+                //AudioSource.PlayClipAtPoint(playerAttackSE, transform.position);
 
                 dialogueText.text = "First Strike for 10 damage";
                 bool isDead = enemyUnit.TakeDamage(playerUnit.damage);

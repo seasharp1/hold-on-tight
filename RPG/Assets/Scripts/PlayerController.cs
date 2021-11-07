@@ -10,7 +10,7 @@ public class PlayerController : MonoBehaviour
     Rigidbody2D rb;
     public float speed;
     public float jumpForce;
-    bool isGrounded = false;
+    public bool isGrounded = false;
     public Transform isGroundedChecker;
     public float checkGroundRadius;
     public LayerMask groundLayer;
