@@ -123,6 +123,7 @@ public class BattleSystem : MonoBehaviour
             yield return new WaitForSeconds(1f);
             Debug.Log("Leaf is null!");
         }
+        PlayerController.playerCharacter.SetActive(false);
         PlayerTurn();
     }
 
