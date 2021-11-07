@@ -4111,7 +4111,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 419c350f7570efe40861cbbba964b2f6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  heal: {fileID: 0}
+  heal: {fileID: 8300000, guid: 18b6011358fd43443b4ec4634c60de3f, type: 3}
 --- !u!4 &1456727885 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6609822002726369370, guid: c28ee5d57ff37844ba89b87ef0521b1c, type: 3}
@@ -61476,7 +61476,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5199538944825333424, guid: 976972d1eb5dd2640a62a9d32f151c34, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 32.77
+      value: 184.8
       objectReference: {fileID: 0}
     - target: {fileID: 5199538944825333424, guid: 976972d1eb5dd2640a62a9d32f151c34, type: 3}
       propertyPath: m_LocalPosition.y
