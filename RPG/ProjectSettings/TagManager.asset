@@ -11,6 +11,8 @@ TagManager:
   - LevelEnd
   - CombatLeaf
   - Collectible
+  - Toy Soldier Enemy
+  - Break
   layers:
   - Default
   - TransparentFX
@@ -21,7 +23,7 @@ TagManager:
   - Ground
   - enemy
   - Background
-  - 
+  - Break
   - 
   - 
   - 

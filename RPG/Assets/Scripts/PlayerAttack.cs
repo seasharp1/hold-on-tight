@@ -10,6 +10,7 @@ public class PlayerAttack : MonoBehaviour
     public Transform attackLocation;
     public float attackRange = 0.5f;
     public LayerMask enemies;
+    public LayerMask canBreak;
 
     public bool firstStrike = false;
 
@@ -30,6 +31,7 @@ public class PlayerAttack : MonoBehaviour
         AudioSource.PlayClipAtPoint(swordSwing, transform.position);
 
         Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(attackLocation.position, attackRange, enemies);
+        Collider2D[] hitBreak = Physics2D.OverlapCircleAll(attackLocation.position, attackRange, canBreak);
 
         for (int i = 0; i < hitEnemies.Length; ++i)
         {
@@ -39,9 +41,12 @@ public class PlayerAttack : MonoBehaviour
             PlayerController.mainCamera.SetActive(false);
             //PlayerController.playerCharacter.SetActive(false);
             PlayerController.eventSystem.SetActive(false);
-
-
         }
+        for (int i = 0; i < hitBreak.Length; ++i)
+        {
+            Destroy(hitBreak[i].gameObject);
+        }
+
 
         foreach (Collider2D enemy in hitEnemies)
         {
