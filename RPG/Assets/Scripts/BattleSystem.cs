@@ -49,6 +49,14 @@ public class BattleSystem : MonoBehaviour
     public GameObject enemy2;
 
     // Start is called before the first frame update
+    void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.F) && enemyUnit.currentHP > 0)
+        {
+            print("yeah");
+            GameObject.Find("AttackButton").GetComponent<Button>().onClick.Invoke();
+        }
+    }
     void Start()
     {
         player = GameObject.FindWithTag("Player").GetComponent<PlayerController>();
