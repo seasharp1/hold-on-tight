@@ -49,7 +49,7 @@ public class LevelUpSystem : MonoBehaviour
 
         if (expBarEnabled == true)
         {
-            GUI.Box(new Rect(20, Screen.height - 40, expBarLength, 20), currExp + "/" + maxExp);
+            GUI.Box(new Rect(20, Screen.height - 475, expBarLength, 20), currExp + "/" + maxExp);
         }
     }
 

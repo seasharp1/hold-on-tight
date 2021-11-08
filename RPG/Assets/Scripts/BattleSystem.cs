@@ -123,7 +123,25 @@ public class BattleSystem : MonoBehaviour
                 bool isDead = enemyUnit.TakeDamage(displayDamage);
                 enemyHUD.SetHP(enemyUnit.currentHP, enemyUnit);
                 enemyHUD.SetHUD(enemyUnit);
-                
+                if (isDead == true)
+                {
+                    GameObject.Find("AttackButton").GetComponent<Button>().interactable = false;
+                    GameObject.Find("HealButton").GetComponent<Button>().interactable = false;
+
+                    enemyHUD.SetHP(enemyUnit.currentHP, enemyUnit);
+                    enemyHUD.SetHUD(enemyUnit);
+                    yield return new WaitForSeconds(1f);
+                    dialogueText.text = enemyUnit.unitName + " was defeated!";
+                    yield return new WaitForSeconds(1f);
+                    state = BattleState.WON;
+                    EndBattle();
+                }
+                else
+                {
+                    state = BattleState.ENEMYTURN;
+                    StartCoroutine(EnemyTurn());
+                }
+
                 yield return new WaitForSeconds(1f);
                 GameObject.Find("AttackButton").GetComponent<Button>().interactable = true;
                 GameObject.Find("HealButton").GetComponent<Button>().interactable = true;
