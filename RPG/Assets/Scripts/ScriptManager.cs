@@ -6,11 +6,13 @@ public class ScriptManager : MonoBehaviour
 {
     public int maxHealth;
     public int health;
+    public int extraDamage;
     // Start is called before the first frame update
     void Start()
     {
         //DontDestroyOnLoad(this.gameObject);
         maxHealth = 50;
         health = 50;
+        extraDamage = 0;
     }
 }

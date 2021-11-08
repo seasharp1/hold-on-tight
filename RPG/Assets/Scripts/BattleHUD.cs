@@ -9,7 +9,7 @@ public class BattleHUD : MonoBehaviour
     public Text levelText;
     public Text HPText;
     public Slider hpSlider;
-    int healthModifier = 0;
+    //int healthModifier = 0;
 
     public void SetHUD(Unit unit)
     {

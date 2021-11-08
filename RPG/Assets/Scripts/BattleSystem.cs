@@ -117,8 +117,10 @@ public class BattleSystem : MonoBehaviour
                 anim.SetBool("CombatSwing", true);
                 //AudioSource.PlayClipAtPoint(playerAttackSE, transform.position);
 
-                dialogueText.text = "First Strike for 10 damage";
-                bool isDead = enemyUnit.TakeDamage(playerUnit.damage);
+                int displayDamage = 8 + staticHealth.extraDamage;
+
+                dialogueText.text = "First Strike for " + displayDamage + " damage";
+                bool isDead = enemyUnit.TakeDamage(displayDamage);
                 enemyHUD.SetHP(enemyUnit.currentHP, enemyUnit);
                 enemyHUD.SetHUD(enemyUnit);
                 
@@ -307,6 +309,7 @@ public class BattleSystem : MonoBehaviour
         int damage = 0;
         int multiplier = 1;
         int critChance = Random.Range(1, 101);
+        int damagePlus = staticHealth.extraDamage;
 
         // Set crit chance here...
         if (critChance >= 97)
@@ -327,7 +330,7 @@ public class BattleSystem : MonoBehaviour
         // For player damage
         if (state == BattleState.PLAYERTURN)
         {
-            damage = Random.Range(4, 8) * multiplier;
+            damage = Random.Range(4 + damagePlus, 8 + damagePlus) * multiplier;
         }
 
         return damage;

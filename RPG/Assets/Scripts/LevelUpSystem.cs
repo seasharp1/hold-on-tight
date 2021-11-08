@@ -89,8 +89,9 @@ public class LevelUpSystem : MonoBehaviour
         if (currExp >= expToLevel && currLevel < maxLevel)
         {
             ++currLevel;
-            scriptManager.maxHealth += 10;
-            scriptManager.health += 10;
+            scriptManager.maxHealth += 5;
+            scriptManager.health += 5;
+            scriptManager.extraDamage += 1;
             changeLevel = true;
             bool levelUp = true;
 
