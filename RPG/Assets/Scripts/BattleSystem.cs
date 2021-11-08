@@ -82,10 +82,13 @@ public class BattleSystem : MonoBehaviour
 
         dialogueText.text = "A wild " + enemyUnit.unitName + " approaches...";
 
+        staticHealth = GameObject.Find("GameManager").GetComponent<ScriptManager>();
+        playerUnit.currentHP = staticHealth.health;
+        playerUnit.maxHP = staticHealth.maxHealth;
+
         playerHUD.SetHUD_Start(playerUnit, true);
         enemyHUD.SetHUD_Start(enemyUnit, false);
 
-        staticHealth = GameObject.Find("GameManager").GetComponent<ScriptManager>();
         playerHUD.SetHP_Start(staticHealth.health, playerUnit, true);
         //enemyHUD.SetHP(staticHealth.health, enemyUnit, false);
         playerUnit.currentHP = staticHealth.health;
@@ -179,10 +182,14 @@ public class BattleSystem : MonoBehaviour
             originalCharacter.SetActive(true);
             originalEventSystem.SetActive(true);
 
+            //int oldMax = staticHealth.maxHealth;
+
             levelUp();
 
             staticHealth = GameObject.Find("GameManager").GetComponent<ScriptManager>();
             staticHealth.health = GameUnit.currentHP;
+            //staticHealth.health += (staticHealth.maxHealth - oldMax);
+            //staticHealth.maxHealth = GameUnit.maxHP;
 
             Debug.Log("player health at end of battle is " + GameUnit.currentHP);
             SceneManager.UnloadSceneAsync("Battle");

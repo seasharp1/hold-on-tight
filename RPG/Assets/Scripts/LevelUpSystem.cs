@@ -23,6 +23,7 @@ public class LevelUpSystem : MonoBehaviour
     #region ProgressBar
     public bool expBarEnabled = true;
     public float expBarLength;
+    public ScriptManager scriptManager;
     #endregion
 
     //public void instantiateText()
@@ -33,6 +34,7 @@ public class LevelUpSystem : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        scriptManager = GameObject.Find("GameManager").GetComponent<ScriptManager>();
         //if (!textPrefab)
         //{
         //Debug.Log("Add 3DTextPrefab");
@@ -87,6 +89,8 @@ public class LevelUpSystem : MonoBehaviour
         if (currExp >= expToLevel && currLevel < maxLevel)
         {
             ++currLevel;
+            scriptManager.maxHealth += 10;
+            scriptManager.health += 10;
             changeLevel = true;
             bool levelUp = true;
 
