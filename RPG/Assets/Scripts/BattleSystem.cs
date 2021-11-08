@@ -41,6 +41,7 @@ public class BattleSystem : MonoBehaviour
 
     public AudioClip playerAttackSE;
     public AudioClip playerHealSE;
+    public AudioClip enemyAttack;
 
     public PlayerController player;
 
@@ -200,6 +201,7 @@ public class BattleSystem : MonoBehaviour
         yield return new WaitForSeconds(1f);
         enemyUnit.damage = getDamage();
         dialogueText.text = enemyUnit.unitName + " attacks for " + enemyUnit.damage + " damage!";
+        AudioSource.PlayClipAtPoint(enemyAttack, transform.position);
 
         bool isDead = playerUnit.TakeDamage(enemyUnit.damage);
         playerHUD.SetHUD(playerUnit);

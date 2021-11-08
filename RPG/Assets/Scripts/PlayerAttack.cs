@@ -16,6 +16,7 @@ public class PlayerAttack : MonoBehaviour
     public bool firstStrike = false;
 
     public AudioClip swordSwing;
+    public AudioClip smash;
     public PlayerController player;
 
     // Update is called once per frame
@@ -60,6 +61,7 @@ public class PlayerAttack : MonoBehaviour
         }
         for (int i = 0; i < hitBreak.Length; ++i)
         {
+            AudioSource.PlayClipAtPoint(smash, transform.position);
             Destroy(hitBreak[i].gameObject);
         }
         for (int i = 0; i < hitSoldiers.Length; ++i)

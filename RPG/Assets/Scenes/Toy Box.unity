@@ -61518,6 +61518,10 @@ PrefabInstance:
       propertyPath: dialogueUI
       value: 
       objectReference: {fileID: 820780347}
+    - target: {fileID: 5199538945400060963, guid: 976972d1eb5dd2640a62a9d32f151c34, type: 3}
+      propertyPath: smash
+      value: 
+      objectReference: {fileID: 8300000, guid: f29e4f6e407af3f43a749d8af0cca749, type: 3}
     - target: {fileID: 5199538945400060989, guid: 976972d1eb5dd2640a62a9d32f151c34, type: 3}
       propertyPath: m_Name
       value: Leaf
