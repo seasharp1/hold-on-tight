@@ -1776,7 +1776,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e521ca612a873c34082c7cd987e266ac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerPrefab: {fileID: 8828294100301395274, guid: 6c32d204386f83743b2d01b3a3c20fbe, type: 3}
+  playerPrefab: {fileID: 8828294100301395274, guid: 8efd7abb45aa06e4a8b36ed9fbff1ecd, type: 3}
   enemyPrefab: {fileID: 0}
   playerBattleStation: {fileID: 1784493709}
   enemyBattleStation: {fileID: 372748192}
@@ -1790,7 +1790,7 @@ MonoBehaviour:
   staticHealth: {fileID: 0}
   addExp: 0
   state: 0
-  anim: {fileID: 8828294100301395276, guid: 6c32d204386f83743b2d01b3a3c20fbe, type: 3}
+  anim: {fileID: 8828294100301395276, guid: 8efd7abb45aa06e4a8b36ed9fbff1ecd, type: 3}
   playerAttackSE: {fileID: 8300000, guid: b950eadf83ae83c44b15358fd7158b41, type: 3}
   playerHealSE: {fileID: 8300000, guid: 18b6011358fd43443b4ec4634c60de3f, type: 3}
   enemyAttack: {fileID: 8300000, guid: a3495809075776748829f1042ec32a62, type: 3}
