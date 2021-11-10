@@ -19,15 +19,22 @@ public class PlayerAttack : MonoBehaviour
     public AudioClip smash;
     public PlayerController player;
 
+    GameObject dialogueHolder;
+    DialogueUI dialogueUI;
+
     // Update is called once per frame
     private void Start()
     {
+        dialogueHolder = GameObject.Find("Canvas");
+        dialogueUI = dialogueHolder.GetComponent<DialogueUI>();
         player = GameObject.FindWithTag("Player").GetComponent<PlayerController>();
     }
     void Update()
     {
-        if (Input.GetButtonDown("Fire1"))
+        print("player attack: " + dialogueUI.IsOpen);
+        if (Input.GetButtonDown("Fire1") && dialogueUI.IsOpen == false)
         {
+            print(dialogueUI.IsOpen);
             Attack();
         }
     }

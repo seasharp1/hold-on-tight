@@ -73,11 +73,11 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (dialogueUI.IsOpen) return;
+        print("player controller: " + dialogueUI.IsOpen);
+        CheckIfGrounded();
         Move();
         Jump();
-        CheckIfGrounded();
-        if (Input.GetKeyDown(KeyCode.E))
+        if (Input.GetKeyDown(KeyCode.E) && dialogueUI.IsOpen == false)
         {
             Interactiable?.Interact(this);
         }
@@ -94,6 +94,12 @@ public class PlayerController : MonoBehaviour
         float x = Input.GetAxisRaw("Horizontal");
         float moveBy = x * speed;
         rb.velocity = new Vector2(moveBy, rb.velocity.y);
+
+        if(dialogueUI.IsOpen == true)
+        {
+            rb.velocity = new Vector2(0, rb.velocity.y);
+        }
+
         myAnim.SetFloat("moveX", rb.velocity.x);
 
         if (Input.GetAxisRaw("Horizontal") == 1 || Input.GetAxisRaw("Horizontal") == -1)
@@ -118,7 +124,7 @@ public class PlayerController : MonoBehaviour
 
     void Jump()
     {
-        if (Input.GetKey(KeyCode.Space) && isGrounded)
+        if (Input.GetKey(KeyCode.Space) && isGrounded && dialogueUI.IsOpen == false)
         {
             AudioSource.PlayClipAtPoint(jumpingSE, transform.position);
             rb.velocity = new Vector2(rb.velocity.x, jumpForce);

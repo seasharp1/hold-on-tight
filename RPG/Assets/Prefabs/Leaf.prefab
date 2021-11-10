@@ -300,7 +300,7 @@ MonoBehaviour:
   health: 0
   myAnim: {fileID: 5199538945400060960}
   areaTransitionName: 
-  dialogueUI: {fileID: 0}
+  dialogueUI: {fileID: 9030241052031241965, guid: a680a7fad3d684442affe0b376a52df5, type: 3}
   coin: {fileID: 8300000, guid: cbcec6b3c4939654bae40db7b19e9b86, type: 3}
   jumpingSE: {fileID: 8300000, guid: 1bd8a7b696b0bc6438dabe6cca8f189f, type: 3}
   isToyCar: 0
@@ -357,8 +357,9 @@ MonoBehaviour:
     m_Bits: 512
   firstStrike: 0
   swordSwing: {fileID: 8300000, guid: b950eadf83ae83c44b15358fd7158b41, type: 3}
-  smash: {fileID: 0}
+  smash: {fileID: 8300000, guid: f29e4f6e407af3f43a749d8af0cca749, type: 3}
   player: {fileID: 5199538945400060961}
+  dialogueUI: {fileID: 9030241052031241965, guid: a680a7fad3d684442affe0b376a52df5, type: 3}
 --- !u!114 &5199538945400060988
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -403,6 +404,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   firePoint: {fileID: 427445305930946304}
   bullet: {fileID: 1521070166887375387, guid: b70e8fa5ca990c04ab627500f4364b41, type: 3}
+  dialogueUI: {fileID: 9030241052031241965, guid: a680a7fad3d684442affe0b376a52df5, type: 3}
 --- !u!1 &5199538945981555170
 GameObject:
   m_ObjectHideFlags: 0
