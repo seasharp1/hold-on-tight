@@ -8,6 +8,9 @@ public class Transition : MonoBehaviour
     public GameObject player;
     private void OnTriggerEnter2D(Collider2D other)
     {
-        player.transform.position = newLocation;
+        if(other.tag == "Player")
+        {
+            player.transform.position = newLocation;
+        }
     }
 }
