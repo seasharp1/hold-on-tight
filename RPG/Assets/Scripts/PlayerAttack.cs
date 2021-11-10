@@ -31,14 +31,11 @@ public class PlayerAttack : MonoBehaviour
     }
     void Update()
     {
-        print("player attack: " + dialogueUI.IsOpen);
         if (Input.GetButtonDown("Fire1") && dialogueUI.IsOpen == false)
         {
-            print(dialogueUI.IsOpen);
             Attack();
         }
     }
-
     void Attack()
     {
         animator.SetBool("Attack", true);

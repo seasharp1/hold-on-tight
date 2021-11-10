@@ -73,7 +73,6 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        print("player controller: " + dialogueUI.IsOpen);
         CheckIfGrounded();
         Move();
         Jump();
@@ -106,14 +105,14 @@ public class PlayerController : MonoBehaviour
         {
             myAnim.SetFloat("lastMoveX", Input.GetAxisRaw("Horizontal"));
         }
-        if (myAnim.GetFloat("lastMoveX") < -0.5 && isRight == true) //checks to see if player is facing left
+        if (myAnim.GetFloat("lastMoveX") < -0.5 && isRight == true && dialogueUI.IsOpen == false) //checks to see if player is facing left
         {
             Vector3 myVec = new Vector3(0f, 180f, 0f);
             gameObject.transform.Rotate(myVec);
             isRight = false;
             isLeft = true;
         }
-        if (myAnim.GetFloat("lastMoveX") > 0.5 && isLeft == true) //checks to see if player is facing right
+        if (myAnim.GetFloat("lastMoveX") > 0.5 && isLeft == true && dialogueUI.IsOpen == false) //checks to see if player is facing right
         {
             Vector3 myVec = new Vector3(0f, 180f, 0f);
             gameObject.transform.Rotate(myVec);

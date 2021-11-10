@@ -53,12 +53,10 @@ public class BattleSystem : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.F) && enemyUnit.currentHP > 0)
         {
-            print("yeah");
             GameObject.Find("AttackButton").GetComponent<Button>().onClick.Invoke();
         }
         if (Input.GetKeyDown(KeyCode.E) && enemyUnit.currentHP > 0)
         {
-            print("yeah");
             GameObject.Find("HealButton").GetComponent<Button>().onClick.Invoke();
         }
     }

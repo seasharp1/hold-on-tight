@@ -16,6 +16,7 @@ TagManager:
   - ToySoldierEnemy
   - PlayerGameManager
   - autoInteract
+  - bullet
   layers:
   - Default
   - TransparentFX

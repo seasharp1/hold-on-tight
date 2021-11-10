@@ -174,7 +174,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5199538945400060989}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 32.77, y: 8.78, z: 0}
+  m_LocalPosition: {x: 79.73, y: 8.79, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 5199538945981555169}
@@ -359,7 +359,6 @@ MonoBehaviour:
   swordSwing: {fileID: 8300000, guid: b950eadf83ae83c44b15358fd7158b41, type: 3}
   smash: {fileID: 8300000, guid: f29e4f6e407af3f43a749d8af0cca749, type: 3}
   player: {fileID: 5199538945400060961}
-  dialogueUI: {fileID: 9030241052031241965, guid: a680a7fad3d684442affe0b376a52df5, type: 3}
 --- !u!114 &5199538945400060988
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -404,7 +403,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   firePoint: {fileID: 427445305930946304}
   bullet: {fileID: 1521070166887375387, guid: b70e8fa5ca990c04ab627500f4364b41, type: 3}
-  dialogueUI: {fileID: 9030241052031241965, guid: a680a7fad3d684442affe0b376a52df5, type: 3}
 --- !u!1 &5199538945981555170
 GameObject:
   m_ObjectHideFlags: 0

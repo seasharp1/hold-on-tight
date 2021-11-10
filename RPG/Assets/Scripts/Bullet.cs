@@ -10,7 +10,7 @@ public class Bullet : MonoBehaviour
     public PlayerAttack playerAttack;
     public PlayerController player;
 
-
+    GameObject[] bullets;
 
     // Start is called before the first frame update
     void Start()
@@ -23,8 +23,12 @@ public class Bullet : MonoBehaviour
     {
         if(other.tag == "Enemy")
         {
+            bullets = GameObject.FindGameObjectsWithTag("bullet");
+            for(int i = 0; i < bullets.Length; i++)
+            {
+                Destroy(bullets[i]);
+            }
             Destroy(other.gameObject);
-            Destroy(gameObject);
 
             playerAttack.firstStrike = true;
             player.isToyCar = true;
