@@ -21,7 +21,7 @@ public class Bullet : MonoBehaviour
     }
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if(other.tag == "Enemy" || other.tag == "Toy Soldier Enemy")
+        if(other.tag == "Enemy")
         {
             bullets = GameObject.FindGameObjectsWithTag("bullet");
             for(int i = 0; i < bullets.Length; i++)
@@ -29,9 +29,8 @@ public class Bullet : MonoBehaviour
                 Destroy(bullets[i]);
             }
             Destroy(other.gameObject);
-
-            playerAttack.firstStrike = true;
             player.isToyCar = true;
+            playerAttack.firstStrike = true;
             SceneManager.LoadScene("Battle", LoadSceneMode.Additive);
             PlayerController.mainCamera.SetActive(false);
             //PlayerController.playerCharacter.SetActive(false);
@@ -39,11 +38,14 @@ public class Bullet : MonoBehaviour
         }
         if (other.tag == "Toy Soldier Enemy")
         {
+            bullets = GameObject.FindGameObjectsWithTag("bullet");
+            for (int i = 0; i < bullets.Length; i++)
+            {
+                Destroy(bullets[i]);
+            }
+            Destroy(other.gameObject);
             playerAttack.firstStrike = true;
             player.isToySoldier = true;
-            Destroy(other.gameObject);
-            Destroy(gameObject);
-
             SceneManager.LoadScene("Battle", LoadSceneMode.Additive);
             PlayerController.mainCamera.SetActive(false);
             //PlayerController.playerCharacter.SetActive(false);
