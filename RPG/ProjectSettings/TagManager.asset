@@ -17,6 +17,8 @@ TagManager:
   - PlayerGameManager
   - autoInteract
   - bullet
+  - AttackLocation
+  - CanBreak
   layers:
   - Default
   - TransparentFX

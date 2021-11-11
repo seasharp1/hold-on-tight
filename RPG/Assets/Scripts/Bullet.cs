@@ -21,7 +21,7 @@ public class Bullet : MonoBehaviour
     }
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if(other.tag == "Enemy")
+        if(other.tag == "Enemy" || other.tag == "Toy Soldier Enemy")
         {
             bullets = GameObject.FindGameObjectsWithTag("bullet");
             for(int i = 0; i < bullets.Length; i++)
