@@ -12,9 +12,12 @@ public class combatJump : MonoBehaviour
     public Animator myAnim;
     public float jumpForce;
     public AudioClip jumpingSE;
+
+    BattleSystem battle;
     // Start is called before the first frame update
     void Start()
     {
+        battle = GameObject.Find("BattleSystem").GetComponent<BattleSystem>();
         rb = GetComponent<Rigidbody2D>();
     }
 
@@ -26,7 +29,7 @@ public class combatJump : MonoBehaviour
     }
     void Jump()
     {
-        if (Input.GetKey(KeyCode.Space) && isGrounded)
+        if (Input.GetKey(KeyCode.Space) && isGrounded && battle.state == BattleState.ENEMYTURN)
         {
             AudioSource.PlayClipAtPoint(jumpingSE, transform.position);
             rb.velocity = new Vector2(rb.velocity.x, jumpForce);

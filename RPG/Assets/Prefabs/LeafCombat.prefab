@@ -174,7 +174,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 4
 --- !u!61 &3612788187556878257
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -222,4 +222,3 @@ MonoBehaviour:
   myAnim: {fileID: 1148281474479284744}
   jumpForce: 11
   jumpingSE: {fileID: 8300000, guid: 1bd8a7b696b0bc6438dabe6cca8f189f, type: 3}
-  battle: {fileID: 0}

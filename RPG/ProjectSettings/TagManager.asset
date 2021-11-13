@@ -19,6 +19,7 @@ TagManager:
   - bullet
   - AttackLocation
   - CanBreak
+  - enemyPatrolTag
   layers:
   - Default
   - TransparentFX

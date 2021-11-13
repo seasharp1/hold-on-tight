@@ -48,6 +48,13 @@ public class BattleSystem : MonoBehaviour
     public GameObject enemy1;
     public GameObject enemy2;
 
+    public bool isEnemyTurn;
+
+    public Rigidbody2D enemyRB;
+
+    public GameObject playerClone;
+    public GameObject enemyClone;
+
     // Start is called before the first frame update
     void Update()
     {
@@ -66,11 +73,14 @@ public class BattleSystem : MonoBehaviour
         if(player.isToyCar == true)
         {
             enemyPrefab = enemy1;
+            //enemyPatrol = GameObject.FindWithTag("enemyPatrolTag").GetComponent<Patrol>();
             player.isToyCar = false;
         }
         if (player.isToySoldier == true)
         {
             enemyPrefab = enemy2;
+            enemyRB = enemy2.GetComponent<Rigidbody2D>();
+            //enemyPatrol = GameObject.Find("CombatSoldier").GetComponent<Patrol>();
             player.isToySoldier = false;
         }
         playerHealth = originalCharacter.GetComponent<PlayerController>().health;
@@ -90,6 +100,10 @@ public class BattleSystem : MonoBehaviour
         playerUnit = playerGO.GetComponent<Unit>();
         GameObject enemyGO = Instantiate(enemyPrefab, enemyBattleStation);
         enemyUnit = enemyGO.GetComponent<Unit>();
+        enemyRB = enemyGO.GetComponent<Rigidbody2D>();
+
+        playerClone = playerGO;
+        enemyClone = enemyGO;
 
         dialogueText.text = "A wild " + enemyUnit.unitName + " approaches...";
 
@@ -136,6 +150,8 @@ public class BattleSystem : MonoBehaviour
                 enemyHUD.SetHUD(enemyUnit);
                 if (isDead == true)
                 {
+                    enemyClone.transform.localRotation = Quaternion.Euler(180, 0, 0);
+                    enemyUnit.currentHP = 0;
                     GameObject.Find("AttackButton").GetComponent<Button>().interactable = false;
                     GameObject.Find("HealButton").GetComponent<Button>().interactable = false;
 
@@ -153,7 +169,6 @@ public class BattleSystem : MonoBehaviour
                     StartCoroutine(EnemyTurn());
                 }
 
-                yield return new WaitForSeconds(1f);
                 GameObject.Find("AttackButton").GetComponent<Button>().interactable = true;
                 GameObject.Find("HealButton").GetComponent<Button>().interactable = true;
                 firstStrikeCheck.firstStrike = false;
@@ -177,6 +192,8 @@ public class BattleSystem : MonoBehaviour
 
         if (isDead == true)
         {
+            enemyClone.transform.localRotation = Quaternion.Euler(180, 0, 0);
+            enemyUnit.currentHP = 0;
             GameObject.Find("AttackButton").GetComponent<Button>().interactable = false;
             GameObject.Find("HealButton").GetComponent<Button>().interactable = false;
 
@@ -184,6 +201,7 @@ public class BattleSystem : MonoBehaviour
             enemyHUD.SetHUD(enemyUnit);
             yield return new WaitForSeconds(1f);
             dialogueText.text = enemyUnit.unitName + " was defeated!";
+            Destroy(enemyClone);
             yield return new WaitForSeconds(1f);
             state = BattleState.WON;
             EndBattle();
@@ -236,6 +254,13 @@ public class BattleSystem : MonoBehaviour
 
     IEnumerator EnemyTurn()
     {
+        isEnemyTurn = true;
+        print(Vector2.Distance(playerClone.transform.position, enemyClone.transform.position));
+        if (Vector2.Distance(playerClone.transform.position, enemyClone.transform.position) > 1.5)
+        {
+            print("goes through");
+            enemyRB.AddForce(new Vector2(-2, 0));
+        }        
         yield return new WaitForSeconds(1f);
         enemyUnit.damage = getDamage();
         dialogueText.text = enemyUnit.unitName + " attacks for " + enemyUnit.damage + " damage!";
@@ -361,7 +386,6 @@ public class BattleSystem : MonoBehaviour
         {
             damage = Random.Range(4 + damagePlus, 8 + damagePlus) * multiplier;
         }
-
         return damage;
     }
 }

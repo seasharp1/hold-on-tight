@@ -68,16 +68,6 @@ public class PlayerAttack : MonoBehaviour
             AudioSource.PlayClipAtPoint(smash, transform.position);
             Destroy(hitBreak[i].gameObject);
         }
-        for (int i = 0; i < hitSoldiers.Length; ++i)
-        {
-            Destroy(hitSoldiers[i].gameObject);
-
-            SceneManager.LoadScene("Battle(Toy Soldier)", LoadSceneMode.Additive);
-            PlayerController.mainCamera.SetActive(false);
-            //PlayerController.playerCharacter.SetActive(false);
-            PlayerController.eventSystem.SetActive(false);
-        }
-
 
         foreach (Collider2D enemy in hitEnemies)
         {
