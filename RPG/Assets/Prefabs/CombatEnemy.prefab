@@ -14,7 +14,6 @@ GameObject:
   - component: {fileID: 7531069237298978345}
   - component: {fileID: -3102610927009091014}
   - component: {fileID: 4478522463814762394}
-  - component: {fileID: -1173832880144740879}
   - component: {fileID: -261875218128499874}
   m_Layer: 0
   m_Name: CombatEnemy
@@ -140,7 +139,7 @@ Rigidbody2D:
   m_LinearDrag: 0
   m_AngularDrag: 0.05
   m_GravityScale: 1
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: 686bb69cf7020154db6aeeacf1eba2e9, type: 2}
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
@@ -171,21 +170,6 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.32184672, y: 1.0032794}
   m_EdgeRadius: 0
---- !u!114 &-1173832880144740879
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6197405135042287334}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 292104956361ed84f8c9d7bb6cdd1068, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  speed: 0
-  isGoingRight: 0
-  raycastDistance: 1
 --- !u!114 &-261875218128499874
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -202,4 +186,3 @@ MonoBehaviour:
   originalPosition: {x: 0.399, y: -1.61}
   battle: {fileID: 0}
   playerLocation: {x: 0, y: -1.583}
-  passPlayer: 0

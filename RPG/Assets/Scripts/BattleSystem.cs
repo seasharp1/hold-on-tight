@@ -15,8 +15,8 @@ public class BattleSystem : MonoBehaviour
     public Transform playerBattleStation;
     public Transform enemyBattleStation;
 
-    Unit playerUnit;
-    Unit enemyUnit;
+    public Unit playerUnit;
+    public Unit enemyUnit;
 
     public Text dialogueText;
 
@@ -56,6 +56,9 @@ public class BattleSystem : MonoBehaviour
     public GameObject enemyClone;
 
     public EnemyCombatMovement enemyMove;
+
+    public Vector3 playerLocation;
+    public Vector3 enemyLocation;
 
     // Start is called before the first frame update
     void Update()
@@ -262,48 +265,10 @@ public class BattleSystem : MonoBehaviour
     IEnumerator EnemyTurn()
     {
         isEnemyTurn = true;
-        //StartCoroutine(enemyMove.MoveTowards());
-
-        //print(Vector2.Distance(playerClone.transform.position, enemyClone.transform.position));
         StartCoroutine(enemyMove.MoveTowards());
-        /*
-        while (isEnemyTurn)
-        {
-            while (Vector2.Distance(playerBattleStation.transform.position, enemyClone.transform.position) > 2)
-            {
-                //print(Vector2.Distance(playerClone.transform.position, enemyClone.transform.position));
-                enemyRB.AddForce(new Vector2(-2, 0));
-                yield return null;
-            }
-            print("exit loop");
-            while (Vector2.Distance(enemyClone.transform.position, enemyBattleStation.transform.position) > 1.5)
-            {
-                print("enter loop");
-                //print("New:" + Vector2.Distance(enemyClone.transform.position, enemyBattleStation.transform.position));
-                enemyRB.AddForce(new Vector2(2, 0));
-                print("close to true" + Vector2.Distance(enemyClone.transform.position, enemyBattleStation.transform.position));
-                if(Vector2.Distance(enemyClone.transform.position, enemyBattleStation.transform.position) <= 1.6)
-                {
-                    print("true");
-                    enemyRB.AddForce(new Vector2(0, 0));
-                    isEnemyTurn = false;
-                }
-                yield return null;
-            }
-            yield return null;
-        }
-        */
-        yield return new WaitForSeconds(1f);
-        enemyUnit.damage = getDamage();
-        dialogueText.text = enemyUnit.unitName + " attacks for " + enemyUnit.damage + " damage!";
-        AudioSource.PlayClipAtPoint(enemyAttack, transform.position);
 
-        bool isDead = playerUnit.TakeDamage(enemyUnit.damage);
-        playerHUD.SetHUD(playerUnit);
-
-        playerHUD.SetHP(playerUnit.currentHP, playerUnit);
-        yield return new WaitForSeconds(1f);
-
+        yield return new WaitForSeconds(3f);
+        bool isDead = playerUnit.TakeDamage(0);
         if (isDead)
         {
             yield return new WaitForSeconds(1f);
@@ -315,6 +280,8 @@ public class BattleSystem : MonoBehaviour
             state = BattleState.PLAYERTURN;
             PlayerTurn();
         }
+        playerClone.transform.position = playerLocation;
+        enemyClone.transform.position = enemyLocation;
     }
 
     void PlayerTurn()

@@ -18,37 +18,53 @@ public class EnemyCombatMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(battle.isEnemyTurn)
-        {
-            //StartCoroutine(MoveTowards(playerLocation, 4));
-        }
+        
     }
     public IEnumerator MoveTowards()
     {
+        bool goingToPlayer = true;
         while (battle.isEnemyTurn)
         {
-            while (Vector2.Distance(battle.playerBattleStation.transform.position, battle.enemyClone.transform.position) > 2)
+            while (Vector2.Distance(battle.playerBattleStation.transform.position, battle.enemyClone.transform.position) > 2 && goingToPlayer == true)
             {
-                //print(Vector2.Distance(playerClone.transform.position, enemyClone.transform.position));
                 battle.enemyRB.AddForce(new Vector2(-2, 0));
                 yield return null;
             }
-            print("exit loop");
             while (Vector2.Distance(battle.enemyClone.transform.position, battle.enemyBattleStation.transform.position) > 1.5)
             {
-                print("enter loop");
-                //print("New:" + Vector2.Distance(enemyClone.transform.position, enemyBattleStation.transform.position));
+                goingToPlayer = false;
                 battle.enemyRB.AddForce(new Vector2(2, 0));
-                print("close to true" + Vector2.Distance(battle.enemyClone.transform.position, battle.enemyBattleStation.transform.position));
                 if (Vector2.Distance(battle.enemyClone.transform.position, battle.enemyBattleStation.transform.position) <= 1.6)
                 {
-                    print("true");
                     battle.enemyRB.AddForce(new Vector2(0, 0));
                     battle.isEnemyTurn = false;
                 }
                 yield return null;
             }
             yield return null;
+        }
+    }
+    private void OnCollisionEnter2D(Collision2D other)
+    {
+        if(other.gameObject.name == "LeafCombat(Clone)")
+        {
+            //other.collider.isTrigger = true;
+            print("Called");
+            battle.enemyUnit.damage = battle.getDamage();
+            battle.dialogueText.text = battle.enemyUnit.unitName + " attacks for " + battle.enemyUnit.damage + " damage!";
+            AudioSource.PlayClipAtPoint(battle.enemyAttack, transform.position);
+
+            battle.playerUnit.TakeDamage(battle.enemyUnit.damage);
+            battle.playerHUD.SetHUD(battle.playerUnit);
+
+            battle.playerHUD.SetHP(battle.playerUnit.currentHP, battle.playerUnit);
+        }
+    }
+    private void OnCollisionExit2D(Collision2D other)
+    {
+        if (other.gameObject.name == "LeafCombat(Clone)")
+        {
+            other.collider.isTrigger = false;
         }
     }
 }

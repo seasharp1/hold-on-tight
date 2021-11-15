@@ -1772,6 +1772,8 @@ MonoBehaviour:
   enemyPrefab: {fileID: 0}
   playerBattleStation: {fileID: 1784493709}
   enemyBattleStation: {fileID: 372748192}
+  playerUnit: {fileID: 0}
+  enemyUnit: {fileID: 0}
   dialogueText: {fileID: 1588733730}
   playerHUD: {fileID: 875843145}
   enemyHUD: {fileID: 1794169586}
@@ -1794,6 +1796,8 @@ MonoBehaviour:
   playerClone: {fileID: 0}
   enemyClone: {fileID: 6197405135042287334, guid: 3ecaa40805e8bbe418db048aada61ae1, type: 3}
   enemyMove: {fileID: 0}
+  playerLocation: {x: -4.443, y: -0.583, z: 0}
+  enemyLocation: {x: 3.435, y: -0.61, z: 0}
 --- !u!1 &1047848418
 GameObject:
   m_ObjectHideFlags: 0
@@ -2772,7 +2776,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1481089147}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 5.18, y: -1.02, z: -2.3768413}
+  m_LocalPosition: {x: 4.66, y: -1.02, z: -2.3768413}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}

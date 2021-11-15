@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 5576793479979445242}
   - component: {fileID: -5448417840524229565}
   - component: {fileID: -2664667208900866262}
+  - component: {fileID: -1260653510198257991}
   m_Layer: 0
   m_Name: CombatSoldier
   m_TagString: Untagged
@@ -165,3 +166,19 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 2, y: 5.0206137}
   m_EdgeRadius: 0
+--- !u!114 &-1260653510198257991
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6775707160523368820}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d930b3c2d9edb98419672c81d951c100, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  body: {fileID: -5448417840524229565}
+  originalPosition: {x: 0, y: 0}
+  battle: {fileID: 0}
+  playerLocation: {x: 0, y: 0}
