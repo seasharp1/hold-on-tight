@@ -23,21 +23,32 @@ public class EnemyCombatMovement : MonoBehaviour
             //StartCoroutine(MoveTowards(playerLocation, 4));
         }
     }
-    IEnumerator MoveTowards(Vector2 target, float speed)
+    public IEnumerator MoveTowards()
     {
-        print("called");
-        body.AddForce(new Vector2(-speed, 0));
-        if(body.position.x <= .1)
+        while (battle.isEnemyTurn)
         {
-            print("called again");
-            body.AddForce(new Vector2(0, 0));
-            body.AddForce(new Vector2(speed, 0));
-            if(body.position.x == originalPosition.x)
+            while (Vector2.Distance(battle.playerBattleStation.transform.position, battle.enemyClone.transform.position) > 2)
             {
-                print("called one last time");
+                //print(Vector2.Distance(playerClone.transform.position, enemyClone.transform.position));
+                battle.enemyRB.AddForce(new Vector2(-2, 0));
                 yield return null;
             }
+            print("exit loop");
+            while (Vector2.Distance(battle.enemyClone.transform.position, battle.enemyBattleStation.transform.position) > 1.5)
+            {
+                print("enter loop");
+                //print("New:" + Vector2.Distance(enemyClone.transform.position, enemyBattleStation.transform.position));
+                battle.enemyRB.AddForce(new Vector2(2, 0));
+                print("close to true" + Vector2.Distance(battle.enemyClone.transform.position, battle.enemyBattleStation.transform.position));
+                if (Vector2.Distance(battle.enemyClone.transform.position, battle.enemyBattleStation.transform.position) <= 1.6)
+                {
+                    print("true");
+                    battle.enemyRB.AddForce(new Vector2(0, 0));
+                    battle.isEnemyTurn = false;
+                }
+                yield return null;
+            }
+            yield return null;
         }
-        yield return null;
     }
 }

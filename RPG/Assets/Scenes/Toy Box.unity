@@ -3364,8 +3364,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 0}
-  m_AnchoredPosition: {x: 0.33672, y: 0}
-  m_SizeDelta: {x: 899.93, y: 99.44}
+  m_AnchoredPosition: {x: 0.063015, y: 5}
+  m_SizeDelta: {x: 788.88, y: 87.17}
   m_Pivot: {x: 0.5, y: 0}
 --- !u!1 &1254955732
 GameObject:
@@ -5332,8 +5332,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: -2.2700005}
+  m_SizeDelta: {x: 0, y: 4.54}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1664638218
 MonoBehaviour:
@@ -6627,7 +6627,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5199538944825333424, guid: 1b7a2e8117c73454d9351d86556cae3f, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 206.5
+      value: 205.3
       objectReference: {fileID: 0}
     - target: {fileID: 5199538944825333424, guid: 1b7a2e8117c73454d9351d86556cae3f, type: 3}
       propertyPath: m_LocalPosition.y

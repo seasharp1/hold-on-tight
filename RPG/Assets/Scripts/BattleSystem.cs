@@ -55,6 +55,8 @@ public class BattleSystem : MonoBehaviour
     public GameObject playerClone;
     public GameObject enemyClone;
 
+    public EnemyCombatMovement enemyMove;
+
     // Start is called before the first frame update
     void Update()
     {
@@ -73,12 +75,14 @@ public class BattleSystem : MonoBehaviour
         if(player.isToyCar == true)
         {
             enemyPrefab = enemy1;
+            //enemyMove = enemy1.GetComponent<EnemyCombatMovement>();
             //enemyPatrol = GameObject.FindWithTag("enemyPatrolTag").GetComponent<Patrol>();
             player.isToyCar = false;
         }
         if (player.isToySoldier == true)
         {
             enemyPrefab = enemy2;
+            //enemyMove = enemy2.GetComponent<EnemyCombatMovement>();
             enemyRB = enemy2.GetComponent<Rigidbody2D>();
             //enemyPatrol = GameObject.Find("CombatSoldier").GetComponent<Patrol>();
             player.isToySoldier = false;
@@ -101,6 +105,8 @@ public class BattleSystem : MonoBehaviour
         GameObject enemyGO = Instantiate(enemyPrefab, enemyBattleStation);
         enemyUnit = enemyGO.GetComponent<Unit>();
         enemyRB = enemyGO.GetComponent<Rigidbody2D>();
+
+        enemyMove = enemyGO.GetComponent<EnemyCombatMovement>();
 
         playerClone = playerGO;
         enemyClone = enemyGO;
@@ -173,6 +179,7 @@ public class BattleSystem : MonoBehaviour
                 GameObject.Find("HealButton").GetComponent<Button>().interactable = true;
                 firstStrikeCheck.firstStrike = false;
             }
+
         }
         else
         {
@@ -255,12 +262,37 @@ public class BattleSystem : MonoBehaviour
     IEnumerator EnemyTurn()
     {
         isEnemyTurn = true;
-        print(Vector2.Distance(playerClone.transform.position, enemyClone.transform.position));
-        if (Vector2.Distance(playerClone.transform.position, enemyClone.transform.position) > 1.5)
+        //StartCoroutine(enemyMove.MoveTowards());
+
+        //print(Vector2.Distance(playerClone.transform.position, enemyClone.transform.position));
+        StartCoroutine(enemyMove.MoveTowards());
+        /*
+        while (isEnemyTurn)
         {
-            print("goes through");
-            enemyRB.AddForce(new Vector2(-2, 0));
-        }        
+            while (Vector2.Distance(playerBattleStation.transform.position, enemyClone.transform.position) > 2)
+            {
+                //print(Vector2.Distance(playerClone.transform.position, enemyClone.transform.position));
+                enemyRB.AddForce(new Vector2(-2, 0));
+                yield return null;
+            }
+            print("exit loop");
+            while (Vector2.Distance(enemyClone.transform.position, enemyBattleStation.transform.position) > 1.5)
+            {
+                print("enter loop");
+                //print("New:" + Vector2.Distance(enemyClone.transform.position, enemyBattleStation.transform.position));
+                enemyRB.AddForce(new Vector2(2, 0));
+                print("close to true" + Vector2.Distance(enemyClone.transform.position, enemyBattleStation.transform.position));
+                if(Vector2.Distance(enemyClone.transform.position, enemyBattleStation.transform.position) <= 1.6)
+                {
+                    print("true");
+                    enemyRB.AddForce(new Vector2(0, 0));
+                    isEnemyTurn = false;
+                }
+                yield return null;
+            }
+            yield return null;
+        }
+        */
         yield return new WaitForSeconds(1f);
         enemyUnit.damage = getDamage();
         dialogueText.text = enemyUnit.unitName + " attacks for " + enemyUnit.damage + " damage!";
