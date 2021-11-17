@@ -210,4 +210,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   firePoint: {fileID: 3925151312933189342}
-  bullet: {fileID: 467886117490555869, guid: a23eb25e13e942f419db2c6e042f467e, type: 3}
+  bullet: {fileID: 1397715330768853467, guid: a23eb25e13e942f419db2c6e042f467e, type: 3}

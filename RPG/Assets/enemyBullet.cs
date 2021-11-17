@@ -7,11 +7,23 @@ public class enemyBullet : MonoBehaviour
     public float speed = 5f;
     public Rigidbody2D rb;
     BattleSystem battle;
+    GameObject[] bullets;
     // Start is called before the first frame update
     void Start()
     {
         battle = GameObject.Find("BattleSystem").GetComponent<BattleSystem>();
         rb.velocity = -transform.right * speed;
+    }
+    private void Update()
+    {
+        if(battle.state == BattleState.PLAYERTURN)
+        {
+            bullets = GameObject.FindGameObjectsWithTag("enemyBullet");
+            for (int i = 0; i < bullets.Length; i++)
+            {
+                Destroy(bullets[i]);
+            }
+        }
     }
     private void OnTriggerEnter2D(Collider2D other)
     {

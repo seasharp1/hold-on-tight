@@ -264,6 +264,7 @@ public class BattleSystem : MonoBehaviour
         isEnemyTurn = true;
         if(enemyMove != null)
         {
+            yield return new WaitForSeconds(1f);
             StartCoroutine(enemyMove.MoveTowards());
             yield return new WaitForSeconds(3f);
         }
