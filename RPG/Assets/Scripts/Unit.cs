@@ -14,9 +14,7 @@ public class Unit : MonoBehaviour
 
     public bool TakeDamage(int dmg)
     {
-        Debug.Log("HP befor hit " + currentHP);
         currentHP -= dmg;
-        Debug.Log("damage = " + dmg);
         if (currentHP <= 0)
         {
             return true;

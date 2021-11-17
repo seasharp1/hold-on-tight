@@ -56,9 +56,10 @@ public class BattleSystem : MonoBehaviour
     public GameObject enemyClone;
 
     public EnemyCombatMovement enemyMove;
+    public enemyShooting enemyShoot;
 
-    public Vector3 playerLocation;
-    public Vector3 enemyLocation;
+    Vector3 playerLocation;
+    Vector3 enemyLocation;
 
     // Start is called before the first frame update
     void Update()
@@ -110,9 +111,13 @@ public class BattleSystem : MonoBehaviour
         enemyRB = enemyGO.GetComponent<Rigidbody2D>();
 
         enemyMove = enemyGO.GetComponent<EnemyCombatMovement>();
+        enemyShoot = enemyGO.GetComponent<enemyShooting>();
 
         playerClone = playerGO;
         enemyClone = enemyGO;
+
+        playerLocation = playerGO.transform.position;
+        enemyLocation = enemyGO.transform.position;
 
         dialogueText.text = "A wild " + enemyUnit.unitName + " approaches...";
 
@@ -127,20 +132,15 @@ public class BattleSystem : MonoBehaviour
         //enemyHUD.SetHP(staticHealth.health, enemyUnit, false);
         playerUnit.currentHP = staticHealth.health;
 
-        //Debug.Log("Player start health " + staticHealth.health);
-
         //yield return new WaitForSeconds(1f);
 
         state = BattleState.PLAYERTURN;
         GameObject tempLeaf = GameObject.Find("Leaf"); //added this
         if (tempLeaf != null)
         {
-            Debug.Log("Leaf is not null");
             firstStrikeCheck = tempLeaf.GetComponent<PlayerAttack>();
             if (firstStrikeCheck.firstStrike == true)
             {
-                Debug.Log("extra damage!");
-
                 PlayerController.playerCharacter.SetActive(false);
 
                 GameObject.Find("AttackButton").GetComponent<Button>().interactable = false;
@@ -174,8 +174,7 @@ public class BattleSystem : MonoBehaviour
                 }
                 else
                 {
-                    state = BattleState.ENEMYTURN;
-                    StartCoroutine(EnemyTurn());
+                    state = BattleState.PLAYERTURN;
                 }
 
                 GameObject.Find("AttackButton").GetComponent<Button>().interactable = true;
@@ -188,7 +187,6 @@ public class BattleSystem : MonoBehaviour
         {
             PlayerController.playerCharacter.SetActive(false);
             yield return new WaitForSeconds(1f);
-            Debug.Log("Leaf is null!");
         }
         PlayerController.playerCharacter.SetActive(false);
         PlayerTurn();
@@ -250,7 +248,6 @@ public class BattleSystem : MonoBehaviour
             //staticHealth.health += (staticHealth.maxHealth - oldMax);
             //staticHealth.maxHealth = GameUnit.maxHP;
 
-            Debug.Log("player health at end of battle is " + GameUnit.currentHP);
             SceneManager.UnloadSceneAsync("Battle");
         }
         else if (state == BattleState.LOST)
@@ -265,9 +262,17 @@ public class BattleSystem : MonoBehaviour
     IEnumerator EnemyTurn()
     {
         isEnemyTurn = true;
-        StartCoroutine(enemyMove.MoveTowards());
-
-        yield return new WaitForSeconds(3f);
+        if(enemyMove != null)
+        {
+            StartCoroutine(enemyMove.MoveTowards());
+            yield return new WaitForSeconds(3f);
+        }
+        if(enemyShoot != null)
+        {
+            yield return new WaitForSeconds(1f);
+            enemyShoot.Shoot();
+            yield return new WaitForSeconds(1.5f);
+        }
         bool isDead = playerUnit.TakeDamage(0);
         if (isDead)
         {
@@ -353,7 +358,6 @@ public class BattleSystem : MonoBehaviour
     {
         addExp = 10;
         originalCharacter.GetComponent<LevelUpSystem>().currExp += addExp;
-        Debug.Log("Player gained " + addExp + " experience.");
     }
 
     // Returns random number within specified range for damage and allows for critical hits
