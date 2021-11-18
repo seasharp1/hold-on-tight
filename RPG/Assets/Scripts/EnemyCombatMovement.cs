@@ -10,6 +10,7 @@ public class EnemyCombatMovement : MonoBehaviour
     public Vector2 playerLocation;
     BoxCollider2D box;
     BoxCollider2D player;
+    Animator anim;
     // Start is called before the first frame update
     void Start()
     {
@@ -18,6 +19,7 @@ public class EnemyCombatMovement : MonoBehaviour
         body = this.GetComponent<Rigidbody2D>();
         battle = GameObject.Find("BattleSystem").GetComponent<BattleSystem>();
         Physics2D.IgnoreCollision(box, player);
+        anim = this.GetComponent<Animator>();
 
     }
     public IEnumerator MoveTowards()
@@ -28,8 +30,11 @@ public class EnemyCombatMovement : MonoBehaviour
             while (Vector2.Distance(battle.playerBattleStation.transform.position, battle.enemyClone.transform.position) > 2.5 && goingToPlayer == true)
             {
                 battle.enemyRB.AddForce(new Vector2(-2, 0));
+                anim.SetBool("carMoving", true);
                 yield return null;
             }
+            Vector3 myVec = new Vector3(0f, 180f, 0f);
+            gameObject.transform.Rotate(myVec);
             while (Vector2.Distance(battle.enemyClone.transform.position, battle.enemyBattleStation.transform.position) > 1.5)
             {
                 goingToPlayer = false;
@@ -41,6 +46,8 @@ public class EnemyCombatMovement : MonoBehaviour
                 }
                 yield return null;
             }
+            anim.SetBool("carMoving", false);
+            gameObject.transform.Rotate(myVec);
             yield return null;
         }
     }
