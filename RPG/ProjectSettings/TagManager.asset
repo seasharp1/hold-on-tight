@@ -21,6 +21,7 @@ TagManager:
   - CanBreak
   - enemyPatrolTag
   - enemyBullet
+  - UIItemSlot
   layers:
   - Default
   - TransparentFX
