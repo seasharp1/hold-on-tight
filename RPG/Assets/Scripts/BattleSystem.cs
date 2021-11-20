@@ -75,6 +75,8 @@ public class BattleSystem : MonoBehaviour
     }
     void Start()
     {
+        GameObject.Find("AttackButton").GetComponent<Button>().interactable = false;
+        GameObject.Find("HealButton").GetComponent<Button>().interactable = false;
         player = GameObject.FindWithTag("Player").GetComponent<PlayerController>();
         if(player.isToyCar == true)
         {
@@ -161,8 +163,6 @@ public class BattleSystem : MonoBehaviour
                 {
                     enemyClone.transform.localRotation = Quaternion.Euler(180, 0, 0);
                     enemyUnit.currentHP = 0;
-                    GameObject.Find("AttackButton").GetComponent<Button>().interactable = false;
-                    GameObject.Find("HealButton").GetComponent<Button>().interactable = false;
 
                     enemyHUD.SetHP(enemyUnit.currentHP, enemyUnit);
                     enemyHUD.SetHUD(enemyUnit);
@@ -194,6 +194,8 @@ public class BattleSystem : MonoBehaviour
 
     IEnumerator PlayerAttack()
     {
+        GameObject.Find("AttackButton").GetComponent<Button>().interactable = true;
+        GameObject.Find("HealButton").GetComponent<Button>().interactable = true;
         playerUnit.damage = getDamage();
         bool isDead = enemyUnit.TakeDamage(playerUnit.damage);
         dialogueText.text = "The attack hit for " + playerUnit.damage + " damage!";
@@ -223,7 +225,10 @@ public class BattleSystem : MonoBehaviour
         enemyHUD.SetHP(enemyUnit.currentHP, enemyUnit);
         enemyHUD.SetHUD(enemyUnit);
 
-        yield return new WaitForSeconds(1f);
+        //yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(.65f);
+        anim.SetBool("CombatSwing", false);
+        yield return new WaitForSeconds(.35f);
     }
 
     void EndBattle()
@@ -288,6 +293,7 @@ public class BattleSystem : MonoBehaviour
         }
         playerClone.transform.position = playerLocation;
         enemyClone.transform.position = enemyLocation;
+        anim.SetBool("CombatSwing", false);
     }
 
     void PlayerTurn()

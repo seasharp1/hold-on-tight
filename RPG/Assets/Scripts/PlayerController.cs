@@ -123,7 +123,7 @@ public class PlayerController : MonoBehaviour
 
     void Jump()
     {
-        if (Input.GetKeyDown(KeyCode.Space) && isGrounded && dialogueUI.IsOpen == false)
+        if (Input.GetKey(KeyCode.Space) && isGrounded && dialogueUI.IsOpen == false)
         {
             AudioSource.PlayClipAtPoint(jumpingSE, transform.position);
             rb.velocity = new Vector2(rb.velocity.x, jumpForce);

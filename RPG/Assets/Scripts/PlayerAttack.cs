@@ -22,6 +22,9 @@ public class PlayerAttack : MonoBehaviour
     GameObject dialogueHolder;
     DialogueUI dialogueUI;
 
+    public float cooldownTime = 1;
+    private float nextFireTime;
+
     // Update is called once per frame
     private void Start()
     {
@@ -31,9 +34,13 @@ public class PlayerAttack : MonoBehaviour
     }
     void Update()
     {
-        if (Input.GetButtonDown("Fire1") && dialogueUI.IsOpen == false)
+        if (Time.time > nextFireTime)
         {
-            Attack();
+            if (Input.GetButtonDown("Fire1") && dialogueUI.IsOpen == false)
+            {
+                Attack();
+                nextFireTime = Time.time + cooldownTime;
+            }
         }
     }
     void Attack()
