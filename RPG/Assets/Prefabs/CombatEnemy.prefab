@@ -244,3 +244,4 @@ MonoBehaviour:
   originalPosition: {x: 0.399, y: -1.61}
   battle: {fileID: 0}
   playerLocation: {x: 0, y: -1.583}
+  isWave: 0

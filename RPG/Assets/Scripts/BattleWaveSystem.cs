@@ -66,15 +66,16 @@ public class BattleWaveSystem : MonoBehaviour
 
     DialogueActivatorCutscene cutscene;
 
+    bool isSetUp;
 
     // Start is called before the first frame update
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.F) && enemyUnit.currentHP > 0)
+        if (Input.GetKeyDown(KeyCode.F) && enemyUnit.currentHP > 0 && state == BattleState.PLAYERTURN && isSetUp)
         {
             GameObject.Find("AttackButton").GetComponent<Button>().onClick.Invoke();
         }
-        if (Input.GetKeyDown(KeyCode.E) && enemyUnit.currentHP > 0)
+        if (Input.GetKeyDown(KeyCode.E) && enemyUnit.currentHP > 0 && state == BattleState.PLAYERTURN && isSetUp)
         {
             GameObject.Find("HealButton").GetComponent<Button>().onClick.Invoke();
         }
@@ -86,6 +87,7 @@ public class BattleWaveSystem : MonoBehaviour
     }
     void Start()
     {
+        isSetUp = false;
         cutscene = GameObject.Find("waveCutscene").GetComponent<DialogueActivatorCutscene>();
         player = GameObject.FindWithTag("Player").GetComponent<PlayerController>();
 
@@ -103,6 +105,8 @@ public class BattleWaveSystem : MonoBehaviour
     IEnumerator SetupBattle()
     {
         round++;
+        GameObject.Find("AttackButton").GetComponent<Button>().interactable = false;
+        GameObject.Find("HealButton").GetComponent<Button>().interactable = false;
         if (round == 1)
         {
             enemyPrefab = enemy1;
@@ -154,12 +158,19 @@ public class BattleWaveSystem : MonoBehaviour
         state = BattleState.PLAYERTURN;
         GameObject tempLeaf = GameObject.Find("Leaf"); //added this
 
+        GameObject.Find("AttackButton").GetComponent<Button>().interactable = true;
+        GameObject.Find("HealButton").GetComponent<Button>().interactable = true;
+
         PlayerController.playerCharacter.SetActive(false);
         PlayerTurn();
+        isSetUp = true;
     }
 
     IEnumerator SetupBattleAgain()
     {
+        isSetUp = false;
+        GameObject.Find("AttackButton").GetComponent<Button>().interactable = false;
+        GameObject.Find("HealButton").GetComponent<Button>().interactable = false;
         round++;
         if (round == 1)
         {
@@ -177,8 +188,6 @@ public class BattleWaveSystem : MonoBehaviour
         {
             enemyPrefab = enemy4;
         }
-        GameObject.Find("AttackButton").GetComponent<Button>().interactable = true;
-        GameObject.Find("HealButton").GetComponent<Button>().interactable = true;
         GameObject enemyGO = Instantiate(enemyPrefab, enemyBattleStation);
         enemyUnit = enemyGO.GetComponent<Unit>();
         enemyRB = enemyGO.GetComponent<Rigidbody2D>();
@@ -201,20 +210,23 @@ public class BattleWaveSystem : MonoBehaviour
 
         playerHUD.SetHP_Start(staticHealth.health, playerUnit, true);
         //enemyHUD.SetHP(staticHealth.health, enemyUnit, false);
+        isEnemyTurn = false;
 
         yield return new WaitForSeconds(1f);
 
-        state = BattleState.ENEMYTURN;
+        state = BattleState.PLAYERTURN;
         GameObject tempLeaf = GameObject.Find("Leaf"); //added this
+
+        GameObject.Find("AttackButton").GetComponent<Button>().interactable = true;
+        GameObject.Find("HealButton").GetComponent<Button>().interactable = true;
 
         PlayerController.playerCharacter.SetActive(false);
         PlayerTurn();
+        isSetUp = true;
     }
 
     IEnumerator PlayerAttack()
     {
-        GameObject.Find("AttackButton").GetComponent<Button>().interactable = true;
-        GameObject.Find("HealButton").GetComponent<Button>().interactable = true;
         int damage = getDamage();
         enemyHUD.damageText.text = "-" + damage.ToString();
         bool isDead = enemyUnit.TakeDamage(damage);
@@ -265,9 +277,9 @@ public class BattleWaveSystem : MonoBehaviour
         {
             dialogueText.text = "The battle was won! +40Exp";
             yield return new WaitForSeconds(1f);
-            GameObject leafUnitHealth = GameObject.Find("LeafUnit");
-            GameUnit = leafUnitHealth.GetComponent<Unit>();
-            GameUnit.currentHP = playerUnit.getHP();
+            //GameObject leafUnitHealth = GameObject.Find("LeafUnit");
+            //GameUnit = leafUnitHealth.GetComponent<Unit>();
+            //GameUnit.currentHP = playerUnit.getHP();
 
             originalCamera.SetActive(true);
             originalCharacter.SetActive(true);
@@ -278,7 +290,7 @@ public class BattleWaveSystem : MonoBehaviour
             levelUp();
 
             staticHealth = GameObject.Find("GameManager").GetComponent<ScriptManager>();
-            staticHealth.health = GameUnit.currentHP;
+            staticHealth.health = playerUnit.currentHP;
             //staticHealth.health += (staticHealth.maxHealth - oldMax);
             //staticHealth.maxHealth = GameUnit.maxHP;
 

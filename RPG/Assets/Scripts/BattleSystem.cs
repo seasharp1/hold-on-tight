@@ -35,7 +35,7 @@ public class BattleSystem : MonoBehaviour
 
     public Animator anim;
 
-    Unit GameUnit;  //holds player health
+    [SerializeField] Unit GameUnit;  //holds player health
 
     PlayerAttack firstStrikeCheck;
 
@@ -61,22 +61,26 @@ public class BattleSystem : MonoBehaviour
     Vector3 playerLocation;
     Vector3 enemyLocation;
 
+    bool isSetUp;
+
     // Start is called before the first frame update
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.F) && enemyUnit.currentHP > 0)
+        if (Input.GetKeyDown(KeyCode.F) && enemyUnit.currentHP > 0 && state == BattleState.PLAYERTURN && isSetUp)
         {
             GameObject.Find("AttackButton").GetComponent<Button>().onClick.Invoke();
+            state = BattleState.ENEMYTURN;
         }
-        if (Input.GetKeyDown(KeyCode.E) && enemyUnit.currentHP > 0)
+        if (Input.GetKeyDown(KeyCode.E) && enemyUnit.currentHP > 0 && state == BattleState.PLAYERTURN && isSetUp)
         {
             GameObject.Find("HealButton").GetComponent<Button>().onClick.Invoke();
+            state = BattleState.ENEMYTURN;
         }
     }
     void Start()
     {
-        GameObject.Find("AttackButton").GetComponent<Button>().interactable = false;
-        GameObject.Find("HealButton").GetComponent<Button>().interactable = false;
+        isSetUp = false;
+        state = BattleState.START;
         player = GameObject.FindWithTag("Player").GetComponent<PlayerController>();
         if(player.isToyCar == true)
         {
@@ -93,19 +97,20 @@ public class BattleSystem : MonoBehaviour
             //enemyPatrol = GameObject.Find("CombatSoldier").GetComponent<Patrol>();
             player.isToySoldier = false;
         }
-        playerHealth = originalCharacter.GetComponent<PlayerController>().health;
+        playerHealth = 20;
 
         originalCamera = PlayerController.mainCamera;
         originalCharacter = PlayerController.playerCharacter;
         originalEventSystem = PlayerController.eventSystem;
 
-        state = BattleState.START;
         StartCoroutine(SetupBattle());
         anim = GameObject.FindWithTag("CombatLeaf").GetComponent<Animator>(); //this fixes the combat animation
     }
 
     IEnumerator SetupBattle()
     {
+        GameObject.Find("AttackButton").GetComponent<Button>().interactable = false;
+        GameObject.Find("HealButton").GetComponent<Button>().interactable = false;
         GameObject playerGO = Instantiate(playerPrefab, playerBattleStation);
         playerUnit = playerGO.GetComponent<Unit>();
         GameObject enemyGO = Instantiate(enemyPrefab, enemyBattleStation);
@@ -124,6 +129,7 @@ public class BattleSystem : MonoBehaviour
         dialogueText.text = "A wild " + enemyUnit.unitName + " approaches...";
 
         staticHealth = GameObject.Find("GameManager").GetComponent<ScriptManager>();
+        print(staticHealth.health + " " + staticHealth.maxHealth);
         playerUnit.currentHP = staticHealth.health;
         playerUnit.maxHP = staticHealth.maxHealth;
 
@@ -135,8 +141,6 @@ public class BattleSystem : MonoBehaviour
         playerUnit.currentHP = staticHealth.health;
 
         //yield return new WaitForSeconds(1f);
-
-        state = BattleState.PLAYERTURN;
         GameObject tempLeaf = GameObject.Find("Leaf"); //added this
         if (tempLeaf != null)
         {
@@ -193,7 +197,9 @@ public class BattleSystem : MonoBehaviour
             yield return new WaitForSeconds(1f);
         }
         PlayerController.playerCharacter.SetActive(false);
+        state = BattleState.PLAYERTURN;
         PlayerTurn();
+        isSetUp = true;
     }
 
     IEnumerator PlayerAttack()
@@ -244,9 +250,9 @@ public class BattleSystem : MonoBehaviour
         {
             dialogueText.text = "The battle was won! +10Exp!";
             yield return new WaitForSeconds(1f);
-            GameObject leafUnitHealth = GameObject.Find("LeafUnit");
-            GameUnit = leafUnitHealth.GetComponent<Unit>();
-            GameUnit.currentHP = playerUnit.getHP();
+            //GameObject leafUnitHealth = GameObject.Find("LeafUnit");
+            //GameUnit = leafUnitHealth.GetComponent<Unit>();
+            //GameUnit.currentHP = playerUnit.getHP();
 
             originalCamera.SetActive(true);
             originalCharacter.SetActive(true);
@@ -257,7 +263,7 @@ public class BattleSystem : MonoBehaviour
             levelUp();
 
             staticHealth = GameObject.Find("GameManager").GetComponent<ScriptManager>();
-            staticHealth.health = GameUnit.currentHP;
+            staticHealth.health = playerUnit.currentHP;
             //staticHealth.health += (staticHealth.maxHealth - oldMax);
             //staticHealth.maxHealth = GameUnit.maxHP;
 

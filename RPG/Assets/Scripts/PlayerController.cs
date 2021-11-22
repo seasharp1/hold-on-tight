@@ -48,7 +48,7 @@ public class PlayerController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        health = 50;
+        health = 20;
 
         mainCamera = GameObject.FindGameObjectWithTag("MainCamera");
         playerCharacter = GameObject.FindGameObjectWithTag("Player");

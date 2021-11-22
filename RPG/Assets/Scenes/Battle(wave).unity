@@ -1374,7 +1374,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.10645294, y: 2.7827094}
+  m_Offset: {x: -0.10645294, y: 0.29565597}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -1385,7 +1385,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.7870941, y: 6.5654187}
+  m_Size: {x: 0.7870941, y: 11.539524}
   m_EdgeRadius: 0
 --- !u!4 &440928208
 Transform:
@@ -2820,7 +2820,7 @@ MonoBehaviour:
   originalCamera: {fileID: 973320680}
   originalCharacter: {fileID: 5199538945400060989, guid: 1b7a2e8117c73454d9351d86556cae3f, type: 3}
   originalEventSystem: {fileID: 0}
-  playerHealth: 50
+  playerHealth: 20
   staticHealth: {fileID: 0}
   addExp: 0
   state: 0

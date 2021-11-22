@@ -1861,7 +1861,7 @@ MonoBehaviour:
   originalCamera: {fileID: 1149963664}
   originalCharacter: {fileID: 1384027665069696234, guid: 0f267a8e3822f0a488c4e26a8f2057a1, type: 3}
   originalEventSystem: {fileID: 0}
-  playerHealth: 50
+  playerHealth: 20
   staticHealth: {fileID: 0}
   addExp: 0
   state: 0
@@ -2914,7 +2914,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.10645294, y: 2.7827094}
+  m_Offset: {x: -0.10645294, y: 0.019379616}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -2925,7 +2925,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.7870941, y: 6.5654187}
+  m_Size: {x: 0.7870941, y: 12.092079}
   m_EdgeRadius: 0
 --- !u!4 &1481089149
 Transform:
