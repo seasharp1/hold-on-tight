@@ -32,7 +32,10 @@ public class WeaponWheelController : MonoBehaviour
                 selectedItem.sprite = noImage;
                 break;
             case 1: // Sword
-                Debug.Log("Sword"); // Put any anims or sounds here
+                Debug.Log("Sword equipped"); // Put any anims or sounds here
+                break;
+            case 2: // Gun
+                Debug.Log("Gun equipped");
                 break;
         }
     }
