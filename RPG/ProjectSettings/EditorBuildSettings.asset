@@ -29,4 +29,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Battle.unity
     guid: 95967a5df0f6fd446ae0b1239d469230
+  - enabled: 1
+    path: Assets/Scenes/Battle(wave).unity
+    guid: 1ff2d03ed7b0bcc45b63d93a52f8abd5
   m_configObjects: {}

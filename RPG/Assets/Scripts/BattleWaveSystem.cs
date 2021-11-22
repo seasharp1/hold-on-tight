@@ -4,9 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
-public enum BattleState { START, PLAYERTURN, ENEMYTURN, WON, LOST }
-
-public class BattleSystem : MonoBehaviour
+public class BattleWaveSystem : MonoBehaviour
 {
 
     public GameObject playerPrefab;
@@ -19,6 +17,8 @@ public class BattleSystem : MonoBehaviour
     public Unit enemyUnit;
 
     public Text dialogueText;
+
+    public Text rounds;
 
     public BattleHUD playerHUD;
     public BattleHUD enemyHUD;
@@ -37,8 +37,6 @@ public class BattleSystem : MonoBehaviour
 
     Unit GameUnit;  //holds player health
 
-    PlayerAttack firstStrikeCheck;
-
     public AudioClip playerAttackSE;
     public AudioClip playerHealSE;
     public AudioClip enemyAttack;
@@ -47,6 +45,8 @@ public class BattleSystem : MonoBehaviour
 
     public GameObject enemy1;
     public GameObject enemy2;
+    public GameObject enemy3;
+    public GameObject enemy4;
 
     public bool isEnemyTurn;
 
@@ -61,6 +61,12 @@ public class BattleSystem : MonoBehaviour
     Vector3 playerLocation;
     Vector3 enemyLocation;
 
+    public int round = 0;
+    public int totalRounds = 4;
+
+    DialogueActivatorCutscene cutscene;
+
+
     // Start is called before the first frame update
     void Update()
     {
@@ -72,27 +78,17 @@ public class BattleSystem : MonoBehaviour
         {
             GameObject.Find("HealButton").GetComponent<Button>().onClick.Invoke();
         }
+        if(staticHealth.health <= 0)
+        {
+            state = BattleState.LOST;
+            StartCoroutine(EndBattle());
+        }
     }
     void Start()
     {
-        GameObject.Find("AttackButton").GetComponent<Button>().interactable = false;
-        GameObject.Find("HealButton").GetComponent<Button>().interactable = false;
+        cutscene = GameObject.Find("waveCutscene").GetComponent<DialogueActivatorCutscene>();
         player = GameObject.FindWithTag("Player").GetComponent<PlayerController>();
-        if(player.isToyCar == true)
-        {
-            enemyPrefab = enemy1;
-            //enemyMove = enemy1.GetComponent<EnemyCombatMovement>();
-            //enemyPatrol = GameObject.FindWithTag("enemyPatrolTag").GetComponent<Patrol>();
-            player.isToyCar = false;
-        }
-        if (player.isToySoldier == true)
-        {
-            enemyPrefab = enemy2;
-            //enemyMove = enemy2.GetComponent<EnemyCombatMovement>();
-            enemyRB = enemy2.GetComponent<Rigidbody2D>();
-            //enemyPatrol = GameObject.Find("CombatSoldier").GetComponent<Patrol>();
-            player.isToySoldier = false;
-        }
+
         playerHealth = originalCharacter.GetComponent<PlayerController>().health;
 
         originalCamera = PlayerController.mainCamera;
@@ -106,11 +102,30 @@ public class BattleSystem : MonoBehaviour
 
     IEnumerator SetupBattle()
     {
+        round++;
+        if (round == 1)
+        {
+            enemyPrefab = enemy1;
+        }
+        if (round == 2)
+        {
+            enemyPrefab = enemy2;
+        }
+        if (round == 3)
+        {
+            enemyPrefab = enemy3;
+        }
+        if (round == 4)
+        {
+            enemyPrefab = enemy4;
+        }
         GameObject playerGO = Instantiate(playerPrefab, playerBattleStation);
         playerUnit = playerGO.GetComponent<Unit>();
         GameObject enemyGO = Instantiate(enemyPrefab, enemyBattleStation);
         enemyUnit = enemyGO.GetComponent<Unit>();
         enemyRB = enemyGO.GetComponent<Rigidbody2D>();
+
+        rounds.text = "Round " + round + "/" + totalRounds;
 
         enemyMove = enemyGO.GetComponent<EnemyCombatMovement>();
         enemyShoot = enemyGO.GetComponent<enemyShooting>();
@@ -134,60 +149,64 @@ public class BattleSystem : MonoBehaviour
         //enemyHUD.SetHP(staticHealth.health, enemyUnit, false);
         playerUnit.currentHP = staticHealth.health;
 
-        //yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(1f);
 
         state = BattleState.PLAYERTURN;
         GameObject tempLeaf = GameObject.Find("Leaf"); //added this
-        if (tempLeaf != null)
+
+        PlayerController.playerCharacter.SetActive(false);
+        PlayerTurn();
+    }
+
+    IEnumerator SetupBattleAgain()
+    {
+        round++;
+        if (round == 1)
         {
-            firstStrikeCheck = tempLeaf.GetComponent<PlayerAttack>();
-            if (firstStrikeCheck.firstStrike == true)
-            {
-                PlayerController.playerCharacter.SetActive(false);
-
-                GameObject.Find("AttackButton").GetComponent<Button>().interactable = false;
-                GameObject.Find("HealButton").GetComponent<Button>().interactable = false;
-
-                yield return new WaitForSeconds(.01f);
-
-                anim.SetBool("CombatSwing", true);
-                //AudioSource.PlayClipAtPoint(playerAttackSE, transform.position);
-
-                int displayDamage = 8 + staticHealth.extraDamage;
-
-                dialogueText.text = "First Strike for " + displayDamage + " damage";
-                bool isDead = enemyUnit.TakeDamage(displayDamage);
-                enemyHUD.SetHP(enemyUnit.currentHP, enemyUnit);
-                enemyHUD.SetHUD(enemyUnit);
-                if (isDead == true)
-                {
-                    enemyClone.transform.localRotation = Quaternion.Euler(180, 0, 0);
-                    enemyUnit.currentHP = 0;
-
-                    enemyHUD.SetHP(enemyUnit.currentHP, enemyUnit);
-                    enemyHUD.SetHUD(enemyUnit);
-                    yield return new WaitForSeconds(1f);
-                    dialogueText.text = enemyUnit.unitName + " was defeated!";
-                    yield return new WaitForSeconds(1f);
-                    state = BattleState.WON;
-                    StartCoroutine(EndBattle());
-                }
-                else
-                {
-                    state = BattleState.PLAYERTURN;
-                }
-
-                GameObject.Find("AttackButton").GetComponent<Button>().interactable = true;
-                GameObject.Find("HealButton").GetComponent<Button>().interactable = true;
-                firstStrikeCheck.firstStrike = false;
-            }
-
+            enemyPrefab = enemy1;
         }
-        else
+        if (round == 2)
         {
-            PlayerController.playerCharacter.SetActive(false);
-            yield return new WaitForSeconds(1f);
+            enemyPrefab = enemy2;
         }
+        if (round == 3)
+        {
+            enemyPrefab = enemy3;
+        }
+        if (round == 4)
+        {
+            enemyPrefab = enemy4;
+        }
+        GameObject.Find("AttackButton").GetComponent<Button>().interactable = true;
+        GameObject.Find("HealButton").GetComponent<Button>().interactable = true;
+        GameObject enemyGO = Instantiate(enemyPrefab, enemyBattleStation);
+        enemyUnit = enemyGO.GetComponent<Unit>();
+        enemyRB = enemyGO.GetComponent<Rigidbody2D>();
+
+        rounds.text = "Round " + round + "/" + totalRounds;
+
+        enemyMove = enemyGO.GetComponent<EnemyCombatMovement>();
+        enemyShoot = enemyGO.GetComponent<enemyShooting>();
+
+        enemyClone = enemyGO;
+
+        enemyLocation = enemyGO.transform.position;
+
+        dialogueText.text = "A wild " + enemyUnit.unitName + " approaches...";
+
+        staticHealth.health = playerUnit.currentHP;
+
+        playerHUD.SetHUD_Start(playerUnit, true);
+        enemyHUD.SetHUD_Start(enemyUnit, false);
+
+        playerHUD.SetHP_Start(staticHealth.health, playerUnit, true);
+        //enemyHUD.SetHP(staticHealth.health, enemyUnit, false);
+
+        yield return new WaitForSeconds(1f);
+
+        state = BattleState.ENEMYTURN;
+        GameObject tempLeaf = GameObject.Find("Leaf"); //added this
+
         PlayerController.playerCharacter.SetActive(false);
         PlayerTurn();
     }
@@ -213,8 +232,15 @@ public class BattleSystem : MonoBehaviour
             dialogueText.text = enemyUnit.unitName + " was defeated!";
             Destroy(enemyClone);
             yield return new WaitForSeconds(1f);
-            state = BattleState.WON;
-            StartCoroutine(EndBattle());
+            if(round == 4)
+            {
+                state = BattleState.WON;
+                StartCoroutine(EndBattle());
+            }
+            else
+            {
+                StartCoroutine(SetupBattleAgain());
+            }
         }
         else
         {
@@ -235,7 +261,7 @@ public class BattleSystem : MonoBehaviour
     {
         if (state == BattleState.WON)
         {
-            dialogueText.text = "The battle was won! +10Exp!";
+            dialogueText.text = "The battle was won! +40Exp";
             yield return new WaitForSeconds(1f);
             GameObject leafUnitHealth = GameObject.Find("LeafUnit");
             GameUnit = leafUnitHealth.GetComponent<Unit>();
@@ -254,13 +280,14 @@ public class BattleSystem : MonoBehaviour
             //staticHealth.health += (staticHealth.maxHealth - oldMax);
             //staticHealth.maxHealth = GameUnit.maxHP;
 
-            SceneManager.UnloadSceneAsync("Battle");
+            cutscene.wave = false;
+            SceneManager.UnloadSceneAsync("Battle(wave)");
         }
         else if (state == BattleState.LOST)
         {
             dialogueText.text = "The battle was lost...";
             originalCamera.SetActive(false);
-            SceneManager.UnloadSceneAsync("Battle");
+            SceneManager.UnloadSceneAsync("Battle(wave)");
             SceneManager.LoadScene("BattleLost");
         }
     }
@@ -268,13 +295,13 @@ public class BattleSystem : MonoBehaviour
     IEnumerator EnemyTurn()
     {
         isEnemyTurn = true;
-        if(enemyMove != null)
+        if (enemyMove != null)
         {
             yield return new WaitForSeconds(1f);
             StartCoroutine(enemyMove.MoveTowards());
             yield return new WaitForSeconds(3f);
         }
-        if(enemyShoot != null)
+        if (enemyShoot != null)
         {
             yield return new WaitForSeconds(1f);
             enemyShoot.Shoot();
@@ -364,7 +391,7 @@ public class BattleSystem : MonoBehaviour
     // Used to gain exp at end of combat
     public void levelUp()
     {
-        addExp = 10;
+        addExp = 10 * totalRounds;
         originalCharacter.GetComponent<LevelUpSystem>().currExp += addExp;
     }
 
@@ -387,7 +414,8 @@ public class BattleSystem : MonoBehaviour
         if (enemyUnit.unitName == "Toy Car")
         {
             damage = Random.Range(1, 6);
-        } else if (enemyUnit.unitName == "Toy Soldier") // For use when implemented...
+        }
+        else if (enemyUnit.unitName == "Toy Soldier") // For use when implemented...
         {
             damage = Random.Range(2, 8);
         } // Add more enemies just as done above and specify damage range...

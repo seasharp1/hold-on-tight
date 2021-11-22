@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class combatJump : MonoBehaviour
 {
-    Rigidbody2D rb;
+    public Rigidbody2D rb;
     public bool isGrounded = false;
     public Transform isGroundedChecker;
     public float checkGroundRadius;
@@ -13,12 +13,10 @@ public class combatJump : MonoBehaviour
     public float jumpForce;
     public AudioClip jumpingSE;
 
-    BattleSystem battle;
     // Start is called before the first frame update
     void Start()
     {
-        battle = GameObject.Find("BattleSystem").GetComponent<BattleSystem>();
-        rb = GetComponent<Rigidbody2D>();
+
     }
 
     // Update is called once per frame
@@ -29,7 +27,7 @@ public class combatJump : MonoBehaviour
     }
     void Jump()
     {
-        if (Input.GetKey(KeyCode.Space) && isGrounded && battle.state == BattleState.ENEMYTURN)
+        if (Input.GetKey(KeyCode.Space) && isGrounded)
         {
             AudioSource.PlayClipAtPoint(jumpingSE, transform.position);
             rb.velocity = new Vector2(rb.velocity.x, jumpForce);

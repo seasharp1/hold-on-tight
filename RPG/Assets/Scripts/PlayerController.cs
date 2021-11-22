@@ -42,6 +42,8 @@ public class PlayerController : MonoBehaviour
     public bool isToyCar = false;
     public bool isToySoldier = false;
 
+    public bool cantMove = false;
+
 
     // Start is called before the first frame update
     void Start()
@@ -92,8 +94,14 @@ public class PlayerController : MonoBehaviour
 
         float x = Input.GetAxisRaw("Horizontal");
         float moveBy = x * speed;
-        rb.velocity = new Vector2(moveBy, rb.velocity.y);
+        if (cantMove)
+        {
 
+        }
+        else
+        {
+            rb.velocity = new Vector2(moveBy, rb.velocity.y);
+        }
         if(dialogueUI.IsOpen == true)
         {
             rb.velocity = new Vector2(0, rb.velocity.y);
@@ -105,14 +113,14 @@ public class PlayerController : MonoBehaviour
         {
             myAnim.SetFloat("lastMoveX", Input.GetAxisRaw("Horizontal"));
         }
-        if (myAnim.GetFloat("lastMoveX") < -0.5 && isRight == true && dialogueUI.IsOpen == false) //checks to see if player is facing left
+        if (myAnim.GetFloat("lastMoveX") < -0.5 && isRight == true && dialogueUI.IsOpen == false && cantMove == false) //checks to see if player is facing left
         {
             Vector3 myVec = new Vector3(0f, 180f, 0f);
             gameObject.transform.Rotate(myVec);
             isRight = false;
             isLeft = true;
         }
-        if (myAnim.GetFloat("lastMoveX") > 0.5 && isLeft == true && dialogueUI.IsOpen == false) //checks to see if player is facing right
+        if (myAnim.GetFloat("lastMoveX") > 0.5 && isLeft == true && dialogueUI.IsOpen == false && cantMove == false) //checks to see if player is facing right
         {
             Vector3 myVec = new Vector3(0f, 180f, 0f);
             gameObject.transform.Rotate(myVec);
@@ -123,7 +131,7 @@ public class PlayerController : MonoBehaviour
 
     void Jump()
     {
-        if (Input.GetKey(KeyCode.Space) && isGrounded && dialogueUI.IsOpen == false)
+        if (Input.GetKey(KeyCode.Space) && isGrounded && dialogueUI.IsOpen == false && cantMove == false)
         {
             AudioSource.PlayClipAtPoint(jumpingSE, transform.position);
             rb.velocity = new Vector2(rb.velocity.x, jumpForce);

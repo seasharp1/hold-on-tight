@@ -10,16 +10,19 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6051a42f62c8eab4cb99fb54b9249893, type: 3}
-  m_Name: TB- Enemy Wave
+  m_Name: TB- EnemyWave Cutscene 1
   m_EditorClassIdentifier: 
   dialogue:
+  - "Toy Soldier 1- \nStop! You are in violation of the terms and conditions of the
+    mighty Jackyll!"
+  - 'Toy Soldier 2-
+
+    Yeah!'
   - 'Pepper-
 
-    Seems this is where a battle wave would be.'
-  - 'Pepper-
+    Who?'
+  - '???-
 
-    Seems like that''d be fun.'
-  - 'Pepper-
-
-    If only the lazy creators added this, shame.'
+    WHOOO??????'
   responses: []
+  isDone: 1

@@ -22,6 +22,8 @@ TagManager:
   - enemyPatrolTag
   - enemyBullet
   - UIItemSlot
+  - Jackyll
+  - waveEnemies
   layers:
   - Default
   - TransparentFX

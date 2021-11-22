@@ -1,0 +1,36 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6051a42f62c8eab4cb99fb54b9249893, type: 3}
+  m_Name: TB- EnemyWave cutscene 2
+  m_EditorClassIdentifier: 
+  dialogue:
+  - 'Pepper-
+
+    Dark.'
+  - "Jackyll-\nI\u2019m sorry but did you just say \u2018WHO\u2019 when one of my
+    loyal and trusted soldiers said..."
+  - 'Jackyll-
+
+    AND I QUOTE!'
+  - 'Jackyll-
+
+    You are in violation of the terms and conditions of the mighty
+    JACKYLL!'
+  - "Pepper-\nAlright, we get it, you\u2019re Jackyll."
+  - "Jackyll-\nWow, you\u2019re a fast learner, maybe you should work for me!"
+  - 'Pepper-
+
+    Hehe, yeah, no, not happening.'
+  - "Jackyll-\nOk, I\u2019ve made up my mind. You ARE gonna work for me!"
+  - "Pepper-\nLeaf, let\u2019s teach this freak some manners!"
+  responses: []
+  isDone: 1
