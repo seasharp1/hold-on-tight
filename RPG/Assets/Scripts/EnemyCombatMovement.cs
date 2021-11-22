@@ -15,7 +15,7 @@ public class EnemyCombatMovement : MonoBehaviour
     BoxCollider2D player;
     Animator anim;
 
-    bool isWave = false;
+    [SerializeField] bool isWave = false;
 
     DialogueActivatorCutscene cutscene;
 
@@ -119,9 +119,11 @@ public class EnemyCombatMovement : MonoBehaviour
             battle.playerUnit.TakeDamage(damage);
             battle.playerHUD.SetHUD(battle.playerUnit);
 
-            battle.playerHUD.SetHP(battle.playerUnit.currentHP, battle.playerUnit); yield return new WaitForSeconds(1f);
+            battle.playerHUD.SetHP(battle.playerUnit.currentHP, battle.playerUnit);
+            battle.dialogueText.text = battle.enemyUnit.unitName + " attacks for " + damage + " damage!";
+            yield return new WaitForSeconds(1f);
+            print("test");
             playerDamage.damageText.text = "";
-            battle.dialogueText.text = battle.enemyUnit.unitName + " attacks for " + battle.enemyUnit.damage + " damage!";
             AudioSource.PlayClipAtPoint(battle.enemyAttack, transform.position);
         }
         if (other.gameObject.name == "LeafCombat(Clone)" && isWave)
@@ -131,9 +133,10 @@ public class EnemyCombatMovement : MonoBehaviour
             battleWave.playerUnit.TakeDamage(damage);
             battleWave.playerHUD.SetHUD(battleWave.playerUnit);
 
-            battleWave.playerHUD.SetHP(battleWave.playerUnit.currentHP, battleWave.playerUnit); yield return new WaitForSeconds(1f);
+            battleWave.playerHUD.SetHP(battleWave.playerUnit.currentHP, battleWave.playerUnit);
+            battleWave.dialogueText.text = battleWave.enemyUnit.unitName + " attacks for " + damage + " damage!";
+            yield return new WaitForSeconds(1f);
             playerDamage.damageText.text = "";
-            battleWave.dialogueText.text = battleWave.enemyUnit.unitName + " attacks for " + battleWave.enemyUnit.damage + " damage!";
             AudioSource.PlayClipAtPoint(battleWave.enemyAttack, transform.position);
         }
     }

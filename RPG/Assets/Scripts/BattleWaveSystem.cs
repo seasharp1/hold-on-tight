@@ -218,7 +218,7 @@ public class BattleWaveSystem : MonoBehaviour
         int damage = getDamage();
         enemyHUD.damageText.text = "-" + damage.ToString();
         bool isDead = enemyUnit.TakeDamage(damage);
-        dialogueText.text = "The attack hit for " + playerUnit.damage + " damage!";
+        dialogueText.text = "The attack hit for " + damage + " damage!";
 
         if (isDead == true)
         {
@@ -307,7 +307,7 @@ public class BattleWaveSystem : MonoBehaviour
         {
             yield return new WaitForSeconds(1f);
             enemyShoot.Shoot();
-            yield return new WaitForSeconds(1.5f);
+            yield return new WaitForSeconds(2f);
         }
         bool isDead = playerUnit.TakeDamage(0);
         if (isDead)

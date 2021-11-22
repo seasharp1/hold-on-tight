@@ -64,28 +64,28 @@ public class enemyBullet : MonoBehaviour
     {
         if (other.tag == "CombatLeaf" && isWave == false)
         {
-            print("Hit leaf");
             int damage = battle.getDamage();
             playerDamage.damageText.text = "-" + damage.ToString();
             battle.playerUnit.TakeDamage(damage);
             battle.playerHUD.SetHUD(battle.playerUnit);
+
             battle.playerHUD.SetHP(battle.playerUnit.currentHP, battle.playerUnit);
             yield return new WaitForSeconds(1f);
             playerDamage.damageText.text = "";
-            battle.dialogueText.text = battle.enemyUnit.unitName + " attacks for " + battle.enemyUnit.damage + " damage!";
+            battle.dialogueText.text = battle.enemyUnit.unitName + " attacks for " + damage + " damage!";
             AudioSource.PlayClipAtPoint(battle.enemyAttack, transform.position);
         }
         if (other.tag == "CombatLeaf" && isWave)
         {
-            print("Hit leaf");
             int damage = battleWave.getDamage();
             playerDamage.damageText.text = "-" + damage.ToString();
             battleWave.playerUnit.TakeDamage(damage);
             battleWave.playerHUD.SetHUD(battleWave.playerUnit);
+
             battleWave.playerHUD.SetHP(battleWave.playerUnit.currentHP, battleWave.playerUnit);
             yield return new WaitForSeconds(1f);
             playerDamage.damageText.text = "";
-            battleWave.dialogueText.text = battleWave.enemyUnit.unitName + " attacks for " + battleWave.enemyUnit.damage + " damage!";
+            battleWave.dialogueText.text = battleWave.enemyUnit.unitName + " attacks for " + damage + " damage!";
             AudioSource.PlayClipAtPoint(battleWave.enemyAttack, transform.position);
         }
     }
