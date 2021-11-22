@@ -215,8 +215,9 @@ public class BattleWaveSystem : MonoBehaviour
     {
         GameObject.Find("AttackButton").GetComponent<Button>().interactable = true;
         GameObject.Find("HealButton").GetComponent<Button>().interactable = true;
-        playerUnit.damage = getDamage();
-        bool isDead = enemyUnit.TakeDamage(playerUnit.damage);
+        int damage = getDamage();
+        enemyHUD.damageText.text = "-" + damage.ToString();
+        bool isDead = enemyUnit.TakeDamage(damage);
         dialogueText.text = "The attack hit for " + playerUnit.damage + " damage!";
 
         if (isDead == true)
@@ -229,6 +230,7 @@ public class BattleWaveSystem : MonoBehaviour
             enemyHUD.SetHP(enemyUnit.currentHP, enemyUnit);
             enemyHUD.SetHUD(enemyUnit);
             yield return new WaitForSeconds(1f);
+            enemyHUD.damageText.text = "";
             dialogueText.text = enemyUnit.unitName + " was defeated!";
             Destroy(enemyClone);
             yield return new WaitForSeconds(1f);
@@ -247,7 +249,6 @@ public class BattleWaveSystem : MonoBehaviour
             state = BattleState.ENEMYTURN;
             StartCoroutine(EnemyTurn());
         }
-
         enemyHUD.SetHP(enemyUnit.currentHP, enemyUnit);
         enemyHUD.SetHUD(enemyUnit);
 
@@ -255,6 +256,7 @@ public class BattleWaveSystem : MonoBehaviour
         yield return new WaitForSeconds(.65f);
         anim.SetBool("CombatSwing", false);
         yield return new WaitForSeconds(.35f);
+        enemyHUD.damageText.text = "";
     }
 
     IEnumerator EndBattle()

@@ -109,8 +109,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8f61addb7c2eaf24d969da2c84ad1809, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 50
-  health: 50
+  maxHealth: 20
+  health: 20
   extraDamage: 0
 --- !u!1 &5199538944896365563
 GameObject:
@@ -305,6 +305,7 @@ MonoBehaviour:
   jumpingSE: {fileID: 8300000, guid: 1bd8a7b696b0bc6438dabe6cca8f189f, type: 3}
   isToyCar: 0
   isToySoldier: 0
+  cantMove: 0
 --- !u!61 &5199538945400060962
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -359,6 +360,7 @@ MonoBehaviour:
   swordSwing: {fileID: 8300000, guid: b950eadf83ae83c44b15358fd7158b41, type: 3}
   smash: {fileID: 8300000, guid: f29e4f6e407af3f43a749d8af0cca749, type: 3}
   player: {fileID: 5199538945400060961}
+  cooldownTime: 1
 --- !u!114 &5199538945400060988
 MonoBehaviour:
   m_ObjectHideFlags: 0

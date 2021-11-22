@@ -19,16 +19,18 @@ public class EnemyCombatMovement : MonoBehaviour
 
     DialogueActivatorCutscene cutscene;
 
+    BattleHUD playerDamage;
+
     // Start is called before the first frame update
     void Start()
     {
+        playerDamage = GameObject.Find("PlayerBattleHud").GetComponent<BattleHUD>();
         cutscene = GameObject.Find("waveCutscene").GetComponent<DialogueActivatorCutscene>();
         box = GameObject.Find("CombatEnemy(Clone)").GetComponent<BoxCollider2D>();
         player = GameObject.Find("LeafCombat(Clone)").GetComponent<BoxCollider2D>();
         body = this.GetComponent<Rigidbody2D>();
         Physics2D.IgnoreCollision(box, player);
         anim = this.GetComponent<Animator>();
-        cutscene = GameObject.Find("waveCutscene").GetComponent<DialogueActivatorCutscene>();
         if (cutscene.wave)
         {
             isWave = true;
@@ -108,29 +110,31 @@ public class EnemyCombatMovement : MonoBehaviour
             }
         }
     }
-    private void OnTriggerEnter2D(Collider2D other)
+    private IEnumerator OnTriggerEnter2D(Collider2D other)
     {
         if(other.gameObject.name == "LeafCombat(Clone)" && isWave == false)
         {
-            battle.enemyUnit.damage = battle.getDamage();
-            battle.dialogueText.text = battle.enemyUnit.unitName + " attacks for " + battle.enemyUnit.damage + " damage!";
-            AudioSource.PlayClipAtPoint(battle.enemyAttack, transform.position);
-
-            battle.playerUnit.TakeDamage(battle.enemyUnit.damage);
+            int damage = battle.getDamage();
+            playerDamage.damageText.text = "-" + damage.ToString();
+            battle.playerUnit.TakeDamage(damage);
             battle.playerHUD.SetHUD(battle.playerUnit);
 
-            battle.playerHUD.SetHP(battle.playerUnit.currentHP, battle.playerUnit);
+            battle.playerHUD.SetHP(battle.playerUnit.currentHP, battle.playerUnit); yield return new WaitForSeconds(1f);
+            playerDamage.damageText.text = "";
+            battle.dialogueText.text = battle.enemyUnit.unitName + " attacks for " + battle.enemyUnit.damage + " damage!";
+            AudioSource.PlayClipAtPoint(battle.enemyAttack, transform.position);
         }
         if (other.gameObject.name == "LeafCombat(Clone)" && isWave)
         {
-            battleWave.enemyUnit.damage = battleWave.getDamage();
-            battleWave.dialogueText.text = battleWave.enemyUnit.unitName + " attacks for " + battleWave.enemyUnit.damage + " damage!";
-            AudioSource.PlayClipAtPoint(battleWave.enemyAttack, transform.position);
-
-            battleWave.playerUnit.TakeDamage(battleWave.enemyUnit.damage);
+            int damage = battleWave.getDamage();
+            playerDamage.damageText.text = "-" + damage.ToString();
+            battleWave.playerUnit.TakeDamage(damage);
             battleWave.playerHUD.SetHUD(battleWave.playerUnit);
 
-            battleWave.playerHUD.SetHP(battleWave.playerUnit.currentHP, battleWave.playerUnit);
+            battleWave.playerHUD.SetHP(battleWave.playerUnit.currentHP, battleWave.playerUnit); yield return new WaitForSeconds(1f);
+            playerDamage.damageText.text = "";
+            battleWave.dialogueText.text = battleWave.enemyUnit.unitName + " attacks for " + battleWave.enemyUnit.damage + " damage!";
+            AudioSource.PlayClipAtPoint(battleWave.enemyAttack, transform.position);
         }
     }
 }

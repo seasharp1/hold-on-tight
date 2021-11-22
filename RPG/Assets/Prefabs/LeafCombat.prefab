@@ -82,8 +82,8 @@ MonoBehaviour:
   unitName: Leaf
   unitLevel: 5
   damage: 10
-  maxHP: 50
-  currentHP: 50
+  maxHP: 20
+  currentHP: 20
 --- !u!95 &1148281474479284744
 Animator:
   serializedVersion: 3

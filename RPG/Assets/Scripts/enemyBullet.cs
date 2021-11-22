@@ -11,10 +11,14 @@ public class enemyBullet : MonoBehaviour
     GameObject[] bullets;
     public bool isWave = false;
 
+    BattleHUD playerDamage;
+
     DialogueActivatorCutscene cutscene;
     // Start is called before the first frame update
     void Start()
     {
+        playerDamage = GameObject.Find("PlayerBattleHud").GetComponent<BattleHUD>();
+        //enemyDamage = GameObject.Find("EnemyBattleHud").GetComponent<BattleHUD>();
         cutscene = GameObject.Find("waveCutscene").GetComponent<DialogueActivatorCutscene>();
         if (cutscene.wave)
         {
@@ -56,31 +60,33 @@ public class enemyBullet : MonoBehaviour
             }
         }
     }
-    private void OnTriggerEnter2D(Collider2D other)
+    private IEnumerator OnTriggerEnter2D(Collider2D other)
     {
         if (other.tag == "CombatLeaf" && isWave == false)
         {
             print("Hit leaf");
-            battle.enemyUnit.damage = battle.getDamage();
+            int damage = battle.getDamage();
+            playerDamage.damageText.text = "-" + damage.ToString();
+            battle.playerUnit.TakeDamage(damage);
+            battle.playerHUD.SetHUD(battle.playerUnit);
+            battle.playerHUD.SetHP(battle.playerUnit.currentHP, battle.playerUnit);
+            yield return new WaitForSeconds(1f);
+            playerDamage.damageText.text = "";
             battle.dialogueText.text = battle.enemyUnit.unitName + " attacks for " + battle.enemyUnit.damage + " damage!";
             AudioSource.PlayClipAtPoint(battle.enemyAttack, transform.position);
-
-            battle.playerUnit.TakeDamage(battle.enemyUnit.damage);
-            battle.playerHUD.SetHUD(battle.playerUnit);
-
-            battle.playerHUD.SetHP(battle.playerUnit.currentHP, battle.playerUnit);
         }
         if (other.tag == "CombatLeaf" && isWave)
         {
             print("Hit leaf");
-            battleWave.enemyUnit.damage = battleWave.getDamage();
+            int damage = battleWave.getDamage();
+            playerDamage.damageText.text = "-" + damage.ToString();
+            battleWave.playerUnit.TakeDamage(damage);
+            battleWave.playerHUD.SetHUD(battleWave.playerUnit);
+            battleWave.playerHUD.SetHP(battleWave.playerUnit.currentHP, battleWave.playerUnit);
+            yield return new WaitForSeconds(1f);
+            playerDamage.damageText.text = "";
             battleWave.dialogueText.text = battleWave.enemyUnit.unitName + " attacks for " + battleWave.enemyUnit.damage + " damage!";
             AudioSource.PlayClipAtPoint(battleWave.enemyAttack, transform.position);
-
-            battleWave.playerUnit.TakeDamage(battleWave.enemyUnit.damage);
-            battleWave.playerHUD.SetHUD(battleWave.playerUnit);
-
-            battleWave.playerHUD.SetHP(battleWave.playerUnit.currentHP, battleWave.playerUnit);
         }
     }
 }

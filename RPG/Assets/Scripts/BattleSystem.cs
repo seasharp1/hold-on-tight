@@ -157,6 +157,7 @@ public class BattleSystem : MonoBehaviour
 
                 dialogueText.text = "First Strike for " + displayDamage + " damage";
                 bool isDead = enemyUnit.TakeDamage(displayDamage);
+                enemyHUD.damageText.text = "-" + displayDamage.ToString();
                 enemyHUD.SetHP(enemyUnit.currentHP, enemyUnit);
                 enemyHUD.SetHUD(enemyUnit);
                 if (isDead == true)
@@ -167,6 +168,7 @@ public class BattleSystem : MonoBehaviour
                     enemyHUD.SetHP(enemyUnit.currentHP, enemyUnit);
                     enemyHUD.SetHUD(enemyUnit);
                     yield return new WaitForSeconds(1f);
+                    enemyHUD.damageText.text = "";
                     dialogueText.text = enemyUnit.unitName + " was defeated!";
                     yield return new WaitForSeconds(1f);
                     state = BattleState.WON;
@@ -180,6 +182,8 @@ public class BattleSystem : MonoBehaviour
                 GameObject.Find("AttackButton").GetComponent<Button>().interactable = true;
                 GameObject.Find("HealButton").GetComponent<Button>().interactable = true;
                 firstStrikeCheck.firstStrike = false;
+                yield return new WaitForSeconds(.5f);
+                enemyHUD.damageText.text = "";
             }
 
         }
@@ -196,8 +200,9 @@ public class BattleSystem : MonoBehaviour
     {
         GameObject.Find("AttackButton").GetComponent<Button>().interactable = true;
         GameObject.Find("HealButton").GetComponent<Button>().interactable = true;
-        playerUnit.damage = getDamage();
-        bool isDead = enemyUnit.TakeDamage(playerUnit.damage);
+        int damage = getDamage();
+        enemyHUD.damageText.text = "-" + damage.ToString();
+        bool isDead = enemyUnit.TakeDamage(damage);
         dialogueText.text = "The attack hit for " + playerUnit.damage + " damage!";
 
         if (isDead == true)
@@ -210,6 +215,7 @@ public class BattleSystem : MonoBehaviour
             enemyHUD.SetHP(enemyUnit.currentHP, enemyUnit);
             enemyHUD.SetHUD(enemyUnit);
             yield return new WaitForSeconds(1f);
+            enemyHUD.damageText.text = "";
             dialogueText.text = enemyUnit.unitName + " was defeated!";
             Destroy(enemyClone);
             yield return new WaitForSeconds(1f);
@@ -229,6 +235,7 @@ public class BattleSystem : MonoBehaviour
         yield return new WaitForSeconds(.65f);
         anim.SetBool("CombatSwing", false);
         yield return new WaitForSeconds(.35f);
+        enemyHUD.damageText.text = "";
     }
 
     IEnumerator EndBattle()
