@@ -14,6 +14,7 @@ public class EnemyCombatMovement : MonoBehaviour
     BoxCollider2D box;
     BoxCollider2D player;
     Animator anim;
+    Animator playerAnim;
 
     [SerializeField] bool isWave = false;
 
@@ -24,6 +25,7 @@ public class EnemyCombatMovement : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        playerAnim = GameObject.FindWithTag("CombatLeaf").GetComponent<Animator>();
         playerDamage = GameObject.Find("PlayerBattleHud").GetComponent<BattleHUD>();
         cutscene = GameObject.Find("waveCutscene").GetComponent<DialogueActivatorCutscene>();
         box = GameObject.Find("CombatEnemy(Clone)").GetComponent<BoxCollider2D>();
@@ -114,6 +116,7 @@ public class EnemyCombatMovement : MonoBehaviour
     {
         if(other.gameObject.name == "LeafCombat(Clone)" && isWave == false)
         {
+            playerAnim.SetBool("isHit", true);
             int damage = battle.getDamage();
             playerDamage.damageText.text = "-" + damage.ToString();
             battle.playerUnit.TakeDamage(damage);
@@ -121,13 +124,15 @@ public class EnemyCombatMovement : MonoBehaviour
 
             battle.playerHUD.SetHP(battle.playerUnit.currentHP, battle.playerUnit);
             battle.dialogueText.text = battle.enemyUnit.unitName + " attacks for " + damage + " damage!";
-            yield return new WaitForSeconds(1f);
-            print("test");
-            playerDamage.damageText.text = "";
             AudioSource.PlayClipAtPoint(battle.enemyAttack, transform.position);
+
+            yield return new WaitForSeconds(1f);
+            playerAnim.SetBool("isHit", false);
+            playerDamage.damageText.text = "";
         }
         if (other.gameObject.name == "LeafCombat(Clone)" && isWave)
         {
+            playerAnim.SetBool("isHit", true);
             int damage = battleWave.getDamage();
             playerDamage.damageText.text = "-" + damage.ToString();
             battleWave.playerUnit.TakeDamage(damage);
@@ -135,9 +140,11 @@ public class EnemyCombatMovement : MonoBehaviour
 
             battleWave.playerHUD.SetHP(battleWave.playerUnit.currentHP, battleWave.playerUnit);
             battleWave.dialogueText.text = battleWave.enemyUnit.unitName + " attacks for " + damage + " damage!";
-            yield return new WaitForSeconds(1f);
-            playerDamage.damageText.text = "";
             AudioSource.PlayClipAtPoint(battleWave.enemyAttack, transform.position);
+
+            yield return new WaitForSeconds(1f);
+            playerAnim.SetBool("isHit", false);
+            playerDamage.damageText.text = "";
         }
     }
 }

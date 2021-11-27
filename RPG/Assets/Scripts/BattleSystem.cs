@@ -305,8 +305,11 @@ public class BattleSystem : MonoBehaviour
             state = BattleState.PLAYERTURN;
             PlayerTurn();
         }
-        playerClone.transform.position = playerLocation;
-        enemyClone.transform.position = enemyLocation;
+        //playerClone.transform.position = playerLocation;
+        if(enemyPrefab == enemy1)
+        {
+            enemyClone.transform.position = enemyLocation;
+        }
         anim.SetBool("CombatSwing", false);
     }
 

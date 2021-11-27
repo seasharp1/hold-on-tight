@@ -333,8 +333,11 @@ public class BattleWaveSystem : MonoBehaviour
             state = BattleState.PLAYERTURN;
             PlayerTurn();
         }
-        playerClone.transform.position = playerLocation;
-        enemyClone.transform.position = enemyLocation;
+        //playerClone.transform.position = playerLocation;
+        if(enemyPrefab == enemy2 || enemyPrefab == enemy4)
+        {
+            enemyClone.transform.position = enemyLocation;
+        }
         anim.SetBool("CombatSwing", false);
     }
 
