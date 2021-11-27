@@ -10,15 +10,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6051a42f62c8eab4cb99fb54b9249893, type: 3}
-  m_Name: TB- EnemyWave cutscene 3
+  m_Name: TB- Ball npc notDoneYet
   m_EditorClassIdentifier: 
   dialogue:
-  - 'Jackyll-
+  - 'Ball-
 
-    WAIT!! I just realized how rude I was being!'
+    Have you guys cleared out all the enemies yet?'
   - 'Pepper-
 
-    Oh, uh, yeah you were.'
-  - "Jackyll-\nI haven\u2019t introduced you to my ARMY!"
+    Not yet. Don''t worry, we''ll do it.'
   responses: []
   isDone: 0

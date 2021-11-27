@@ -1818,7 +1818,7 @@ GameObject:
   - component: {fileID: 1043279808}
   m_Layer: 0
   m_Name: BattleSystem
-  m_TagString: Untagged
+  m_TagString: battleSystem
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1866,6 +1866,7 @@ MonoBehaviour:
   addExp: 0
   state: 0
   anim: {fileID: 8828294100301395276, guid: 8efd7abb45aa06e4a8b36ed9fbff1ecd, type: 3}
+  GameUnit: {fileID: 0}
   playerAttackSE: {fileID: 8300000, guid: b950eadf83ae83c44b15358fd7158b41, type: 3}
   playerHealSE: {fileID: 8300000, guid: 18b6011358fd43443b4ec4634c60de3f, type: 3}
   enemyAttack: {fileID: 8300000, guid: a3495809075776748829f1042ec32a62, type: 3}

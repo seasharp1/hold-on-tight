@@ -6,7 +6,8 @@ public class DialogueActivatorAuto : MonoBehaviour, IInteractable
 
     [SerializeField] private DialogueObject dialogueObject;
 
-    bool isDone = false;
+    public bool isDone = false;
+    public bool isFight = false;
 
     private void Start()
     {
