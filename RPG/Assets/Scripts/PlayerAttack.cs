@@ -12,6 +12,7 @@ public class PlayerAttack : MonoBehaviour
     public LayerMask enemies;
     public LayerMask otherEnemies;
     public LayerMask canBreak;
+    public LayerMask tutorial;
 
     public bool firstStrike = false;
 
@@ -51,6 +52,7 @@ public class PlayerAttack : MonoBehaviour
         Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(attackLocation.position, attackRange, enemies);
         Collider2D[] hitSoldiers = Physics2D.OverlapCircleAll(attackLocation.position, attackRange, otherEnemies);
         Collider2D[] hitBreak = Physics2D.OverlapCircleAll(attackLocation.position, attackRange, canBreak);
+        Collider2D[] hitTutorial = Physics2D.OverlapCircleAll(attackLocation.position, attackRange, tutorial);
 
         for (int i = 0; i < hitEnemies.Length; ++i)
         {
@@ -75,6 +77,15 @@ public class PlayerAttack : MonoBehaviour
             AudioSource.PlayClipAtPoint(smash, transform.position);
             Destroy(hitBreak[i].gameObject);
         }
+        for (int i = 0; i < hitTutorial.Length; ++i)
+        {
+            Destroy(hitTutorial[i].gameObject);
+
+            SceneManager.LoadScene("Battle(Tutorial)", LoadSceneMode.Additive);
+            //PlayerController.mainCamera.SetActive(false);
+            //PlayerController.playerCharacter.SetActive(false);
+            //PlayerController.eventSystem.SetActive(false);
+        }
 
         foreach (Collider2D enemy in hitEnemies)
         {
@@ -86,6 +97,12 @@ public class PlayerAttack : MonoBehaviour
         {
             Debug.Log("Attack");
             player.isToySoldier = true;
+            firstStrike = true;
+        }
+
+        foreach (Collider2D enemy in hitTutorial)
+        {
+            Debug.Log("Attack");
             firstStrike = true;
         }
     }

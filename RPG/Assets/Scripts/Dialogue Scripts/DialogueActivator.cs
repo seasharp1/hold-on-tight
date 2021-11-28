@@ -11,7 +11,10 @@ public class DialogueActivator : MonoBehaviour, IInteractable
     DialogueUI dialogueUI;
 
     public bool doneOnce = false;
-    public bool notBall = true;
+
+    public bool isBall = false;
+    public bool isSoldier = false;
+
     public bool allDone = false;
 
     ballSideQuest ball;
@@ -46,16 +49,21 @@ public class DialogueActivator : MonoBehaviour, IInteractable
         if(doneOnce == false && dialogueUI.IsOpen == false)
         {
             player.DialogueUI.ShowDialogue(dialogueObject);
-            if (notBall == false)
+            if (isBall == true)
             {
                 doneOnce = true;
             }
+            if (isSoldier)
+            {
+                doneOnce = true;
+                allDone = true;
+            }
         }
-        if(doneOnce && ball.questComplete == false && dialogueUI.IsOpen == false)
+        if(doneOnce && ball.questComplete == false && dialogueUI.IsOpen == false && isSoldier == false)
         {
             player.DialogueUI.ShowDialogue(dialogueObjectNotDone);
         }
-        if(doneOnce && ball.questComplete && dialogueUI.IsOpen == false && allDone == false)
+        if(doneOnce && ball.questComplete && dialogueUI.IsOpen == false && allDone == false && isSoldier == false)
         {
             player.DialogueUI.ShowDialogue(dialogueObjectDone);
             allDone = true;

@@ -24,7 +24,6 @@ public class DialogueActivatorAfterEvent : MonoBehaviour, IInteractable
         }
         if (wallBroken && playerTouching && isDone == false)
         {
-            print("dialogue!");
             player.DialogueUI.ShowDialogue(dialogueObject);
             isDone = true;
         }

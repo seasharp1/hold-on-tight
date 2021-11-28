@@ -64,7 +64,6 @@ public class DialogueActivatorCutscene : MonoBehaviour, IInteractable
     {
         if (other.tag == "Player" && dialogueObject.isDone == false)
         {
-            print("Play");
             player.cantMove = true;
             StartCoroutine(nextDialogueNoWait(dialogueObject));
         }

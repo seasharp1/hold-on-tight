@@ -4,10 +4,9 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
-public enum BattleState { START, PLAYERTURN, ENEMYTURN, WON, LOST }
-
-public class BattleSystem : MonoBehaviour
+public class battleTutorial : MonoBehaviour
 {
+    [SerializeField] private DialogueObject dialogueObject;
 
     public GameObject playerPrefab;
     public GameObject enemyPrefab;
@@ -63,15 +62,18 @@ public class BattleSystem : MonoBehaviour
 
     bool isSetUp;
 
+    GameObject dialogueHolder;
+    DialogueUI dialogueUI;
+
     // Start is called before the first frame update
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.F) && enemyUnit.currentHP > 0 && state == BattleState.PLAYERTURN && isSetUp)
+        if (Input.GetKeyDown(KeyCode.F) && enemyUnit.currentHP > 0 && state == BattleState.PLAYERTURN && isSetUp && dialogueUI.IsOpen == false)
         {
             GameObject.Find("AttackButton").GetComponent<Button>().onClick.Invoke();
             state = BattleState.ENEMYTURN;
         }
-        if (Input.GetKeyDown(KeyCode.E) && enemyUnit.currentHP > 0 && state == BattleState.PLAYERTURN && isSetUp)
+        if (Input.GetKeyDown(KeyCode.E) && enemyUnit.currentHP > 0 && state == BattleState.PLAYERTURN && isSetUp && dialogueUI.IsOpen == false)
         {
             GameObject.Find("HealButton").GetComponent<Button>().onClick.Invoke();
             state = BattleState.ENEMYTURN;
@@ -79,10 +81,12 @@ public class BattleSystem : MonoBehaviour
     }
     void Start()
     {
+        dialogueHolder = GameObject.Find("Canvas");
+        dialogueUI = dialogueHolder.GetComponent<DialogueUI>();
         isSetUp = false;
         state = BattleState.START;
         player = GameObject.FindWithTag("Player").GetComponent<PlayerController>();
-        if(player.isToyCar == true)
+        if (player.isToyCar == true)
         {
             enemyPrefab = enemy1;
             //enemyMove = enemy1.GetComponent<EnemyCombatMovement>();
@@ -147,6 +151,9 @@ public class BattleSystem : MonoBehaviour
             if (firstStrikeCheck.firstStrike == true)
             {
                 PlayerController.playerCharacter.SetActive(false);
+
+                print("Play dial");
+                player.DialogueUI.ShowDialogue(dialogueObject);
 
                 GameObject.Find("AttackButton").GetComponent<Button>().interactable = false;
                 GameObject.Find("HealButton").GetComponent<Button>().interactable = false;
@@ -280,13 +287,13 @@ public class BattleSystem : MonoBehaviour
     IEnumerator EnemyTurn()
     {
         isEnemyTurn = true;
-        if(enemyMove != null)
+        if (enemyMove != null)
         {
             yield return new WaitForSeconds(1f);
             StartCoroutine(enemyMove.MoveTowards());
             yield return new WaitForSeconds(3f);
         }
-        if(enemyShoot != null)
+        if (enemyShoot != null)
         {
             yield return new WaitForSeconds(1f);
             enemyShoot.Shoot();
@@ -305,7 +312,7 @@ public class BattleSystem : MonoBehaviour
             PlayerTurn();
         }
         //playerClone.transform.position = playerLocation;
-        if(enemyPrefab == enemy1)
+        if (enemyPrefab == enemy1)
         {
             enemyClone.transform.position = enemyLocation;
         }
@@ -402,7 +409,8 @@ public class BattleSystem : MonoBehaviour
         if (enemyUnit.unitName == "Toy Car")
         {
             damage = Random.Range(1, 6);
-        } else if (enemyUnit.unitName == "Toy Soldier") // For use when implemented...
+        }
+        else if (enemyUnit.unitName == "Toy Soldier") // For use when implemented...
         {
             damage = Random.Range(2, 8);
         } // Add more enemies just as done above and specify damage range...

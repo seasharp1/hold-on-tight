@@ -26,6 +26,7 @@ TagManager:
   - waveEnemies
   - battleSystem
   - ballNPC
+  - battleTutorial
   layers:
   - Default
   - TransparentFX
@@ -38,7 +39,7 @@ TagManager:
   - Background
   - Break
   - ToySoldier
-  - 
+  - tutorial
   - 
   - 
   - 

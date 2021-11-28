@@ -1,0 +1,33 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6051a42f62c8eab4cb99fb54b9249893, type: 3}
+  m_Name: TB- Battle Tutorial
+  m_EditorClassIdentifier: 
+  dialogue:
+  - 'Pepper-
+
+    Leaf, look!'
+  - 'Pepper-
+
+    There''s an enemy right there.'
+  - 'Pepper-
+
+    I don''t think they know we''re here. You should try to get a first
+    strike in.'
+  - 'Pepper-
+
+    If you do that, we can get an extra attack in! '
+  - 'Pepper-
+
+    Walk up to the enemy and press F to swing your sword.'
+  responses: []
+  isDone: 0
