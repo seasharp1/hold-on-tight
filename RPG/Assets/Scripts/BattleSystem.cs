@@ -63,6 +63,7 @@ public class BattleSystem : MonoBehaviour
 
     bool isSetUp;
 
+    Bullet bullet;
     // Start is called before the first frame update
     void Update()
     {
@@ -155,8 +156,15 @@ public class BattleSystem : MonoBehaviour
 
                 anim.SetBool("CombatSwing", true);
                 //AudioSource.PlayClipAtPoint(playerAttackSE, transform.position);
-
-                int displayDamage = 8 + staticHealth.extraDamage;
+                int displayDamage;
+                if (firstStrikeCheck.bulletFirstStrike)
+                {
+                    displayDamage = (8 + staticHealth.extraDamage) / 2;
+                }
+                else
+                {
+                    displayDamage = 8 + staticHealth.extraDamage;
+                }
 
                 dialogueText.text = "First Strike for " + displayDamage + " damage";
                 bool isDead = enemyUnit.TakeDamage(displayDamage);
@@ -184,6 +192,7 @@ public class BattleSystem : MonoBehaviour
 
                 GameObject.Find("AttackButton").GetComponent<Button>().interactable = true;
                 GameObject.Find("HealButton").GetComponent<Button>().interactable = true;
+                firstStrikeCheck.bulletFirstStrike = false;
                 firstStrikeCheck.firstStrike = false;
                 yield return new WaitForSeconds(.5f);
                 enemyHUD.damageText.text = "";

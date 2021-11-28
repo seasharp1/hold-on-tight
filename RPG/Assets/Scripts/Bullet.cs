@@ -24,6 +24,7 @@ public class Bullet : MonoBehaviour
     {
         if(other.tag == "Enemy")
         {
+            playerAttack.bulletFirstStrike = true;
             bullets = GameObject.FindGameObjectsWithTag("bullet");
             for(int i = 0; i < bullets.Length; i++)
             {
@@ -39,6 +40,7 @@ public class Bullet : MonoBehaviour
         }
         if (other.tag == "Toy Soldier Enemy")
         {
+            playerAttack.bulletFirstStrike = true;
             bullets = GameObject.FindGameObjectsWithTag("bullet");
             for (int i = 0; i < bullets.Length; i++)
             {

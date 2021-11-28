@@ -15,6 +15,7 @@ public class PlayerAttack : MonoBehaviour
     public LayerMask tutorial;
 
     public bool firstStrike = false;
+    public bool bulletFirstStrike = false;
 
     public AudioClip swordSwing;
     public AudioClip smash;
