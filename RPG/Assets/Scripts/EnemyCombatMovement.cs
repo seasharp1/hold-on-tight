@@ -9,6 +9,7 @@ public class EnemyCombatMovement : MonoBehaviour
 
     public BattleSystem battle;
     BattleWaveSystem battleWave;
+    battleTutorial tutorial;
 
     public Vector2 playerLocation;
     BoxCollider2D box;
@@ -21,6 +22,8 @@ public class EnemyCombatMovement : MonoBehaviour
     DialogueActivatorCutscene cutscene;
 
     BattleHUD playerDamage;
+
+    public bool isTutorial = false;
 
     // Start is called before the first frame update
     void Start()
@@ -45,9 +48,13 @@ public class EnemyCombatMovement : MonoBehaviour
         {
             battleWave = GameObject.Find("BattleWaveSystem").GetComponent<BattleWaveSystem>();
         }
-        else
+        else if(isTutorial == false)
         {
             battle = GameObject.Find("BattleSystem").GetComponent<BattleSystem>();
+        }
+        else
+        {
+            tutorial = GameObject.Find("BattleSystemTutorial").GetComponent<battleTutorial>();
         }
 
     }
@@ -82,7 +89,7 @@ public class EnemyCombatMovement : MonoBehaviour
                 yield return null;
             }
         }
-        else
+        else if (battle != null)
         {
             bool goingToPlayer = true;
             while (battle.isEnemyTurn && battle.state == BattleState.ENEMYTURN)
@@ -111,10 +118,39 @@ public class EnemyCombatMovement : MonoBehaviour
                 yield return null;
             }
         }
+        else if(tutorial != null)
+        {
+            bool goingToPlayer = true;
+            while (tutorial.isEnemyTurn && tutorial.state == BattleState.ENEMYTURN)
+            {
+                while (Vector2.Distance(tutorial.playerBattleStation.transform.position, tutorial.enemyClone.transform.position) > 2.5 && goingToPlayer == true)
+                {
+                    tutorial.enemyRB.AddForce(new Vector2(-2, 0));
+                    anim.SetBool("carMoving", true);
+                    yield return null;
+                }
+                Vector3 myVec = new Vector3(0f, 180f, 0f);
+                gameObject.transform.Rotate(myVec);
+                while (Vector2.Distance(tutorial.enemyClone.transform.position, tutorial.enemyBattleStation.transform.position) > 1.5)
+                {
+                    goingToPlayer = false;
+                    tutorial.enemyRB.AddForce(new Vector2(4, 0));
+                    if (Vector2.Distance(tutorial.enemyClone.transform.position, tutorial.enemyBattleStation.transform.position) <= 1.6)
+                    {
+                        tutorial.enemyRB.AddForce(new Vector2(0, 0));
+                        tutorial.isEnemyTurn = false;
+                    }
+                    yield return null;
+                }
+                anim.SetBool("carMoving", false);
+                gameObject.transform.Rotate(myVec);
+                yield return null;
+            }
+        }
     }
     private IEnumerator OnTriggerEnter2D(Collider2D other)
     {
-        if(other.gameObject.name == "LeafCombat(Clone)" && isWave == false)
+        if(other.gameObject.name == "LeafCombat(Clone)" && isWave == false && tutorial == null)
         {
             playerAnim.SetBool("isHit", true);
             int damage = battle.getDamage();
@@ -130,7 +166,7 @@ public class EnemyCombatMovement : MonoBehaviour
             playerAnim.SetBool("isHit", false);
             playerDamage.damageText.text = "";
         }
-        if (other.gameObject.name == "LeafCombat(Clone)" && isWave)
+        if (other.gameObject.name == "LeafCombat(Clone)" && isWave && tutorial == null)
         {
             playerAnim.SetBool("isHit", true);
             int damage = battleWave.getDamage();
@@ -141,6 +177,22 @@ public class EnemyCombatMovement : MonoBehaviour
             battleWave.playerHUD.SetHP(battleWave.playerUnit.currentHP, battleWave.playerUnit);
             battleWave.dialogueText.text = battleWave.enemyUnit.unitName + " attacks for " + damage + " damage!";
             AudioSource.PlayClipAtPoint(battleWave.enemyAttack, transform.position);
+
+            yield return new WaitForSeconds(1f);
+            playerAnim.SetBool("isHit", false);
+            playerDamage.damageText.text = "";
+        }
+        if (other.gameObject.name == "LeafCombat(Clone)" && isWave == false && tutorial != null)
+        {
+            playerAnim.SetBool("isHit", true);
+            int damage = tutorial.getDamage();
+            playerDamage.damageText.text = "-" + damage.ToString();
+            tutorial.playerUnit.TakeDamage(damage);
+            tutorial.playerHUD.SetHUD(tutorial.playerUnit);
+
+            tutorial.playerHUD.SetHP(tutorial.playerUnit.currentHP, tutorial.playerUnit);
+            tutorial.dialogueText.text = tutorial.enemyUnit.unitName + " attacks for " + damage + " damage!";
+            AudioSource.PlayClipAtPoint(tutorial.enemyAttack, transform.position);
 
             yield return new WaitForSeconds(1f);
             playerAnim.SetBool("isHit", false);

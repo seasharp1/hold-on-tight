@@ -3256,7 +3256,7 @@ GameObject:
   - component: {fileID: 820780350}
   m_Layer: 5
   m_Name: Canvas
-  m_TagString: Untagged
+  m_TagString: dialogueCanvas
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3310,7 +3310,7 @@ Canvas:
   m_GameObject: {fileID: 820780341}
   m_Enabled: 1
   serializedVersion: 3
-  m_RenderMode: 1
+  m_RenderMode: 0
   m_Camera: {fileID: 465936570}
   m_PlaneDistance: 100
   m_PixelPerfect: 0
@@ -9146,7 +9146,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5199538944825333424, guid: 1b7a2e8117c73454d9351d86556cae3f, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 80.5
+      value: 29.6
       objectReference: {fileID: 0}
     - target: {fileID: 5199538944825333424, guid: 1b7a2e8117c73454d9351d86556cae3f, type: 3}
       propertyPath: m_LocalPosition.y

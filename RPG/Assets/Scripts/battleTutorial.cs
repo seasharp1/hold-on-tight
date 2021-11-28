@@ -7,6 +7,10 @@ using UnityEngine.SceneManagement;
 public class battleTutorial : MonoBehaviour
 {
     [SerializeField] private DialogueObject dialogueObject;
+    [SerializeField] private DialogueObject dialogueObject1;
+    [SerializeField] private DialogueObject dialogueObject2;
+    [SerializeField] private DialogueObject dialogueObject3;
+
 
     public GameObject playerPrefab;
     public GameObject enemyPrefab;
@@ -64,6 +68,11 @@ public class battleTutorial : MonoBehaviour
 
     GameObject dialogueHolder;
     DialogueUI dialogueUI;
+    Canvas theCanvas;
+
+    bool dialogue1Done = false;
+    bool dialogue2Done = false;
+    bool dialogue3Done = false;
 
     // Start is called before the first frame update
     void Update()
@@ -81,6 +90,7 @@ public class battleTutorial : MonoBehaviour
     }
     void Start()
     {
+        theCanvas = GameObject.FindWithTag("dialogueCanvas").GetComponent<Canvas>();
         dialogueHolder = GameObject.Find("Canvas");
         dialogueUI = dialogueHolder.GetComponent<DialogueUI>();
         isSetUp = false;
@@ -122,6 +132,7 @@ public class battleTutorial : MonoBehaviour
         enemyRB = enemyGO.GetComponent<Rigidbody2D>();
 
         enemyMove = enemyGO.GetComponent<EnemyCombatMovement>();
+        enemyMove.isTutorial = true;
         enemyShoot = enemyGO.GetComponent<enemyShooting>();
 
         playerClone = playerGO;
@@ -152,7 +163,6 @@ public class battleTutorial : MonoBehaviour
             {
                 PlayerController.playerCharacter.SetActive(false);
 
-                print("Play dial");
                 player.DialogueUI.ShowDialogue(dialogueObject);
 
                 GameObject.Find("AttackButton").GetComponent<Button>().interactable = false;
@@ -204,7 +214,7 @@ public class battleTutorial : MonoBehaviour
         }
         PlayerController.playerCharacter.SetActive(false);
         state = BattleState.PLAYERTURN;
-        PlayerTurn();
+        StartCoroutine(PlayerTurn());
         isSetUp = true;
     }
 
@@ -255,6 +265,19 @@ public class battleTutorial : MonoBehaviour
         if (state == BattleState.WON)
         {
             dialogueText.text = "The battle was won! +10Exp!";
+            while (dialogueUI.IsOpen)
+            {
+                yield return null;
+            }
+            if (dialogue3Done == false)
+            {
+                player.DialogueUI.ShowDialogue(dialogueObject3);
+                dialogue2Done = true;
+            }
+            while (dialogueUI.IsOpen)
+            {
+                yield return null;
+            }
             yield return new WaitForSeconds(1f);
             //GameObject leafUnitHealth = GameObject.Find("LeafUnit");
             //GameUnit = leafUnitHealth.GetComponent<Unit>();
@@ -273,22 +296,36 @@ public class battleTutorial : MonoBehaviour
             //staticHealth.health += (staticHealth.maxHealth - oldMax);
             //staticHealth.maxHealth = GameUnit.maxHP;
 
-            SceneManager.UnloadSceneAsync("Battle");
+            SceneManager.UnloadSceneAsync("Battle(Tutorial)");
         }
         else if (state == BattleState.LOST)
         {
             dialogueText.text = "The battle was lost...";
             originalCamera.SetActive(false);
-            SceneManager.UnloadSceneAsync("Battle");
+            SceneManager.UnloadSceneAsync("Battle(Tutorial)");
             SceneManager.LoadScene("BattleLost");
         }
     }
 
     IEnumerator EnemyTurn()
     {
+        while (dialogueUI.IsOpen)
+        {
+            yield return null;
+        }
+        if (dialogue2Done == false)
+        {
+            player.DialogueUI.ShowDialogue(dialogueObject2);
+            dialogue2Done = true;
+        }
+        while (dialogueUI.IsOpen)
+        {
+            yield return null;
+        }
         isEnemyTurn = true;
         if (enemyMove != null)
         {
+            print("enemyattack");
             yield return new WaitForSeconds(1f);
             StartCoroutine(enemyMove.MoveTowards());
             yield return new WaitForSeconds(3f);
@@ -309,7 +346,7 @@ public class battleTutorial : MonoBehaviour
         else
         {
             state = BattleState.PLAYERTURN;
-            PlayerTurn();
+            StartCoroutine(PlayerTurn());
         }
         //playerClone.transform.position = playerLocation;
         if (enemyPrefab == enemy1)
@@ -319,9 +356,22 @@ public class battleTutorial : MonoBehaviour
         anim.SetBool("CombatSwing", false);
     }
 
-    void PlayerTurn()
+    IEnumerator PlayerTurn()
     {
         dialogueText.text = "Choose an action:";
+        while (dialogueUI.IsOpen)
+        {
+            yield return null;
+        }
+        if (dialogue1Done == false)
+        {
+            player.DialogueUI.ShowDialogue(dialogueObject1);
+            dialogue1Done = true;
+        }
+        while (dialogueUI.IsOpen)
+        {
+            yield return null;
+        }
     }
 
     IEnumerator PlayerHeal()

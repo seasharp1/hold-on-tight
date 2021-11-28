@@ -82,9 +82,9 @@ public class PlayerAttack : MonoBehaviour
             Destroy(hitTutorial[i].gameObject);
 
             SceneManager.LoadScene("Battle(Tutorial)", LoadSceneMode.Additive);
-            //PlayerController.mainCamera.SetActive(false);
+            PlayerController.mainCamera.SetActive(false);
             //PlayerController.playerCharacter.SetActive(false);
-            //PlayerController.eventSystem.SetActive(false);
+            PlayerController.eventSystem.SetActive(false);
         }
 
         foreach (Collider2D enemy in hitEnemies)
