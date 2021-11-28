@@ -325,7 +325,6 @@ public class battleTutorial : MonoBehaviour
         isEnemyTurn = true;
         if (enemyMove != null)
         {
-            print("enemyattack");
             yield return new WaitForSeconds(1f);
             StartCoroutine(enemyMove.MoveTowards());
             yield return new WaitForSeconds(3f);

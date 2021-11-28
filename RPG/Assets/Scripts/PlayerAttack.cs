@@ -103,7 +103,6 @@ public class PlayerAttack : MonoBehaviour
 
         foreach (Collider2D enemy in hitTutorial)
         {
-            Debug.Log("Attack");
             firstStrike = true;
         }
     }
