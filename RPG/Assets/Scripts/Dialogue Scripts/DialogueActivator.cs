@@ -1,4 +1,6 @@
 using UnityEngine;
+using System.Collections;
+
 
 public class DialogueActivator : MonoBehaviour, IInteractable
 {
@@ -19,8 +21,11 @@ public class DialogueActivator : MonoBehaviour, IInteractable
 
     ballSideQuest ball;
 
+    GameObject crank;
+
     private void Start()
     {
+        crank = GameObject.Find("key_item");
         ball = GameObject.FindWithTag("ballNPC").GetComponent<ballSideQuest>();
         dialogueHolder = GameObject.Find("Canvas");
         dialogueUI = dialogueHolder.GetComponent<DialogueUI>();
@@ -67,10 +72,19 @@ public class DialogueActivator : MonoBehaviour, IInteractable
         {
             player.DialogueUI.ShowDialogue(dialogueObjectDone);
             allDone = true;
+            StartCoroutine(destroyTheObject(crank));
         }
         if (allDone && dialogueUI.IsOpen == false)
         {
             player.DialogueUI.ShowDialogue(dialogueObjectAfter);
         }
+    }
+    IEnumerator destroyTheObject(GameObject obj)
+    {
+        while (dialogueUI.IsOpen)
+        {
+            yield return null;
+        }
+        Destroy(obj);
     }
 }
