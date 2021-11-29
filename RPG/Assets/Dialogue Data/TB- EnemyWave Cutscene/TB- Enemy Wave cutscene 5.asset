@@ -10,10 +10,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6051a42f62c8eab4cb99fb54b9249893, type: 3}
-  m_Name: New Dialogue Object
+  m_Name: TB- Enemy Wave cutscene 5
   m_EditorClassIdentifier: 
   dialogue:
   - 'Pepper-
 
-    Haha! Nice!'
+    Leaf, you still breathing?'
+  - 'Pepper-
+
+    Just a guess, but I bet that freak has that kids toy'
   responses: []
+  isDone: 0

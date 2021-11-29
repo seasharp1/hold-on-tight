@@ -11,6 +11,7 @@ public class DialogueActivatorCutscene : MonoBehaviour, IInteractable
     [SerializeField] private DialogueObject dialogueObject2;
     [SerializeField] private DialogueObject dialogueObject3;
 
+
     public Rigidbody2D jackyllRB;
 
     bool allDone = false;
@@ -58,6 +59,7 @@ public class DialogueActivatorCutscene : MonoBehaviour, IInteractable
             PlayerController.mainCamera.SetActive(false);
             //PlayerController.playerCharacter.SetActive(false);
             PlayerController.eventSystem.SetActive(false);
+            loadOnce = true;
         }
     }
     private void OnTriggerEnter2D(Collider2D other)

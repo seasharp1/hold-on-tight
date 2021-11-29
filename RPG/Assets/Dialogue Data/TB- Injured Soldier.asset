@@ -37,7 +37,7 @@ MonoBehaviour:
 
     Oh my, is that how you got injured?'
   - "Injured Soldier-\nNah, some dog chewed my leg off a few weeks ago, but I'm more
-    traumatised by what\u2019s going on right now than that."
+    traumatised by what\u2019s going on right now. than that."
   - "Injured Soldier-\nLook, if you\u2019re going in there, be careful. I recommend
     you don\u2019t but I feel like you\u2019re gonna go in there no matter what I
     say."
@@ -45,3 +45,4 @@ MonoBehaviour:
 
     Yeah, you right.'
   responses: []
+  isDone: 0

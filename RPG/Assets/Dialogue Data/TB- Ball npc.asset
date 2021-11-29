@@ -24,7 +24,7 @@ MonoBehaviour:
 
     Oh cool, I guess. Can we use it?'
   - "Ball-\nOh, you\u2019re lucky my dad didn\u2019t hear you say that. He believes
-    that this slingshot is the key to our family\u2019s success and survival."
+    that this crank is the key to our family\u2019s. success and survival."
   - "Pepper-\nHuh, interesting. So I guess you won\u2019t let us use it."
   - "Ball-\nOh, you can use it, I don\u2019t believe in all that nonsense."
   - "Ball-\nSay, if you clear out all those enemies down there then I\u2019ll let
@@ -33,3 +33,4 @@ MonoBehaviour:
 
     Deal!'
   responses: []
+  isDone: 0
