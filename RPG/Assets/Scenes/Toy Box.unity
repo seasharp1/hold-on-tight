@@ -3199,7 +3199,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 735903891}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 194.63, y: 37.5, z: 0}
+  m_LocalPosition: {x: 189.27, y: 37.5, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -5778,7 +5778,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 13a57daea2a26b94980c409643def1ac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dialogueObject: {fileID: 11400000, guid: dbfad55c5a20b5043af7bdea5aaafd4f, type: 2}
+  dialogueObject: {fileID: 11400000, guid: 1a4a0659bd78b46439bda8e5ac21f231, type: 2}
   isDone: 0
   isFight: 0
 --- !u!61 &1310195970
@@ -9855,7 +9855,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5199538944825333424, guid: 1b7a2e8117c73454d9351d86556cae3f, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 180.5
+      value: 28.9
       objectReference: {fileID: 0}
     - target: {fileID: 5199538944825333424, guid: 1b7a2e8117c73454d9351d86556cae3f, type: 3}
       propertyPath: m_LocalPosition.y
