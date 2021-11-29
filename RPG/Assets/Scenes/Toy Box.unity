@@ -504,7 +504,7 @@ GameObject:
   - component: {fileID: 77131788}
   - component: {fileID: 77131789}
   - component: {fileID: 77131790}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: DialoguePrompt
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -647,7 +647,7 @@ GameObject:
   - component: {fileID: 90068038}
   - component: {fileID: 90068037}
   - component: {fileID: 90068036}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: WeaponWheelButton (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2472,7 +2472,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_Sprite: {fileID: 3522819101244262014, guid: a72ee6c594c8bc542ad3c1270f7565e2, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -3117,7 +3117,7 @@ GameObject:
   - component: {fileID: 698826268}
   - component: {fileID: 698826270}
   - component: {fileID: 698826269}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: ItemContainer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3371,7 +3371,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 712524567}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: ResponseBox
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3964,7 +3964,7 @@ GameObject:
   - component: {fileID: 820780348}
   - component: {fileID: 820780349}
   - component: {fileID: 820780350}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: Canvas
   m_TagString: dialogueCanvas
   m_Icon: {fileID: 0}
@@ -4347,7 +4347,7 @@ GameObject:
   - component: {fileID: 873020851}
   - component: {fileID: 873020853}
   - component: {fileID: 873020852}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: Icon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4604,7 +4604,7 @@ GameObject:
   - component: {fileID: 926713423}
   - component: {fileID: 926713425}
   - component: {fileID: 926713424}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: Content
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5214,7 +5214,7 @@ GameObject:
   - component: {fileID: 1141695826}
   - component: {fileID: 1141695828}
   - component: {fileID: 1141695827}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: SelectedItem
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5344,7 +5344,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1148959143}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: ResponsePivot
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5382,7 +5382,7 @@ GameObject:
   - component: {fileID: 1161423970}
   - component: {fileID: 1161423972}
   - component: {fileID: 1161423971}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: ContainerName
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5728,7 +5728,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1254332994}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: DialogueBox
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6091,7 +6091,7 @@ GameObject:
   - component: {fileID: 1284961457}
   - component: {fileID: 1284961459}
   - component: {fileID: 1284961458}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: Icon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6200,7 +6200,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 13a57daea2a26b94980c409643def1ac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dialogueObject: {fileID: 11400000, guid: dbfad55c5a20b5043af7bdea5aaafd4f, type: 2}
+  dialogueObject: {fileID: 11400000, guid: 1a4a0659bd78b46439bda8e5ac21f231, type: 2}
   isDone: 0
   isFight: 0
 --- !u!61 &1310195970
@@ -6662,7 +6662,7 @@ GameObject:
   - component: {fileID: 1423565974}
   - component: {fileID: 1423565976}
   - component: {fileID: 1423565975}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: BG
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7722,7 +7722,7 @@ GameObject:
   - component: {fileID: 1595811038}
   - component: {fileID: 1595811037}
   - component: {fileID: 1595811036}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: OptionTemplate
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7900,7 +7900,7 @@ GameObject:
   - component: {fileID: 1599472104}
   - component: {fileID: 1599472106}
   - component: {fileID: 1599472105}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: Text (TMP)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -8227,7 +8227,7 @@ GameObject:
   - component: {fileID: 1651804871}
   - component: {fileID: 1651804873}
   - component: {fileID: 1651804872}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: WeaponWheel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -8301,7 +8301,7 @@ GameObject:
   - component: {fileID: 1664638217}
   - component: {fileID: 1664638219}
   - component: {fileID: 1664638218}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: Image
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -8646,7 +8646,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_Sprite: {fileID: 21300000, guid: 52a92df3e47159347af75751e0686e9b, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -8811,7 +8811,7 @@ GameObject:
   - component: {fileID: 1807150645}
   - component: {fileID: 1807150644}
   - component: {fileID: 1807150643}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: WeaponWheelButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9891,7 +9891,7 @@ GameObject:
   - component: {fileID: 1967435928}
   m_Layer: 0
   m_Name: toy_soldier_npc
-  m_TagString: Untagged
+  m_TagString: NPC
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -9979,7 +9979,7 @@ MonoBehaviour:
   dialogueObjectAfter: {fileID: 11400000, guid: 04845891e4c2b554599bbb9c35d4d3a9, type: 2}
   doneOnce: 0
   isBall: 0
-  isNPC: 0
+  isNPC: 1
   allDone: 0
 --- !u!61 &1967435929
 BoxCollider2D:
@@ -10018,7 +10018,7 @@ GameObject:
   - component: {fileID: 1972896995}
   - component: {fileID: 1972896997}
   - component: {fileID: 1972896996}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: ItemSelected
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -10281,7 +10281,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5199538944825333424, guid: 1b7a2e8117c73454d9351d86556cae3f, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 39.9
+      value: 206.66
       objectReference: {fileID: 0}
     - target: {fileID: 5199538944825333424, guid: 1b7a2e8117c73454d9351d86556cae3f, type: 3}
       propertyPath: m_LocalPosition.y
@@ -72966,7 +72966,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2106798511}
   - component: {fileID: 2106798512}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: Responses
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -73274,6 +73274,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: JackyllHand
       objectReference: {fileID: 0}
+    - target: {fileID: 890231971023602148, guid: 28ca2deb5e183ad418d4f2a28a6c4a9f, type: 3}
+      propertyPath: m_SortingOrder
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 890231971023602149, guid: 28ca2deb5e183ad418d4f2a28a6c4a9f, type: 3}
       propertyPath: attachedTo
       value: 
@@ -73347,7 +73351,7 @@ GameObject:
   - component: {fileID: 7720306589176565545}
   - component: {fileID: 3006718225213661779}
   - component: {fileID: 5428450383463241058}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: CursorSlot
   m_TagString: UIItemSlot
   m_Icon: {fileID: 0}
@@ -73536,7 +73540,7 @@ GameObject:
   - component: {fileID: 9001965974999534544}
   - component: {fileID: 8941179816150652287}
   - component: {fileID: 4157270584257254977}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: Amount
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -73632,7 +73636,7 @@ GameObject:
   - component: {fileID: 8157908423955328321}
   - component: {fileID: 6751859295374430573}
   - component: {fileID: 7958827990382606580}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: Icon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
