@@ -217,11 +217,15 @@ public class PlayerController : MonoBehaviour
         {
             dialoguePrompt.text = "Talk (E)";
         }
+        if (collision.gameObject.tag == "flavorText")
+        {
+            dialoguePrompt.text = "Observe (E)";
+        }
     }
 
     private void OnTriggerExit2D(Collider2D collision)
     {
-        if (collision.gameObject.tag == "NPC" || collision.gameObject.tag == "ballNPC")
+        if (collision.gameObject.tag == "NPC" || collision.gameObject.tag == "ballNPC" || collision.gameObject.tag == "flavorText")
         {
             dialoguePrompt.text = "";
         }
