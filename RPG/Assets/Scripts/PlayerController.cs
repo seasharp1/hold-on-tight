@@ -84,6 +84,10 @@ public class PlayerController : MonoBehaviour
         {
             Interactiable?.Interact(this);
         }
+        if (dialogueUI.IsOpen)
+        {
+            dialoguePrompt.text = "";
+        }
     }
 
     void Move()
