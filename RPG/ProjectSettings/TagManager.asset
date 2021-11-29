@@ -29,6 +29,7 @@ TagManager:
   - battleTutorial
   - dialogueCanvas
   - NPC
+  - flavorText
   layers:
   - Default
   - TransparentFX
