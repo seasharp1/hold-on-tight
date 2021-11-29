@@ -30,6 +30,7 @@ public class SettingsMenuController : MonoBehaviour
         resolutionDropdown.AddOptions(options);
         resolutionDropdown.value = currentResolutionIndex;
         resolutionDropdown.RefreshShownValue();
+
     }
 
     public void SetResolution(int resolutionIndex)

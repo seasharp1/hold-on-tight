@@ -1,0 +1,47 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6051a42f62c8eab4cb99fb54b9249893, type: 3}
+  m_Name: TB- After wavebattle
+  m_EditorClassIdentifier: 
+  dialogue:
+  - "Pepper-\nHey, why didn\u2019t you attack us back there?"
+  - 'Toy Soldier-
+
+    Why, did you want me to?'
+  - 'Pepper-
+
+    Well, no, but all those others attacked us but not you'
+  - "Toy Soldier-\nThat\u2019s because they\u2019re all under Jackyll\u2019s insane
+    control"
+  - 'Toy Soldier-
+
+    Over the past few days he has been practically kidnapping
+    or tricking others and then somehow brainwashing them.'
+  - "Pepper-\nAnd you\u2019re somehow not?"
+  - 'Toy Soldier-
+
+    Well, he has a few dozen in his army right now, which is practically
+    everyone who lives here so I just pretended to be brainwashed'
+  - 'Pepper-
+
+    Jeez, well sorry if we beat up someone you knew back there'
+  - "Toy Soldier-\nOnly my cousin, but that\u2019s ok."
+  - "Toy Soldier-\nHonestly i\u2019m kinda happy you guys did that cause he owes
+    me like 40 bucks, so we're cool."
+  - 'Pepper-
+
+    Alright, stay safe out there I guess.'
+  - 'Toy Soldier-
+
+    No promises.'
+  responses: []
+  isDone: 0
