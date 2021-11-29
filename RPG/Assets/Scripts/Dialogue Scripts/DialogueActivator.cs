@@ -15,7 +15,7 @@ public class DialogueActivator : MonoBehaviour, IInteractable
     public bool doneOnce = false;
 
     public bool isBall = false;
-    public bool isSoldier = false;
+    public bool isNPC = false;
 
     public bool allDone = false;
 
@@ -58,17 +58,17 @@ public class DialogueActivator : MonoBehaviour, IInteractable
             {
                 doneOnce = true;
             }
-            if (isSoldier)
+            if (isNPC)
             {
                 doneOnce = true;
                 allDone = true;
             }
         }
-        if(doneOnce && ball.questComplete == false && dialogueUI.IsOpen == false && isSoldier == false)
+        if(doneOnce && ball.questComplete == false && dialogueUI.IsOpen == false && isNPC == false)
         {
             player.DialogueUI.ShowDialogue(dialogueObjectNotDone);
         }
-        if(doneOnce && ball.questComplete && dialogueUI.IsOpen == false && allDone == false && isSoldier == false)
+        if(doneOnce && ball.questComplete && dialogueUI.IsOpen == false && allDone == false && isNPC == false)
         {
             player.DialogueUI.ShowDialogue(dialogueObjectDone);
             allDone = true;
