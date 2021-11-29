@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using TMPro;
 
 public class PlayerController : MonoBehaviour
 {
@@ -14,6 +15,7 @@ public class PlayerController : MonoBehaviour
     public Transform isGroundedChecker;
     public float checkGroundRadius;
     public LayerMask groundLayer;
+    public TextMeshProUGUI dialoguePrompt;
 
     public static GameObject mainCamera;
     public static GameObject playerCharacter;
@@ -205,6 +207,19 @@ public class PlayerController : MonoBehaviour
             Debug.Log("Collectible Acquired!");
             Destroy(collision.gameObject);
             AudioSource.PlayClipAtPoint(coin, transform.position);
+        }
+
+        if (collision.gameObject.tag == "NPC")
+        {
+            dialoguePrompt.text = "Talk (E)";
+        }
+    }
+
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if (collision.gameObject.tag == "NPC")
+        {
+            dialoguePrompt.text = "";
         }
     }
 }
