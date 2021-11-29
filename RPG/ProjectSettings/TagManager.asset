@@ -28,6 +28,7 @@ TagManager:
   - ballNPC
   - battleTutorial
   - dialogueCanvas
+  - NPC
   layers:
   - Default
   - TransparentFX
