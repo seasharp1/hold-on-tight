@@ -67,7 +67,7 @@ public class EnemyCombatMovement : MonoBehaviour
             {
                 while (Vector2.Distance(battleWave.playerBattleStation.transform.position, battleWave.enemyClone.transform.position) > 2.5 && goingToPlayer == true)
                 {
-                    battleWave.enemyRB.AddForce(new Vector2(-2, 0));
+                    battleWave.enemyRB.AddForce(new Vector2(-20, 0));
                     anim.SetBool("carMoving", true);
                     yield return null;
                 }
@@ -76,7 +76,7 @@ public class EnemyCombatMovement : MonoBehaviour
                 while (Vector2.Distance(battleWave.enemyClone.transform.position, battleWave.enemyBattleStation.transform.position) > 1.5)
                 {
                     goingToPlayer = false;
-                    battleWave.enemyRB.AddForce(new Vector2(4, 0));
+                    battleWave.enemyRB.AddForce(new Vector2(40, 0));
                     if (Vector2.Distance(battleWave.enemyClone.transform.position, battleWave.enemyBattleStation.transform.position) <= 1.6)
                     {
                         battleWave.enemyRB.AddForce(new Vector2(0, 0));
@@ -96,7 +96,7 @@ public class EnemyCombatMovement : MonoBehaviour
             {
                 while (Vector2.Distance(battle.playerBattleStation.transform.position, battle.enemyClone.transform.position) > 2.5 && goingToPlayer == true)
                 {
-                    battle.enemyRB.AddForce(new Vector2(-2, 0));
+                    battle.enemyRB.AddForce(new Vector2(-20, 0));
                     anim.SetBool("carMoving", true);
                     yield return null;
                 }
@@ -105,7 +105,7 @@ public class EnemyCombatMovement : MonoBehaviour
                 while (Vector2.Distance(battle.enemyClone.transform.position, battle.enemyBattleStation.transform.position) > 1.5)
                 {
                     goingToPlayer = false;
-                    battle.enemyRB.AddForce(new Vector2(4, 0));
+                    battle.enemyRB.AddForce(new Vector2(40, 0));
                     if (Vector2.Distance(battle.enemyClone.transform.position, battle.enemyBattleStation.transform.position) <= 1.6)
                     {
                         battle.enemyRB.AddForce(new Vector2(0, 0));
@@ -125,7 +125,7 @@ public class EnemyCombatMovement : MonoBehaviour
             {
                 while (Vector2.Distance(tutorial.playerBattleStation.transform.position, tutorial.enemyClone.transform.position) > 2.5 && goingToPlayer == true)
                 {
-                    tutorial.enemyRB.AddForce(new Vector2(-2, 0));
+                    tutorial.enemyRB.AddForce(new Vector2(-20, 0));
                     anim.SetBool("carMoving", true);
                     yield return null;
                 }
@@ -134,7 +134,7 @@ public class EnemyCombatMovement : MonoBehaviour
                 while (Vector2.Distance(tutorial.enemyClone.transform.position, tutorial.enemyBattleStation.transform.position) > 1.5)
                 {
                     goingToPlayer = false;
-                    tutorial.enemyRB.AddForce(new Vector2(4, 0));
+                    tutorial.enemyRB.AddForce(new Vector2(40, 0));
                     if (Vector2.Distance(tutorial.enemyClone.transform.position, tutorial.enemyBattleStation.transform.position) <= 1.6)
                     {
                         tutorial.enemyRB.AddForce(new Vector2(0, 0));
