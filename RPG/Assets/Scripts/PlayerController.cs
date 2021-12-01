@@ -50,6 +50,7 @@ public class PlayerController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        Application.targetFrameRate = 60;
         health = 20;
 
         mainCamera = GameObject.FindGameObjectWithTag("MainCamera");
@@ -77,6 +78,7 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        //print(Screen.width + " " + Screen.height);
         CheckIfGrounded();
         Move();
         Jump();
