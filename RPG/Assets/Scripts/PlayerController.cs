@@ -143,6 +143,7 @@ public class PlayerController : MonoBehaviour
         {
             AudioSource.PlayClipAtPoint(jumpingSE, transform.position);
             rb.velocity = new Vector2(rb.velocity.x, jumpForce);
+            //rb.velocity += Vector2.up * jumpForce;
             myAnim.SetBool("isJumping", true);
         }
     }
