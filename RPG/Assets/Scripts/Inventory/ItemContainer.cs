@@ -36,7 +36,7 @@ public class ItemContainer : MonoBehaviour
         #endregion
     }
 
-    private void Update()
+    /*private void Update()
     {
         if (Input.GetKeyDown(KeyCode.Q))
         {
@@ -45,7 +45,7 @@ public class ItemContainer : MonoBehaviour
         {
             OpenContainer(items);
         }
-    }
+    }*/
 
     List<UIItemSlot> UISlots = new List<UIItemSlot>();
 
