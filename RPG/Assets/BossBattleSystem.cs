@@ -91,6 +91,7 @@ public class BossBattleSystem : MonoBehaviour
 
         StartCoroutine(SetupBattle());
         anim = GameObject.FindWithTag("CombatLeaf").GetComponent<Animator>(); //this fixes the combat animation
+        attack1 = GameObject.Find("JackyllHandAttack").GetComponent<JackyllHandAttack>();
     }
 
     IEnumerator SetupBattle()
@@ -102,8 +103,6 @@ public class BossBattleSystem : MonoBehaviour
         GameObject enemyGO = Instantiate(enemyPrefab, enemyBattleStation);
         enemyUnit = enemyGO.GetComponent<Unit>();
         enemyRB = enemyGO.GetComponent<Rigidbody2D>();
-
-        attack1 = enemyGO.GetComponent<JackyllHandAttack>();
 
         playerClone = playerGO;
         enemyClone = enemyGO;
@@ -129,9 +128,10 @@ public class BossBattleSystem : MonoBehaviour
         
         PlayerController.playerCharacter.SetActive(false);
         state = BattleState.PLAYERTURN;
-        yield return null;
+        yield return new WaitForSeconds(1f);
         PlayerTurn();
         isSetUp = true;
+
     }
 
     IEnumerator PlayerAttack()
@@ -214,9 +214,8 @@ public class BossBattleSystem : MonoBehaviour
     {
         isEnemyTurn = true;
         bool isDead = playerUnit.TakeDamage(0);
-        yield return new WaitForSeconds(3f);
         StartCoroutine(attack1.handAttack());
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(4f);
         if (isDead)
         {
             yield return new WaitForSeconds(1f);

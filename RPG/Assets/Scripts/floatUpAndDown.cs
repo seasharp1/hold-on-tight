@@ -12,12 +12,22 @@ public class floatUpAndDown : MonoBehaviour
     public float yLevelAdjustment;
 
     public GameObject attachedTo;
+
+    public bool stopMoving = false;
     // Update is called once per frame
     void Update()
     {
-        attachedPos = attachedTo.transform.position;
-        floatY = transform.position;
-        floatY.y = (Mathf.Sin(Time.time) * FloatStrength) + (attachedPos.y + yLevelAdjustment);
-        transform.position = floatY;
+        if (stopMoving)
+        {
+
+        }
+        else
+        {
+            attachedPos = attachedTo.transform.position;
+            floatY = transform.position;
+            floatY.y = (Mathf.Sin(Time.time) * FloatStrength) + (attachedPos.y + yLevelAdjustment);
+            transform.position = floatY;
+        }
+
     }
 }

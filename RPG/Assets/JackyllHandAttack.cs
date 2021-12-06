@@ -7,12 +7,18 @@ public class JackyllHandAttack : MonoBehaviour
     BossBattleSystem battle;
     Animator playerAnim;
     BattleHUD playerDamage;
+    Rigidbody2D handRB;
+    floatUpAndDown change;
+    Vector2 originalPos;
     // Start is called before the first frame update
     void Start()
     {
+        originalPos = new Vector2(gameObject.transform.position.x, gameObject.transform.position.y);
         battle = GameObject.Find("BossBattleSystem").GetComponent<BossBattleSystem>();
         playerAnim = GameObject.FindWithTag("CombatLeaf").GetComponent<Animator>();
         playerDamage = GameObject.Find("PlayerBattleHud").GetComponent<BattleHUD>();
+        handRB = this.GetComponent<Rigidbody2D>();
+        change = this.GetComponent<floatUpAndDown>();
     }
 
     // Update is called once per frame
@@ -22,27 +28,14 @@ public class JackyllHandAttack : MonoBehaviour
     }
     public IEnumerator handAttack()
     {
+        Vector2 temp = new Vector2(.95f, -.35f);
         bool goingToPlayer = true;
-        while (Vector2.Distance(battle.playerBattleStation.transform.position, battle.enemyClone.transform.position) > 2.5 && goingToPlayer == true)
-        {
-            battle.enemyRB.AddForce(new Vector2(-20, 0));
-            yield return null;
-        }
-        Vector3 myVec = new Vector3(0f, 180f, 0f);
-        gameObject.transform.Rotate(myVec);
-        while (Vector2.Distance(battle.enemyClone.transform.position, battle.enemyBattleStation.transform.position) > 1.5)
-        {
-            goingToPlayer = false;
-            battle.enemyRB.AddForce(new Vector2(40, 0));
-            if (Vector2.Distance(battle.enemyClone.transform.position, battle.enemyBattleStation.transform.position) <= 1.6)
-            {
-                battle.enemyRB.AddForce(new Vector2(0, 0));
-                battle.isEnemyTurn = false;
-            }
-            yield return null;
-        }
+        change.stopMoving = true;
+        this.transform.position = temp;
+        yield return new WaitForSeconds(1f);
+        handRB.AddForce(new Vector2(-500, 0));
     }
-    private void OnTriggerEnter2D(Collider2D other)
+    private IEnumerator OnTriggerEnter2D(Collider2D other)
     {
         if (other.gameObject.name == "LeafCombat(Clone)")
         {
@@ -55,6 +48,31 @@ public class JackyllHandAttack : MonoBehaviour
             battle.playerHUD.SetHP(battle.playerUnit.currentHP, battle.playerUnit);
             battle.dialogueText.text = battle.enemyUnit.unitName + " attacks for " + damage + " damage!";
             AudioSource.PlayClipAtPoint(battle.enemyAttack, transform.position);
+            yield return new WaitForSeconds(1f);
+            playerAnim.SetBool("isHit", false);
         }
+        if(other.tag == "flip")
+        {
+            print("flip");
+            Vector3 myVec = new Vector3(0f, 180f, 0f);
+            gameObject.transform.Rotate(myVec);
+            handRB.AddForce(new Vector2(1000, 0));
+
+        }
+        if (other.tag == "return")
+        {
+            print("return");
+            handRB.AddForce(new Vector2(0, 0));
+            Vector3 myVec = new Vector3(0f, 180f, 0f);
+            gameObject.transform.Rotate(myVec);
+            change.stopMoving = false;
+            handRB.AddForce(new Vector2(-500, 0));
+
+            this.transform.position = originalPos;
+        }
+    }
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        
     }
 }
