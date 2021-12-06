@@ -4,9 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
-public enum BattleState { START, PLAYERTURN, ENEMYTURN, WON, LOST }
-
-public class BattleSystem : MonoBehaviour
+public class BossBattleSystem : MonoBehaviour
 {
 
     public GameObject playerPrefab;
@@ -45,8 +43,6 @@ public class BattleSystem : MonoBehaviour
 
     public PlayerController player;
 
-    public GameObject enemy1;
-    public GameObject enemy2;
 
     public bool isEnemyTurn;
 
@@ -54,9 +50,6 @@ public class BattleSystem : MonoBehaviour
 
     public GameObject playerClone;
     public GameObject enemyClone;
-
-    public EnemyCombatMovement enemyMove;
-    public enemyShooting enemyShoot;
 
     Vector3 playerLocation;
     Vector3 enemyLocation;
@@ -67,6 +60,8 @@ public class BattleSystem : MonoBehaviour
 
     GameObject dialogueHolder;
     DialogueUI dialogueUI;
+
+    JackyllHandAttack attack1;
     // Start is called before the first frame update
     void Update()
     {
@@ -88,21 +83,6 @@ public class BattleSystem : MonoBehaviour
         isSetUp = false;
         state = BattleState.START;
         player = GameObject.FindWithTag("Player").GetComponent<PlayerController>();
-        if(player.isToyCar == true)
-        {
-            enemyPrefab = enemy1;
-            //enemyMove = enemy1.GetComponent<EnemyCombatMovement>();
-            //enemyPatrol = GameObject.FindWithTag("enemyPatrolTag").GetComponent<Patrol>();
-            player.isToyCar = false;
-        }
-        if (player.isToySoldier == true)
-        {
-            enemyPrefab = enemy2;
-            //enemyMove = enemy2.GetComponent<EnemyCombatMovement>();
-            enemyRB = enemy2.GetComponent<Rigidbody2D>();
-            //enemyPatrol = GameObject.Find("CombatSoldier").GetComponent<Patrol>();
-            player.isToySoldier = false;
-        }
         playerHealth = 20;
 
         originalCamera = PlayerController.mainCamera;
@@ -123,8 +103,7 @@ public class BattleSystem : MonoBehaviour
         enemyUnit = enemyGO.GetComponent<Unit>();
         enemyRB = enemyGO.GetComponent<Rigidbody2D>();
 
-        enemyMove = enemyGO.GetComponent<EnemyCombatMovement>();
-        enemyShoot = enemyGO.GetComponent<enemyShooting>();
+        attack1 = enemyGO.GetComponent<JackyllHandAttack>();
 
         playerClone = playerGO;
         enemyClone = enemyGO;
@@ -147,70 +126,10 @@ public class BattleSystem : MonoBehaviour
 
         //yield return new WaitForSeconds(1f);
         GameObject tempLeaf = GameObject.Find("Leaf"); //added this
-        if (tempLeaf != null)
-        {
-            firstStrikeCheck = tempLeaf.GetComponent<PlayerAttack>();
-            if (firstStrikeCheck.firstStrike == true)
-            {
-                PlayerController.playerCharacter.SetActive(false);
-
-                GameObject.Find("AttackButton").GetComponent<Button>().interactable = false;
-                GameObject.Find("HealButton").GetComponent<Button>().interactable = false;
-
-                yield return new WaitForSeconds(.01f);
-
-                anim.SetBool("CombatSwing", true);
-                //AudioSource.PlayClipAtPoint(playerAttackSE, transform.position);
-                int displayDamage;
-                if (firstStrikeCheck.bulletFirstStrike)
-                {
-                    displayDamage = (8 + staticHealth.extraDamage) / 2;
-                }
-                else
-                {
-                    displayDamage = 8 + staticHealth.extraDamage;
-                }
-
-                dialogueText.text = "First Strike for " + displayDamage + " damage";
-                bool isDead = enemyUnit.TakeDamage(displayDamage);
-                enemyHUD.damageText.text = "-" + displayDamage.ToString();
-                enemyHUD.SetHP(enemyUnit.currentHP, enemyUnit);
-                enemyHUD.SetHUD(enemyUnit);
-                if (isDead == true)
-                {
-                    enemyClone.transform.localRotation = Quaternion.Euler(180, 0, 0);
-                    enemyUnit.currentHP = 0;
-
-                    enemyHUD.SetHP(enemyUnit.currentHP, enemyUnit);
-                    enemyHUD.SetHUD(enemyUnit);
-                    yield return new WaitForSeconds(1f);
-                    enemyHUD.damageText.text = "";
-                    dialogueText.text = enemyUnit.unitName + " was defeated!";
-                    yield return new WaitForSeconds(1f);
-                    state = BattleState.WON;
-                    StartCoroutine(EndBattle());
-                }
-                else
-                {
-                    state = BattleState.PLAYERTURN;
-                }
-
-                GameObject.Find("AttackButton").GetComponent<Button>().interactable = true;
-                GameObject.Find("HealButton").GetComponent<Button>().interactable = true;
-                firstStrikeCheck.bulletFirstStrike = false;
-                firstStrikeCheck.firstStrike = false;
-                yield return new WaitForSeconds(.5f);
-                enemyHUD.damageText.text = "";
-            }
-
-        }
-        else
-        {
-            PlayerController.playerCharacter.SetActive(false);
-            yield return new WaitForSeconds(1f);
-        }
+        
         PlayerController.playerCharacter.SetActive(false);
         state = BattleState.PLAYERTURN;
+        yield return null;
         PlayerTurn();
         isSetUp = true;
     }
@@ -294,19 +213,10 @@ public class BattleSystem : MonoBehaviour
     IEnumerator EnemyTurn()
     {
         isEnemyTurn = true;
-        if(enemyMove != null)
-        {
-            yield return new WaitForSeconds(1f);
-            StartCoroutine(enemyMove.MoveTowards());
-            yield return new WaitForSeconds(3f);
-        }
-        if(enemyShoot != null)
-        {
-            yield return new WaitForSeconds(1f);
-            enemyShoot.Shoot();
-            yield return new WaitForSeconds(2f);
-        }
         bool isDead = playerUnit.TakeDamage(0);
+        yield return new WaitForSeconds(3f);
+        StartCoroutine(attack1.handAttack());
+        yield return new WaitForSeconds(1f);
         if (isDead)
         {
             yield return new WaitForSeconds(1f);
@@ -317,11 +227,6 @@ public class BattleSystem : MonoBehaviour
         {
             state = BattleState.PLAYERTURN;
             PlayerTurn();
-        }
-        //playerClone.transform.position = playerLocation;
-        if(enemyPrefab == enemy1)
-        {
-            enemyClone.transform.position = enemyLocation;
         }
         anim.SetBool("CombatSwing", false);
     }
@@ -413,14 +318,7 @@ public class BattleSystem : MonoBehaviour
         }
 
         // For enemy damage
-        if (enemyUnit.unitName == "Toy Car")
-        {
-            damage = Random.Range(1, 6);
-        } else if (enemyUnit.unitName == "Toy Soldier") // For use when implemented...
-        {
-            damage = Random.Range(2, 8);
-        } // Add more enemies just as done above and specify damage range...
-
+        damage = Random.Range(5, 10);
         // For player damage
         if (state == BattleState.PLAYERTURN)
         {

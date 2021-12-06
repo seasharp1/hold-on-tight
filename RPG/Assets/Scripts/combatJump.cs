@@ -13,10 +13,13 @@ public class combatJump : MonoBehaviour
     public float jumpForce;
     public AudioClip jumpingSE;
 
+    GameObject dialogueHolder;
+    DialogueUI dialogueUI;
     // Start is called before the first frame update
     void Start()
     {
-
+        dialogueHolder = GameObject.Find("Canvas");
+        dialogueUI = dialogueHolder.GetComponent<DialogueUI>();
     }
 
     // Update is called once per frame
@@ -27,7 +30,7 @@ public class combatJump : MonoBehaviour
     }
     void Jump()
     {
-        if (Input.GetKey(KeyCode.Space) && isGrounded)
+        if (Input.GetKey(KeyCode.Space) && isGrounded && dialogueUI.IsOpen == false)
         {
             AudioSource.PlayClipAtPoint(jumpingSE, transform.position);
             rb.velocity = new Vector2(rb.velocity.x, jumpForce);

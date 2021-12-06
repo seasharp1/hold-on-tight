@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 890231971023602148}
   - component: {fileID: 890231971023602149}
   - component: {fileID: 890231971023602150}
+  - component: {fileID: 5780420268073005312}
   m_Layer: 0
   m_Name: JackyllHand
   m_TagString: Untagged
@@ -115,3 +116,15 @@ MonoBehaviour:
   - {fileID: -4324107842414266666, guid: a72ee6c594c8bc542ad3c1270f7565e2, type: 3}
   - {fileID: 7760001359855272278, guid: a72ee6c594c8bc542ad3c1270f7565e2, type: 3}
   change: 0
+--- !u!114 &5780420268073005312
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 890231971023602146}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8fc6b8eb0bad2d047a96adcc4adae443, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

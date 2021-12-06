@@ -192,6 +192,14 @@ public class PlayerController : MonoBehaviour
             //playerCharacter.SetActive(false); //commented out for now
             eventSystem.SetActive(false);
         }
+        if (collision.gameObject.tag == "bossTest")
+        {
+            Destroy(collision.gameObject);
+            SceneManager.LoadScene("BossBattle", LoadSceneMode.Additive);
+            mainCamera.SetActive(false);
+            //playerCharacter.SetActive(false); //commented out for now
+            eventSystem.SetActive(false);
+        }
     }
 
     private void OnTriggerEnter2D(Collider2D collision)

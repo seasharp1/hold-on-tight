@@ -30,6 +30,7 @@ TagManager:
   - dialogueCanvas
   - NPC
   - flavorText
+  - bossTest
   layers:
   - Default
   - TransparentFX
