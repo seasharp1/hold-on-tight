@@ -7,6 +7,7 @@ public class DialogueActivatorAfterEvent : MonoBehaviour, IInteractable
     [SerializeField] private DialogueObject dialogueObject;
 
     public GameObject triggerObject;
+    public GameObject otherObject;
 
     [SerializeField] bool wallBroken = false;
     [SerializeField] bool isDone = false;
@@ -26,6 +27,7 @@ public class DialogueActivatorAfterEvent : MonoBehaviour, IInteractable
         {
             player.DialogueUI.ShowDialogue(dialogueObject);
             isDone = true;
+            Destroy(otherObject);
         }
     }
     private void OnTriggerEnter2D(Collider2D other)
