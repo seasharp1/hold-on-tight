@@ -62,6 +62,8 @@ public class BossBattleSystem : MonoBehaviour
     DialogueUI dialogueUI;
 
     JackyllHandAttack attack1;
+
+    public Animator jackyllAnim;
     // Start is called before the first frame update
     void Update()
     {
@@ -104,6 +106,8 @@ public class BossBattleSystem : MonoBehaviour
         enemyUnit = enemyGO.GetComponent<Unit>();
         enemyRB = enemyGO.GetComponent<Rigidbody2D>();
 
+        jackyllAnim = enemyGO.GetComponent<Animator>();
+
         playerClone = playerGO;
         enemyClone = enemyGO;
 
@@ -129,6 +133,7 @@ public class BossBattleSystem : MonoBehaviour
         PlayerController.playerCharacter.SetActive(false);
         state = BattleState.PLAYERTURN;
         yield return new WaitForSeconds(1f);
+        jackyllAnim.SetBool("introBoing", true);
         PlayerTurn();
         isSetUp = true;
 

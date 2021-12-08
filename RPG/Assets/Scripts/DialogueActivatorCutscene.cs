@@ -13,6 +13,7 @@ public class DialogueActivatorCutscene : MonoBehaviour, IInteractable
 
 
     public Rigidbody2D jackyllRB;
+    public Animator jackyll;
 
     bool allDone = false;
     bool jackyllGravity = false;
@@ -89,6 +90,9 @@ public class DialogueActivatorCutscene : MonoBehaviour, IInteractable
         if (jackyllGravity)
         {
             jackyllRB.gravityScale = 1;
+            yield return new WaitForSeconds(1f);
+            jackyll.SetBool("isBoing", true);
+            jackyllGravity = false;
         }
         yield return new WaitForSeconds(timer);
         player.DialogueUI.ShowDialogue(d);

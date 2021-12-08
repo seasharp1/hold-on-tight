@@ -60,6 +60,7 @@ GameObject:
   - component: {fileID: 6688814961695605451}
   - component: {fileID: 2775753236353307154}
   - component: {fileID: 6846260031067637206}
+  - component: {fileID: 1457851949168669812}
   m_Layer: 0
   m_Name: BossJackyll
   m_TagString: Untagged
@@ -75,7 +76,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6801790682112112281}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 13, z: 0}
+  m_LocalPosition: {x: 0, y: 10.5, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 7981540690617607305}
@@ -123,7 +124,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 52a92df3e47159347af75751e0686e9b, type: 3}
+  m_Sprite: {fileID: -2483485926635317194, guid: 33f44d07ccccfb743ae6aab98fa65258, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -189,7 +190,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 4, y: 8}
+    oldSize: {x: 4, y: 8.40625}
     newSize: {x: 4, y: 8}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -198,6 +199,25 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 4, y: 8}
   m_EdgeRadius: 0
+--- !u!95 &1457851949168669812
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6801790682112112281}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 3ca0ac8fed39d0147b299a82def4e95f, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!50 &231327094075526047
 Rigidbody2D:
   serializedVersion: 4
