@@ -49,6 +49,7 @@ public class JackyllHandAttack : MonoBehaviour
             battle.dialogueText.text = battle.enemyUnit.unitName + " attacks for " + damage + " damage!";
             AudioSource.PlayClipAtPoint(battle.enemyAttack, transform.position);
             yield return new WaitForSeconds(1f);
+            playerDamage.damageText.text = "";
             playerAnim.SetBool("isHit", false);
         }
         if(other.tag == "flip")

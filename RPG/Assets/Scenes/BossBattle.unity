@@ -3370,6 +3370,16 @@ MonoBehaviour:
   enemyRB: {fileID: 0}
   playerClone: {fileID: 0}
   enemyClone: {fileID: 0}
+  jackyllAnim: {fileID: 0}
+  jackyllShoot: {fileID: 0}
+  jackyllFireHand: {fileID: 0}
+  handChange: {fileID: 0}
+  hand: {fileID: 0}
+  hand2: {fileID: 0}
+  below75: {fileID: 11400000, guid: f2a447c23cb70ac4fa0905cde4ba41d5, type: 2}
+  below50: {fileID: 11400000, guid: 23e7fce58fba76948839d2759f006b80, type: 2}
+  below25: {fileID: 11400000, guid: 575ead8d6721bdb49ae99badc246d10e, type: 2}
+  noHealth: {fileID: 11400000, guid: 4f1bea2ffa9826b4ebdd79895ca449fe, type: 2}
 --- !u!1 &1763028596
 GameObject:
   m_ObjectHideFlags: 0

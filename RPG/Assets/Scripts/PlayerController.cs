@@ -46,10 +46,12 @@ public class PlayerController : MonoBehaviour
 
     public bool cantMove = false;
 
+    ScriptManager manager;
 
     // Start is called before the first frame update
     void Start()
     {
+        manager = GameObject.Find("GameManager").GetComponent<ScriptManager>();
         Application.targetFrameRate = 60;
         health = 20;
 
@@ -194,7 +196,6 @@ public class PlayerController : MonoBehaviour
         }
         if (collision.gameObject.tag == "bossTest")
         {
-            Destroy(collision.gameObject);
             SceneManager.LoadScene("BossBattle", LoadSceneMode.Additive);
             mainCamera.SetActive(false);
             //playerCharacter.SetActive(false); //commented out for now
@@ -240,5 +241,14 @@ public class PlayerController : MonoBehaviour
         {
             dialoguePrompt.text = "";
         }
+    }
+
+    public void resetBattle()
+    {
+        mainCamera.SetActive(true);
+        playerCharacter.SetActive(true); //commented out for now
+        eventSystem.SetActive(true);
+        this.transform.position = new Vector2(311.25f, 19.75f);
+        manager.health = manager.maxHealth;
     }
 }

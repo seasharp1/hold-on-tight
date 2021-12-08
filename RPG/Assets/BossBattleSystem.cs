@@ -64,6 +64,27 @@ public class BossBattleSystem : MonoBehaviour
     JackyllHandAttack attack1;
 
     public Animator jackyllAnim;
+
+    public enemyShooting jackyllShoot;
+    public GameObject jackyllFireHand;
+    public changeSprite handChange;
+    public floatUpAndDown hand;
+    public floatUpAndDown hand2;
+
+    public static GameObject mainCamera;
+    public static GameObject playerCharacter;
+    public static GameObject eventSystem;
+
+    [SerializeField] private DialogueObject below75;
+    [SerializeField] private DialogueObject below50;
+    [SerializeField] private DialogueObject below25;
+    [SerializeField] private DialogueObject noHealth;
+    bool below75Done = false;
+    bool below50Done = false;
+    bool below25Done = false;
+    bool noHealthDone = false;
+
+
     // Start is called before the first frame update
     void Update()
     {
@@ -77,9 +98,37 @@ public class BossBattleSystem : MonoBehaviour
             GameObject.Find("HealButton").GetComponent<Button>().onClick.Invoke();
             state = BattleState.ENEMYTURN;
         }
+        if (enemyUnit.currentHP <= 75 && below75Done == false && state == BattleState.PLAYERTURN)
+        {
+            player.DialogueUI.ShowDialogue(below75);
+            below75Done = true;
+        }
+        if (enemyUnit.currentHP <= 50 && below50Done == false && state == BattleState.PLAYERTURN)
+        {
+            player.DialogueUI.ShowDialogue(below50);
+            below50Done = true;
+        }
+        if (enemyUnit.currentHP <= 25 && below25Done == false && state == BattleState.PLAYERTURN)
+        {
+            player.DialogueUI.ShowDialogue(below25);
+            below25Done = true;
+        }
+        if (enemyUnit.currentHP <= 0 && noHealthDone == false && state == BattleState.WON)
+        {
+            player.DialogueUI.ShowDialogue(noHealth);
+            noHealthDone = true;
+        }
+        if(playerUnit.currentHP <= 0)
+        {
+            state = BattleState.LOST;
+            StartCoroutine(EndBattle());
+        }
     }
     void Start()
     {
+        mainCamera = GameObject.FindGameObjectWithTag("MainCamera");
+        playerCharacter = GameObject.FindGameObjectWithTag("Player");
+        eventSystem = GameObject.Find("EventSystem");
         dialogueHolder = GameObject.Find("Canvas");
         dialogueUI = dialogueHolder.GetComponent<DialogueUI>();
         isSetUp = false;
@@ -94,6 +143,8 @@ public class BossBattleSystem : MonoBehaviour
         StartCoroutine(SetupBattle());
         anim = GameObject.FindWithTag("CombatLeaf").GetComponent<Animator>(); //this fixes the combat animation
         attack1 = GameObject.Find("JackyllHandAttack").GetComponent<JackyllHandAttack>();
+        jackyllShoot = GameObject.Find("shoot").GetComponent<enemyShooting>();
+
     }
 
     IEnumerator SetupBattle()
@@ -110,6 +161,11 @@ public class BossBattleSystem : MonoBehaviour
 
         playerClone = playerGO;
         enemyClone = enemyGO;
+
+        jackyllFireHand = GameObject.Find("JackyllHandAttack");
+        hand = GameObject.Find("JackyllHandAttack").GetComponent<floatUpAndDown>();
+        hand2 = GameObject.Find("JackyllHand").GetComponent<floatUpAndDown>();
+        handChange = GameObject.Find("JackyllHandAttack").GetComponent<changeSprite>();
 
         playerLocation = playerGO.transform.position;
         enemyLocation = enemyGO.transform.position;
@@ -141,6 +197,10 @@ public class BossBattleSystem : MonoBehaviour
 
     IEnumerator PlayerAttack()
     {
+        while (dialogueUI.IsOpen)
+        {
+            yield return null;
+        }
         GameObject.Find("AttackButton").GetComponent<Button>().interactable = true;
         GameObject.Find("HealButton").GetComponent<Button>().interactable = true;
         int damage = getDamage();
@@ -150,8 +210,12 @@ public class BossBattleSystem : MonoBehaviour
 
         if (isDead == true)
         {
-            enemyClone.transform.localRotation = Quaternion.Euler(180, 0, 0);
+            hand.stopMoving = true;
+            hand2.stopMoving = true;
+            hand.transform.position = new Vector2(1.25f, -.35f);
+            hand2.transform.position = new Vector2(4.5f, -.35f);
             enemyUnit.currentHP = 0;
+            
             GameObject.Find("AttackButton").GetComponent<Button>().interactable = false;
             GameObject.Find("HealButton").GetComponent<Button>().interactable = false;
 
@@ -160,7 +224,6 @@ public class BossBattleSystem : MonoBehaviour
             yield return new WaitForSeconds(1f);
             enemyHUD.damageText.text = "";
             dialogueText.text = enemyUnit.unitName + " was defeated!";
-            Destroy(enemyClone);
             yield return new WaitForSeconds(1f);
             state = BattleState.WON;
             StartCoroutine(EndBattle());
@@ -185,42 +248,88 @@ public class BossBattleSystem : MonoBehaviour
     {
         if (state == BattleState.WON)
         {
+            Destroy(GameObject.Find("BossTransition"));
             dialogueText.text = "The battle was won! +10Exp!";
             yield return new WaitForSeconds(1f);
             //GameObject leafUnitHealth = GameObject.Find("LeafUnit");
             //GameUnit = leafUnitHealth.GetComponent<Unit>();
             //GameUnit.currentHP = playerUnit.getHP();
 
-            originalCamera.SetActive(true);
-            originalCharacter.SetActive(true);
-            originalEventSystem.SetActive(true);
 
             //int oldMax = staticHealth.maxHealth;
 
             levelUp();
 
-            staticHealth = GameObject.Find("GameManager").GetComponent<ScriptManager>();
+            //staticHealth = GameObject.Find("GameManager").GetComponent<ScriptManager>();
             staticHealth.health = playerUnit.currentHP;
             //staticHealth.health += (staticHealth.maxHealth - oldMax);
             //staticHealth.maxHealth = GameUnit.maxHP;
 
-            SceneManager.UnloadSceneAsync("Battle");
+            int i = 1;
+            bool unload = false;
+            while (i == 1)
+            {
+                yield return null;
+                if (!dialogueUI.IsOpen)
+                {
+                    SceneManager.LoadSceneAsync("EndGame");
+                    SceneManager.UnloadSceneAsync("BossBattle");
+                    originalCamera.SetActive(true);
+                    originalCharacter.SetActive(true);
+                    originalEventSystem.SetActive(true);
+                    i = 2;
+                }
+            }
         }
         else if (state == BattleState.LOST)
         {
             dialogueText.text = "The battle was lost...";
+            yield return new WaitForSeconds(1f);
             originalCamera.SetActive(false);
-            SceneManager.UnloadSceneAsync("Battle");
-            SceneManager.LoadScene("BattleLost");
+            SceneManager.UnloadSceneAsync("BossBattle");
+            player.resetBattle();
         }
     }
 
     IEnumerator EnemyTurn()
     {
+        while (dialogueUI.IsOpen)
+        {
+            yield return null;
+        }
         isEnemyTurn = true;
         bool isDead = playerUnit.TakeDamage(0);
-        StartCoroutine(attack1.handAttack());
-        yield return new WaitForSeconds(4f);
+        int attackNum = Random.Range(0, 2);
+        print(attackNum);
+        if(attackNum == 1)
+        {
+            StartCoroutine(attack1.handAttack());
+            yield return new WaitForSeconds(4f);
+        }
+        if (attackNum == 0)
+        {
+            handChange.change = true;
+            hand.stopMoving = true;
+            Vector2 temp = new Vector2(.95f, -.35f);
+            jackyllFireHand.transform.position = temp;
+            yield return new WaitForSeconds(1f);
+            jackyllShoot.Shoot();
+            Vector2 temp2 = new Vector2(.95f, 1.4f);
+            jackyllFireHand.transform.position = temp2;
+            yield return new WaitForSeconds(1f);
+            jackyllShoot.Shoot();
+            temp = new Vector2(.95f, -.35f);
+            jackyllFireHand.transform.position = temp;
+            yield return new WaitForSeconds(1f);
+            jackyllShoot.Shoot();
+            yield return new WaitForSeconds(1f);
+            handChange.change = false;
+            hand.stopMoving = false;
+        }
+        if(playerUnit.currentHP <= 0)
+        {
+            isDead = true;
+        }
         if (isDead)
         {
             yield return new WaitForSeconds(1f);

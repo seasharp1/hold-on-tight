@@ -8,8 +8,11 @@ public class enemyBullet : MonoBehaviour
     public Rigidbody2D rb;
     BattleSystem battle;
     BattleWaveSystem battleWave;
+    BossBattleSystem bossBattle;
     GameObject[] bullets;
+
     public bool isWave = false;
+    public bool isBoss = false;
 
     Animator playerAnim;
 
@@ -35,17 +38,36 @@ public class enemyBullet : MonoBehaviour
         {
             battleWave = GameObject.Find("BattleWaveSystem").GetComponent<BattleWaveSystem>();
         }
-        else
+        else if(isWave == false && isBoss == false)
         {
             battle = GameObject.Find("BattleSystem").GetComponent<BattleSystem>();
+        }
+        else if (isBoss && isWave == false)
+        {
+            bossBattle = GameObject.Find("BossBattleSystem").GetComponent<BossBattleSystem>();
+        }
+        if (isBoss)
+        {
+
         }
         rb.velocity = -transform.right * speed;
     }
     private void Update()
     {
-        if (isWave)
+        if (isWave && isBoss == false)
         {
             if (battleWave.state == BattleState.PLAYERTURN)
+            {
+                bullets = GameObject.FindGameObjectsWithTag("enemyBullet");
+                for (int i = 0; i < bullets.Length; i++)
+                {
+                    Destroy(bullets[i]);
+                }
+            }
+        }
+        else if(isBoss && isWave == false)
+        {
+            if (bossBattle.state == BattleState.PLAYERTURN)
             {
                 bullets = GameObject.FindGameObjectsWithTag("enemyBullet");
                 for (int i = 0; i < bullets.Length; i++)
@@ -65,7 +87,7 @@ public class enemyBullet : MonoBehaviour
     }
     private IEnumerator OnTriggerEnter2D(Collider2D other)
     {
-        if (other.tag == "CombatLeaf" && isWave == false)
+        if (other.tag == "CombatLeaf" && isWave == false && isBoss == false)
         {
             playerAnim.SetBool("isHit", true);
             int damage = battle.getDamage();
@@ -82,7 +104,7 @@ public class enemyBullet : MonoBehaviour
 
             playerDamage.damageText.text = "";
         }
-        if (other.tag == "CombatLeaf" && isWave)
+        if (other.tag == "CombatLeaf" && isWave && isBoss == false)
         {
             playerAnim.SetBool("isHit", true);
             int damage = battleWave.getDamage();
@@ -93,6 +115,23 @@ public class enemyBullet : MonoBehaviour
             battleWave.playerHUD.SetHP(battleWave.playerUnit.currentHP, battleWave.playerUnit);
             battleWave.dialogueText.text = battleWave.enemyUnit.unitName + " attacks for " + damage + " damage!";
             AudioSource.PlayClipAtPoint(battleWave.enemyAttack, transform.position);
+
+            yield return new WaitForSeconds(1f);
+            playerAnim.SetBool("isHit", false);
+
+            playerDamage.damageText.text = "";
+        }
+        if (other.tag == "CombatLeaf" && isWave == false && isBoss)
+        {
+            playerAnim.SetBool("isHit", true);
+            int damage = bossBattle.getDamage();
+            playerDamage.damageText.text = "-" + damage.ToString();
+            bossBattle.playerUnit.TakeDamage(damage);
+            bossBattle.playerHUD.SetHUD(bossBattle.playerUnit);
+
+            bossBattle.playerHUD.SetHP(bossBattle.playerUnit.currentHP, bossBattle.playerUnit);
+            bossBattle.dialogueText.text = bossBattle.enemyUnit.unitName + " attacks for " + damage + " damage!";
+            AudioSource.PlayClipAtPoint(bossBattle.enemyAttack, transform.position);
 
             yield return new WaitForSeconds(1f);
             playerAnim.SetBool("isHit", false);
