@@ -335,7 +335,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 4316520220219715802, guid: 16816fee43341b343acdf804e57263da, type: 3}
       propertyPath: m_Name
-      value: StartButton
+      value: RestartButton
       objectReference: {fileID: 0}
     - target: {fileID: 4316520220219715804, guid: 16816fee43341b343acdf804e57263da, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target

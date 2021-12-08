@@ -272,6 +272,8 @@ public class BossBattleSystem : MonoBehaviour
                 yield return null;
                 if (!dialogueUI.IsOpen)
                 {
+                    Destroy(originalCamera);
+                    Destroy(playerCharacter);
                     SceneManager.LoadSceneAsync("EndGame");
                     SceneManager.UnloadSceneAsync("BossBattle");
                     originalCamera.SetActive(true);
