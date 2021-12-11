@@ -307,11 +307,33 @@ public class BattleSystem : MonoBehaviour
         }
         if(enemyShoot != null)
         {
-            yield return new WaitForSeconds(.5f);
-            enemyAnim.SetBool("isShooting", true);
-            yield return new WaitForSeconds(.3f);
-            enemyShoot.Shoot();
-            yield return new WaitForSeconds(2f);
+            int ran = Random.Range(0, 3);
+            print(ran);
+            if(ran == 0)
+            {
+                yield return new WaitForSeconds(.5f);
+                enemyAnim.SetBool("isShooting", true);
+                yield return new WaitForSeconds(.3f);
+                enemyShoot.Shoot();
+                yield return new WaitForSeconds(2f);
+            }
+            if(ran == 1)
+            {
+                yield return new WaitForSeconds(1f);
+                enemyAnim.SetBool("isShooting", true);
+                yield return new WaitForSeconds(.3f);
+                enemyShoot.Shoot();
+                yield return new WaitForSeconds(1.5f);
+            }
+            if (ran == 2)
+            {
+                enemyAnim.SetBool("isShooting", true);
+                yield return new WaitForSeconds(1f);
+                enemyAnim.SetBool("isShooting", true);
+                yield return new WaitForSeconds(.3f);
+                enemyShoot.Shoot();
+                yield return new WaitForSeconds(1.5f);
+            }
         }
         bool isDead = playerUnit.TakeDamage(0);
         if (isDead)

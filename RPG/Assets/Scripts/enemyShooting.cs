@@ -10,6 +10,8 @@ public class enemyShooting : MonoBehaviour
     GameObject dialogueHolder;
     DialogueUI dialogueUI;
 
+    public AudioClip gunshot;
+
     // Update is called once per frame
     private void Start()
     {
@@ -18,6 +20,7 @@ public class enemyShooting : MonoBehaviour
     }
     public void Shoot()
     {
+        AudioSource.PlayClipAtPoint(gunshot, transform.position);
         Instantiate(bullet, firePoint.position, firePoint.rotation);
     }
 }

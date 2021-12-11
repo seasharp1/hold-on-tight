@@ -245,3 +245,5 @@ MonoBehaviour:
   battle: {fileID: 0}
   playerLocation: {x: 0, y: -1.583}
   isWave: 0
+  isTutorial: 0
+  screetch: {fileID: 8300000, guid: d3bd33a7c796f9442a8822cba307f920, type: 3}

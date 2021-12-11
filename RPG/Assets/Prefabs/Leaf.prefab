@@ -297,6 +297,7 @@ MonoBehaviour:
   groundLayer:
     serializedVersion: 2
     m_Bits: 64
+  dialoguePrompt: {fileID: 0}
   health: 0
   myAnim: {fileID: 5199538945400060960}
   areaTransitionName: 
@@ -356,7 +357,11 @@ MonoBehaviour:
   canBreak:
     serializedVersion: 2
     m_Bits: 512
+  tutorial:
+    serializedVersion: 2
+    m_Bits: 0
   firstStrike: 0
+  bulletFirstStrike: 0
   swordSwing: {fileID: 8300000, guid: b950eadf83ae83c44b15358fd7158b41, type: 3}
   smash: {fileID: 8300000, guid: f29e4f6e407af3f43a749d8af0cca749, type: 3}
   player: {fileID: 5199538945400060961}
@@ -405,6 +410,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   firePoint: {fileID: 427445305930946304}
   bullet: {fileID: 1521070166887375387, guid: b70e8fa5ca990c04ab627500f4364b41, type: 3}
+  cooldownTime: 1
+  canShoot: 0
+  gunshot: {fileID: 8300000, guid: 223ca4ffc114b5a478664539653cc5e1, type: 3}
 --- !u!1 &5199538945981555170
 GameObject:
   m_ObjectHideFlags: 0

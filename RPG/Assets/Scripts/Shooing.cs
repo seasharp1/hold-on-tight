@@ -15,6 +15,8 @@ public class Shooing : MonoBehaviour
 
     public bool canShoot;
 
+    public AudioClip gunshot;
+
     // Update is called once per frame
     private void Start()
     {
@@ -29,6 +31,7 @@ public class Shooing : MonoBehaviour
             if (Input.GetKeyDown(KeyCode.R) && dialogueUI.IsOpen == false && canShoot)
             {
                 Shoot();
+                AudioSource.PlayClipAtPoint(gunshot, transform.position);
                 nextFireTime = Time.time + cooldownTime;
             }
         }

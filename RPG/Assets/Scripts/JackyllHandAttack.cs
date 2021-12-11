@@ -53,10 +53,12 @@ public class JackyllHandAttack : MonoBehaviour
         }
         if(other.tag == "flip")
         {
+            handRB.AddForce(new Vector2(500, 0));
+            yield return new WaitForSeconds(.3f);
             print("flip");
             Vector3 myVec = new Vector3(0f, 180f, 0f);
             gameObject.transform.Rotate(myVec);
-            handRB.AddForce(new Vector2(1000, 0));
+            handRB.AddForce(new Vector2(500, 0));
 
         }
         if (other.tag == "return")

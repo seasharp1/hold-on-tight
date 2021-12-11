@@ -25,6 +25,8 @@ public class EnemyCombatMovement : MonoBehaviour
 
     public bool isTutorial = false;
 
+    public AudioClip screetch;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -63,6 +65,7 @@ public class EnemyCombatMovement : MonoBehaviour
         if (isWave)
         {
             bool goingToPlayer = true;
+            AudioSource.PlayClipAtPoint(screetch, transform.position);
             while (battleWave.isEnemyTurn && battleWave.state == BattleState.ENEMYTURN)
             {
                 while (Vector2.Distance(battleWave.playerBattleStation.transform.position, battleWave.enemyClone.transform.position) > 2.5 && goingToPlayer == true)
@@ -92,6 +95,7 @@ public class EnemyCombatMovement : MonoBehaviour
         else if (battle != null)
         {
             bool goingToPlayer = true;
+            AudioSource.PlayClipAtPoint(screetch, transform.position);
             while (battle.isEnemyTurn && battle.state == BattleState.ENEMYTURN)
             {
                 while (Vector2.Distance(battle.playerBattleStation.transform.position, battle.enemyClone.transform.position) > 2.5 && goingToPlayer == true)
@@ -121,6 +125,7 @@ public class EnemyCombatMovement : MonoBehaviour
         else if(tutorial != null)
         {
             bool goingToPlayer = true;
+            AudioSource.PlayClipAtPoint(screetch, transform.position);
             while (tutorial.isEnemyTurn && tutorial.state == BattleState.ENEMYTURN)
             {
                 while (Vector2.Distance(tutorial.playerBattleStation.transform.position, tutorial.enemyClone.transform.position) > 2.5 && goingToPlayer == true)

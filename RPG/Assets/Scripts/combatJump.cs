@@ -27,7 +27,7 @@ public class combatJump : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Jump();
+        StartCoroutine(Jump());
         CheckIfGrounded();
         if(isGrounded == false)
         {
@@ -38,14 +38,14 @@ public class combatJump : MonoBehaviour
             myAnim.SetBool("isJumping", false);
         }
     }
-    void Jump()  
+    IEnumerator Jump()  
     {
         if (Input.GetKeyDown(KeyCode.Space) && isGrounded && dialogueUI.IsOpen == false && canJump)
         {
             canJump = false;
             AudioSource.PlayClipAtPoint(jumpingSE, transform.position);
             rb.velocity = new Vector2(rb.velocity.x, jumpForce);
-            //yield return new WaitForSeconds(1f);
+            yield return new WaitForSeconds(1.2f);
             canJump = true;
         }
     }

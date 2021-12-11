@@ -14,7 +14,7 @@ public class SettingsMenuController : MonoBehaviour
     {
         //optionsMenu = GameObject.Find("OptionsMenu");
         //mainMenu = GameObject.Find("MainMenu");
-        audioMixer.SetFloat("Volume", -25);
+        audioMixer.SetFloat("Volume", -35);
         resolutions = Screen.resolutions;
         resolutionDropdown.ClearOptions();
         List<string> options = new List<string>();

@@ -301,7 +301,7 @@ public class BossBattleSystem : MonoBehaviour
         }
         isEnemyTurn = true;
         bool isDead = playerUnit.TakeDamage(0);
-        int attackNum = Random.Range(0, 2);
+        int attackNum = Random.Range(0, 3);
         print(attackNum);
         if(attackNum == 1)
         {
@@ -312,23 +312,41 @@ public class BossBattleSystem : MonoBehaviour
         {
             handChange.change = true;
             hand.stopMoving = true;
-            Vector2 temp = new Vector2(.95f, -.35f);
-            jackyllFireHand.transform.position = temp;
+            Vector2 down = new Vector2(.95f, -.35f);
+            Vector2 up = new Vector2(.95f, 1.4f);
+            jackyllFireHand.transform.position = down;
             yield return new WaitForSeconds(1f);
             jackyllShoot.Shoot();
-            Vector2 temp2 = new Vector2(.95f, 1.4f);
-            jackyllFireHand.transform.position = temp2;
+            jackyllFireHand.transform.position = up;
             yield return new WaitForSeconds(1f);
             jackyllShoot.Shoot();
-            temp = new Vector2(.95f, -.35f);
-            jackyllFireHand.transform.position = temp;
+            jackyllFireHand.transform.position = down;
             yield return new WaitForSeconds(1f);
             jackyllShoot.Shoot();
             yield return new WaitForSeconds(1f);
             handChange.change = false;
             hand.stopMoving = false;
         }
-        if(playerUnit.currentHP <= 0)
+        if (attackNum == 2)
+        {
+            handChange.change = true;
+            hand.stopMoving = true;
+            Vector2 down = new Vector2(.95f, -.35f);
+            Vector2 up = new Vector2(.95f, 1.4f);
+            jackyllFireHand.transform.position = down;
+            yield return new WaitForSeconds(1f);
+            jackyllShoot.Shoot();
+            jackyllFireHand.transform.position = down;
+            yield return new WaitForSeconds(1.5f);
+            jackyllShoot.Shoot();
+            jackyllFireHand.transform.position = down;
+            yield return new WaitForSeconds(1.5f);
+            jackyllShoot.Shoot();
+            yield return new WaitForSeconds(1f);
+            handChange.change = false;
+            hand.stopMoving = false;
+        }
+        if (playerUnit.currentHP <= 0)
         {
             isDead = true;
         }
