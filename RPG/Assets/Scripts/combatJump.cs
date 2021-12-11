@@ -15,9 +15,11 @@ public class combatJump : MonoBehaviour
 
     GameObject dialogueHolder;
     DialogueUI dialogueUI;
+    public bool canJump;
     // Start is called before the first frame update
     void Start()
     {
+        canJump = true;
         dialogueHolder = GameObject.Find("Canvas");
         dialogueUI = dialogueHolder.GetComponent<DialogueUI>();
     }
@@ -27,14 +29,24 @@ public class combatJump : MonoBehaviour
     {
         Jump();
         CheckIfGrounded();
-    }
-    void Jump()
-    {
-        if (Input.GetKey(KeyCode.Space) && isGrounded && dialogueUI.IsOpen == false)
+        if(isGrounded == false)
         {
+            myAnim.SetBool("isJumping", true);
+        }
+        if (isGrounded)
+        {
+            myAnim.SetBool("isJumping", false);
+        }
+    }
+    void Jump()  
+    {
+        if (Input.GetKey(KeyCode.Space) && isGrounded && dialogueUI.IsOpen == false && canJump)
+        {
+            canJump = false;
             AudioSource.PlayClipAtPoint(jumpingSE, transform.position);
             rb.velocity = new Vector2(rb.velocity.x, jumpForce);
-            myAnim.SetBool("isJumping", true);
+            //yield return new WaitForSeconds(1f);
+            canJump = true;
         }
     }
 
@@ -44,7 +56,6 @@ public class combatJump : MonoBehaviour
         if (collider != null)
         {
             isGrounded = true;
-            myAnim.SetBool("isJumping", false);
         }
         else
         {

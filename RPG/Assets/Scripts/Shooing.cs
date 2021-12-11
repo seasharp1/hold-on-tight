@@ -13,9 +13,12 @@ public class Shooing : MonoBehaviour
     public float cooldownTime = 1;
     private float nextFireTime;
 
+    public bool canShoot;
+
     // Update is called once per frame
     private void Start()
     {
+        canShoot = true;
         dialogueHolder = GameObject.Find("Canvas");
         dialogueUI = dialogueHolder.GetComponent<DialogueUI>();
     }
@@ -23,7 +26,7 @@ public class Shooing : MonoBehaviour
     {
         if(Time.time > nextFireTime)
         {
-            if (Input.GetKeyDown(KeyCode.R) && dialogueUI.IsOpen == false)
+            if (Input.GetKeyDown(KeyCode.R) && dialogueUI.IsOpen == false && canShoot)
             {
                 Shoot();
                 nextFireTime = Time.time + cooldownTime;

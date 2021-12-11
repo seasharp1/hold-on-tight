@@ -2147,7 +2147,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 215.7, y: 50.6}
+  m_AnchoredPosition: {x: 179.9, y: 266.4}
   m_SizeDelta: {x: 160, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &785518103
@@ -2220,7 +2220,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'E: Heal'
+  m_Text: 'R: Heal'
 --- !u!222 &785518106
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -3267,7 +3267,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1606810483}
-  - component: {fileID: 1606810482}
   - component: {fileID: 1606810484}
   m_Layer: 0
   m_Name: BossBattleSystem
@@ -3276,48 +3275,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1606810482
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1606810481}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e521ca612a873c34082c7cd987e266ac, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  playerPrefab: {fileID: 8395333762559160493, guid: d50d9f713b28ad04e9f983a91575c890, type: 3}
-  enemyPrefab: {fileID: 0}
-  playerBattleStation: {fileID: 1028451769}
-  enemyBattleStation: {fileID: 286560735}
-  playerUnit: {fileID: 0}
-  enemyUnit: {fileID: 0}
-  dialogueText: {fileID: 170221359}
-  playerHUD: {fileID: 1785415666}
-  enemyHUD: {fileID: 69481077}
-  originalCamera: {fileID: 613537074}
-  originalCharacter: {fileID: 1384027665069696234, guid: 0f267a8e3822f0a488c4e26a8f2057a1, type: 3}
-  originalEventSystem: {fileID: 0}
-  playerHealth: 20
-  staticHealth: {fileID: 0}
-  addExp: 0
-  state: 0
-  anim: {fileID: 8828294100301395276, guid: 8efd7abb45aa06e4a8b36ed9fbff1ecd, type: 3}
-  GameUnit: {fileID: 0}
-  playerAttackSE: {fileID: 8300000, guid: b950eadf83ae83c44b15358fd7158b41, type: 3}
-  playerHealSE: {fileID: 8300000, guid: 18b6011358fd43443b4ec4634c60de3f, type: 3}
-  enemyAttack: {fileID: 8300000, guid: a3495809075776748829f1042ec32a62, type: 3}
-  player: {fileID: 3128283977390369224, guid: 976972d1eb5dd2640a62a9d32f151c34, type: 3}
-  enemy1: {fileID: 6197405135042287334, guid: 3ecaa40805e8bbe418db048aada61ae1, type: 3}
-  enemy2: {fileID: 6775707160523368820, guid: 399e6f99471a0cd46a301eb06be0fda6, type: 3}
-  isEnemyTurn: 0
-  enemyRB: {fileID: 0}
-  playerClone: {fileID: 0}
-  enemyClone: {fileID: 6197405135042287334, guid: 3ecaa40805e8bbe418db048aada61ae1, type: 3}
-  enemyMove: {fileID: 0}
-  enemyShoot: {fileID: 0}
 --- !u!4 &1606810483
 Transform:
   m_ObjectHideFlags: 0

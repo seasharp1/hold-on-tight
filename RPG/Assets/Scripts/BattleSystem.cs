@@ -67,6 +67,8 @@ public class BattleSystem : MonoBehaviour
 
     GameObject dialogueHolder;
     DialogueUI dialogueUI;
+
+    Animator enemyAnim;
     // Start is called before the first frame update
     void Update()
     {
@@ -75,7 +77,7 @@ public class BattleSystem : MonoBehaviour
             GameObject.Find("AttackButton").GetComponent<Button>().onClick.Invoke();
             state = BattleState.ENEMYTURN;
         }
-        if (Input.GetKeyDown(KeyCode.E) && enemyUnit.currentHP > 0 && state == BattleState.PLAYERTURN && isSetUp && dialogueUI.IsOpen == false)
+        if (Input.GetKeyDown(KeyCode.R) && enemyUnit.currentHP > 0 && state == BattleState.PLAYERTURN && isSetUp && dialogueUI.IsOpen == false)
         {
             GameObject.Find("HealButton").GetComponent<Button>().onClick.Invoke();
             state = BattleState.ENEMYTURN;
@@ -125,6 +127,8 @@ public class BattleSystem : MonoBehaviour
 
         enemyMove = enemyGO.GetComponent<EnemyCombatMovement>();
         enemyShoot = enemyGO.GetComponent<enemyShooting>();
+
+        enemyAnim = enemyGO.GetComponent<Animator>();
 
         playerClone = playerGO;
         enemyClone = enemyGO;
@@ -302,7 +306,9 @@ public class BattleSystem : MonoBehaviour
         }
         if(enemyShoot != null)
         {
-            yield return new WaitForSeconds(1f);
+            yield return new WaitForSeconds(.5f);
+            enemyAnim.SetBool("isShooting", true);
+            yield return new WaitForSeconds(.3f);
             enemyShoot.Shoot();
             yield return new WaitForSeconds(2f);
         }

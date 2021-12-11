@@ -9,8 +9,12 @@ public class SettingsMenuController : MonoBehaviour
     public Dropdown resolutionDropdown;
     Resolution[] resolutions;
 
+
     private void Start()
     {
+        //optionsMenu = GameObject.Find("OptionsMenu");
+        //mainMenu = GameObject.Find("MainMenu");
+        audioMixer.SetFloat("Volume", -25);
         resolutions = Screen.resolutions;
         resolutionDropdown.ClearOptions();
         List<string> options = new List<string>();

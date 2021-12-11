@@ -1935,7 +1935,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'E: Heal'
+  m_Text: 'R: Heal'
 --- !u!222 &777268298
 CanvasRenderer:
   m_ObjectHideFlags: 0

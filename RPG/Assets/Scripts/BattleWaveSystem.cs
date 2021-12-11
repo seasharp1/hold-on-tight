@@ -68,6 +68,8 @@ public class BattleWaveSystem : MonoBehaviour
 
     bool isSetUp;
 
+    Animator enemyAnim;
+
     // Start is called before the first frame update
     void Update()
     {
@@ -75,7 +77,7 @@ public class BattleWaveSystem : MonoBehaviour
         {
             GameObject.Find("AttackButton").GetComponent<Button>().onClick.Invoke();
         }
-        if (Input.GetKeyDown(KeyCode.E) && enemyUnit.currentHP > 0 && state == BattleState.PLAYERTURN && isSetUp)
+        if (Input.GetKeyDown(KeyCode.R) && enemyUnit.currentHP > 0 && state == BattleState.PLAYERTURN && isSetUp)
         {
             GameObject.Find("HealButton").GetComponent<Button>().onClick.Invoke();
         }
@@ -128,6 +130,8 @@ public class BattleWaveSystem : MonoBehaviour
         GameObject enemyGO = Instantiate(enemyPrefab, enemyBattleStation);
         enemyUnit = enemyGO.GetComponent<Unit>();
         enemyRB = enemyGO.GetComponent<Rigidbody2D>();
+
+        enemyAnim = enemyGO.GetComponent<Animator>();
 
         rounds.text = "Round " + round + "/" + totalRounds;
 
@@ -200,6 +204,8 @@ public class BattleWaveSystem : MonoBehaviour
         enemyClone = enemyGO;
 
         enemyLocation = enemyGO.transform.position;
+
+        enemyAnim = enemyGO.GetComponent<Animator>();
 
         dialogueText.text = "A wild " + enemyUnit.unitName + " approaches...";
 
@@ -317,7 +323,9 @@ public class BattleWaveSystem : MonoBehaviour
         }
         if (enemyShoot != null)
         {
-            yield return new WaitForSeconds(1f);
+            yield return new WaitForSeconds(.5f);
+            enemyAnim.SetBool("isShooting", true);
+            yield return new WaitForSeconds(.3f);
             enemyShoot.Shoot();
             yield return new WaitForSeconds(2f);
         }

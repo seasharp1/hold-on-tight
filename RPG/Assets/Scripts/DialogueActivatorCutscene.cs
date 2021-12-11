@@ -24,8 +24,11 @@ public class DialogueActivatorCutscene : MonoBehaviour, IInteractable
     bool loadOnce = false;
 
     public bool wave = false;
+
+    public Shooing playerShoot;
     private void Start()
     {
+        playerShoot = GameObject.FindWithTag("Player").GetComponent<Shooing>();
         dialogueObject.isDone = false;
         dialogueObject1.isDone = false;
         dialogueObject2.isDone = false;
@@ -56,6 +59,7 @@ public class DialogueActivatorCutscene : MonoBehaviour, IInteractable
                 Destroy(enemies[i]);
             }
             wave = true;
+            playerShoot.canShoot = true;
             SceneManager.LoadScene("Battle(wave)", LoadSceneMode.Additive);
             PlayerController.mainCamera.SetActive(false);
             //PlayerController.playerCharacter.SetActive(false);
@@ -68,6 +72,7 @@ public class DialogueActivatorCutscene : MonoBehaviour, IInteractable
         if (other.tag == "Player" && dialogueObject.isDone == false)
         {
             player.cantMove = true;
+            playerShoot.canShoot = false;
             StartCoroutine(nextDialogueNoWait(dialogueObject));
         }
     }

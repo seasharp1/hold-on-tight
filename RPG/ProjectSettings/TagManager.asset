@@ -33,6 +33,8 @@ TagManager:
   - bossTest
   - flip
   - return
+  - hypnoBreak
+  - breakHypno
   layers:
   - Default
   - TransparentFX

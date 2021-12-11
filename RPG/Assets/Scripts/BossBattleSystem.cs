@@ -93,7 +93,7 @@ public class BossBattleSystem : MonoBehaviour
             GameObject.Find("AttackButton").GetComponent<Button>().onClick.Invoke();
             state = BattleState.ENEMYTURN;
         }
-        if (Input.GetKeyDown(KeyCode.E) && enemyUnit.currentHP > 0 && state == BattleState.PLAYERTURN && isSetUp && dialogueUI.IsOpen == false)
+        if (Input.GetKeyDown(KeyCode.R) && enemyUnit.currentHP > 0 && state == BattleState.PLAYERTURN && isSetUp && dialogueUI.IsOpen == false)
         {
             GameObject.Find("HealButton").GetComponent<Button>().onClick.Invoke();
             state = BattleState.ENEMYTURN;
@@ -266,7 +266,6 @@ public class BossBattleSystem : MonoBehaviour
             //staticHealth.maxHealth = GameUnit.maxHP;
 
             int i = 1;
-            bool unload = false;
             while (i == 1)
             {
                 yield return null;

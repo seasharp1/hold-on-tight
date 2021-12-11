@@ -29,7 +29,6 @@ public class JackyllHandAttack : MonoBehaviour
     public IEnumerator handAttack()
     {
         Vector2 temp = new Vector2(.95f, -.35f);
-        bool goingToPlayer = true;
         change.stopMoving = true;
         this.transform.position = temp;
         yield return new WaitForSeconds(1f);
