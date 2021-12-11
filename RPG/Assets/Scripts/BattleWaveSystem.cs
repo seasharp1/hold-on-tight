@@ -39,6 +39,7 @@ public class BattleWaveSystem : MonoBehaviour
 
     public AudioClip playerAttackSE;
     public AudioClip playerHealSE;
+    public AudioClip criticalHitSE;
     public AudioClip enemyAttack;
 
     public PlayerController player;
@@ -429,9 +430,10 @@ public class BattleWaveSystem : MonoBehaviour
         int damagePlus = staticHealth.extraDamage;
 
         // Set crit chance here...
-        if (critChance >= 97)
+        if (critChance >= 97 && state == BattleState.PLAYERTURN)
         {
             multiplier = 2;
+            AudioSource.PlayClipAtPoint(criticalHitSE, transform.position);
             Debug.Log("Critical Hit!");
         }
 

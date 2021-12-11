@@ -40,7 +40,7 @@ public class combatJump : MonoBehaviour
     }
     void Jump()  
     {
-        if (Input.GetKey(KeyCode.Space) && isGrounded && dialogueUI.IsOpen == false && canJump)
+        if (Input.GetKeyDown(KeyCode.Space) && isGrounded && dialogueUI.IsOpen == false && canJump)
         {
             canJump = false;
             AudioSource.PlayClipAtPoint(jumpingSE, transform.position);
