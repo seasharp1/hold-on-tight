@@ -22,6 +22,14 @@ MonoBehaviour:
     the right time. This will make you jump!'
   - 'Pepper-
 
+    Sometimes enemies will try to fake you out in order to get you
+    to jump too early.'
+  - 'Pepper-
+
+    If you look closely you''ll be able to tell which move the enemy
+    is going to do next.'
+  - 'Pepper-
+
     Get ready! '
   responses: []
   isDone: 0

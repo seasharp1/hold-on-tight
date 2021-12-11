@@ -35,6 +35,9 @@ TagManager:
   - return
   - hypnoBreak
   - breakHypno
+  - goBack
+  - stop
+  - sike
   layers:
   - Default
   - TransparentFX

@@ -241,6 +241,7 @@ public class BattleWaveSystem : MonoBehaviour
 
         if (isDead == true)
         {
+            enemyRB.gravityScale = 1;
             enemyClone.transform.localRotation = Quaternion.Euler(180, 0, 0);
             enemyUnit.currentHP = 0;
             GameObject.Find("AttackButton").GetComponent<Button>().interactable = false;
@@ -462,11 +463,11 @@ public class BattleWaveSystem : MonoBehaviour
         // For enemy damage
         if (enemyUnit.unitName == "Toy Car")
         {
-            damage = Random.Range(1, 6);
+            damage = Random.Range(3, 6);
         }
         else if (enemyUnit.unitName == "Toy Soldier") // For use when implemented...
         {
-            damage = Random.Range(2, 8);
+            damage = Random.Range(3, 8);
         } // Add more enemies just as done above and specify damage range...
 
         // For player damage

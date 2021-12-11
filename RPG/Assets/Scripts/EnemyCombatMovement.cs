@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class EnemyCombatMovement : MonoBehaviour
 {
-    [SerializeField] private Rigidbody2D body;
+    public Rigidbody2D body;
     public Vector2 originalPosition;
 
     public BattleSystem battle;
@@ -27,9 +27,16 @@ public class EnemyCombatMovement : MonoBehaviour
 
     public AudioClip screetch;
 
+    private Vector3 myVec = new Vector3(0f, 180f, 0f);
+
+    private Vector2 original;
+
+    public bool sike = false;
+
     // Start is called before the first frame update
     void Start()
     {
+        sike = false;
         playerAnim = GameObject.FindWithTag("CombatLeaf").GetComponent<Animator>();
         playerDamage = GameObject.Find("PlayerBattleHud").GetComponent<BattleHUD>();
         cutscene = GameObject.Find("waveCutscene").GetComponent<DialogueActivatorCutscene>();
@@ -38,6 +45,10 @@ public class EnemyCombatMovement : MonoBehaviour
         body = this.GetComponent<Rigidbody2D>();
         Physics2D.IgnoreCollision(box, player);
         anim = this.GetComponent<Animator>();
+        body = gameObject.GetComponent<Rigidbody2D>();
+
+        original = new Vector2(gameObject.transform.position.x, gameObject.transform.position.y);
+
         if (cutscene.wave)
         {
             isWave = true;
@@ -62,100 +73,48 @@ public class EnemyCombatMovement : MonoBehaviour
     }
     public IEnumerator MoveTowards()
     {
-        if (isWave)
+        int ran = Random.Range(0, 2);
+        if(ran == 0)
         {
-            bool goingToPlayer = true;
-            AudioSource.PlayClipAtPoint(screetch, transform.position);
-            while (battleWave.isEnemyTurn && battleWave.state == BattleState.ENEMYTURN)
-            {
-                while (Vector2.Distance(battleWave.playerBattleStation.transform.position, battleWave.enemyClone.transform.position) > 2.5 && goingToPlayer == true)
-                {
-                    battleWave.enemyRB.AddForce(new Vector2(-20, 0));
-                    anim.SetBool("carMoving", true);
-                    yield return null;
-                }
-                Vector3 myVec = new Vector3(0f, 180f, 0f);
-                gameObject.transform.Rotate(myVec);
-                while (Vector2.Distance(battleWave.enemyClone.transform.position, battleWave.enemyBattleStation.transform.position) > 1.5)
-                {
-                    goingToPlayer = false;
-                    battleWave.enemyRB.AddForce(new Vector2(40, 0));
-                    if (Vector2.Distance(battleWave.enemyClone.transform.position, battleWave.enemyBattleStation.transform.position) <= 1.6)
-                    {
-                        battleWave.enemyRB.AddForce(new Vector2(0, 0));
-                        battleWave.isEnemyTurn = false;
-                    }
-                    yield return null;
-                }
-                anim.SetBool("carMoving", false);
-                gameObject.transform.Rotate(myVec);
-                yield return null;
-            }
+            anim.SetBool("carBait", true);
+            yield return new WaitForSeconds(.5f);
+            anim.SetBool("carBait", false);
+            sike = true;
         }
-        else if (battle != null)
-        {
-            bool goingToPlayer = true;
-            AudioSource.PlayClipAtPoint(screetch, transform.position);
-            while (battle.isEnemyTurn && battle.state == BattleState.ENEMYTURN)
-            {
-                while (Vector2.Distance(battle.playerBattleStation.transform.position, battle.enemyClone.transform.position) > 2.5 && goingToPlayer == true)
-                {
-                    battle.enemyRB.AddForce(new Vector2(-20, 0));
-                    anim.SetBool("carMoving", true);
-                    yield return null;
-                }
-                Vector3 myVec = new Vector3(0f, 180f, 0f);
-                gameObject.transform.Rotate(myVec);
-                while (Vector2.Distance(battle.enemyClone.transform.position, battle.enemyBattleStation.transform.position) > 1.5)
-                {
-                    goingToPlayer = false;
-                    battle.enemyRB.AddForce(new Vector2(40, 0));
-                    if (Vector2.Distance(battle.enemyClone.transform.position, battle.enemyBattleStation.transform.position) <= 1.6)
-                    {
-                        battle.enemyRB.AddForce(new Vector2(0, 0));
-                        battle.isEnemyTurn = false;
-                    }
-                    yield return null;
-                }
-                anim.SetBool("carMoving", false);
-                gameObject.transform.Rotate(myVec);
-                yield return null;
-            }
-        }
-        else if(tutorial != null)
-        {
-            bool goingToPlayer = true;
-            AudioSource.PlayClipAtPoint(screetch, transform.position);
-            while (tutorial.isEnemyTurn && tutorial.state == BattleState.ENEMYTURN)
-            {
-                while (Vector2.Distance(tutorial.playerBattleStation.transform.position, tutorial.enemyClone.transform.position) > 2.5 && goingToPlayer == true)
-                {
-                    tutorial.enemyRB.AddForce(new Vector2(-20, 0));
-                    anim.SetBool("carMoving", true);
-                    yield return null;
-                }
-                Vector3 myVec = new Vector3(0f, 180f, 0f);
-                gameObject.transform.Rotate(myVec);
-                while (Vector2.Distance(tutorial.enemyClone.transform.position, tutorial.enemyBattleStation.transform.position) > 1.5)
-                {
-                    goingToPlayer = false;
-                    tutorial.enemyRB.AddForce(new Vector2(40, 0));
-                    if (Vector2.Distance(tutorial.enemyClone.transform.position, tutorial.enemyBattleStation.transform.position) <= 1.6)
-                    {
-                        tutorial.enemyRB.AddForce(new Vector2(0, 0));
-                        tutorial.isEnemyTurn = false;
-                    }
-                    yield return null;
-                }
-                anim.SetBool("carMoving", false);
-                gameObject.transform.Rotate(myVec);
-                yield return null;
-            }
-        }
+        anim.SetBool("carMoving", true);
+        body.AddForce(new Vector2(-450, 0));
+        yield return null;
     }
     private IEnumerator OnTriggerEnter2D(Collider2D other)
     {
-        if(other.gameObject.name == "LeafCombat(Clone)" && isWave == false && tutorial == null)
+        if(other.tag == "goBack")
+        {
+            gameObject.transform.Rotate(myVec);
+            body.AddForce(new Vector2(300, 0));
+            yield return new WaitForSeconds(.1f);
+            body.AddForce(new Vector2(600, 0));
+        }
+        if (other.tag == "stop")
+        {
+            anim.SetBool("carMoving", false);
+            gameObject.transform.Rotate(myVec);
+            body.AddForce(new Vector2(-450, 0));
+            gameObject.transform.position = original;
+        }
+        if(other.tag == "sike")
+        {
+            if (sike)
+            {
+                print("gotem");
+                anim.SetBool("carMoving", false);
+                body.AddForce(new Vector2(450, 0));
+                sike = false;
+                yield return new WaitForSeconds(.5f);
+                anim.SetBool("carMoving", true);
+                body.AddForce(new Vector2(-450, 0));
+            }
+        }
+        if (other.gameObject.name == "LeafCombat(Clone)" && isWave == false && tutorial == null)
         {
             playerAnim.SetBool("isHit", true);
             int damage = battle.getDamage();

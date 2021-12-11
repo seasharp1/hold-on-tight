@@ -358,6 +358,7 @@ public class BossBattleSystem : MonoBehaviour
         }
         else
         {
+            yield return new WaitForSeconds(.5f);
             state = BattleState.PLAYERTURN;
             PlayerTurn();
         }

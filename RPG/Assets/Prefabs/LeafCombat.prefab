@@ -142,7 +142,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_Sprite: {fileID: 7647240639167449756, guid: 211b72a7223eff24c8d1850d72b05b3e, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -223,3 +223,4 @@ MonoBehaviour:
   myAnim: {fileID: 1148281474479284744}
   jumpForce: 11
   jumpingSE: {fileID: 8300000, guid: 1bd8a7b696b0bc6438dabe6cca8f189f, type: 3}
+  canJump: 0
