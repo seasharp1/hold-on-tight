@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class LevelUpSystem : MonoBehaviour
 {
@@ -14,6 +15,7 @@ public class LevelUpSystem : MonoBehaviour
     public int currExp;
     public int dynamicNeededExp;
     public int staticNeededExp;
+    public TextMeshProUGUI playerLevel;
 
     public int maxLevel = 20;
     public int currLevel = 1;
@@ -43,6 +45,7 @@ public class LevelUpSystem : MonoBehaviour
         myTransform = go.transform;
     }
 
+    /*
     private void OnGUI()
     {
         windowRect = GUI.Window(2, windowRect, LevelWdw2Function, "Display Level");
@@ -52,6 +55,7 @@ public class LevelUpSystem : MonoBehaviour
             GUI.Box(new Rect(20, Screen.height - 475, expBarLength, 20), currExp + "/" + maxExp);
         }
     }
+    */
 
     void LevelWdw2Function(int windowID)
     {
@@ -62,13 +66,17 @@ public class LevelUpSystem : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        playerLevel.text = "Level: " + currLevel +
+            "\nExp to Level: " + dynamicNeededExp;
+        /*
         displayLevel = "Current Level: " + currLevel +
             "\nExp to Level: " + expToLevel +
             "\nCurrent Exp: " + currExp +
             "\nExp Needed: " + dynamicNeededExp;
+        */
         levelModifier();
 
-        expBarLength = (Screen.width - 40) * ((currExp - expToLevel + staticNeededExp) / (float)staticNeededExp);
+        //expBarLength = (Screen.width - 40) * ((currExp - expToLevel + staticNeededExp) / (float)staticNeededExp);
     }
 
     public void levelModifier()
