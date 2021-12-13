@@ -190,7 +190,6 @@ public class BossBattleSystem : MonoBehaviour
         PlayerController.playerCharacter.SetActive(false);
         state = BattleState.PLAYERTURN;
         yield return new WaitForSeconds(1f);
-        jackyllAnim.SetBool("introBoing", true);
         PlayerTurn();
         isSetUp = true;
 
