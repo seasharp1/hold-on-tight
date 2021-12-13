@@ -1,0 +1,45 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6051a42f62c8eab4cb99fb54b9249893, type: 3}
+  m_Name: TB- Jackyll Fight Starts
+  m_EditorClassIdentifier: 
+  dialogue:
+  - 'Jackyll-
+
+    Well, well, well.'
+  - 'Pepper-
+
+    Can it, you got something we need, so hand it over!'
+  - 'Jackyll-
+
+    Pepper, what do you think of this room? '
+  - 'Pepper-
+
+    This seems over the top. I would have been fine clawing at you
+    a few rooms back.'
+  - "Jackyll-\nHahaha, you\u2019re just so\u2026"
+  - 'Pepper-
+
+    The word you''re looking for is charming, isn''t it?'
+  - 'Jackyll-
+
+    Annoying!'
+  - 'Pepper-
+
+    Feeling''s mutual.'
+  - "Jackyll-\nYou always have some sort of snarky comeback, don\u2019t ya?"
+  - 'Pepper-
+
+    Ooh, not this time, looks like ya got me!'
+  - "Jackyll-\nBlue shirt, you\u2019re awfully quiet."
+  responses: []
+  isDone: 0

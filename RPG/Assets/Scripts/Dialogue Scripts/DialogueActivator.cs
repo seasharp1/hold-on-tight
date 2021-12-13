@@ -17,6 +17,8 @@ public class DialogueActivator : MonoBehaviour, IInteractable
     public bool isBall = false;
     public bool isNPC = false;
 
+    public bool isMachine = false;
+
     public bool allDone = false;
 
     ballSideQuest ball;
@@ -29,6 +31,13 @@ public class DialogueActivator : MonoBehaviour, IInteractable
         ball = GameObject.FindWithTag("ballNPC").GetComponent<ballSideQuest>();
         dialogueHolder = GameObject.Find("Canvas");
         dialogueUI = dialogueHolder.GetComponent<DialogueUI>();
+    }
+    private void Update()
+    {
+        if(isMachine && GameObject.Find("wireBox") == null)
+        {
+            Destroy(GameObject.Find("WireDialogue"));
+        }
     }
     private void OnTriggerEnter2D(Collider2D other)
     {

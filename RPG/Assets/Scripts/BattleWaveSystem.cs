@@ -158,6 +158,8 @@ public class BattleWaveSystem : MonoBehaviour
         //enemyHUD.SetHP(staticHealth.health, enemyUnit, false);
         playerUnit.currentHP = staticHealth.health;
 
+        PlayerController.playerCharacter.SetActive(false);
+
         yield return new WaitForSeconds(1f);
 
         state = BattleState.PLAYERTURN;
@@ -166,7 +168,7 @@ public class BattleWaveSystem : MonoBehaviour
         GameObject.Find("AttackButton").GetComponent<Button>().interactable = true;
         GameObject.Find("HealButton").GetComponent<Button>().interactable = true;
 
-        PlayerController.playerCharacter.SetActive(false);
+        //PlayerController.playerCharacter.SetActive(false);
         PlayerTurn();
         isSetUp = true;
     }

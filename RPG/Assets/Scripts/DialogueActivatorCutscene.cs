@@ -26,6 +26,8 @@ public class DialogueActivatorCutscene : MonoBehaviour, IInteractable
     public bool wave = false;
 
     public Shooing playerShoot;
+
+    public GameObject afterWave;
     private void Start()
     {
         playerShoot = GameObject.FindWithTag("Player").GetComponent<Shooing>();
@@ -64,6 +66,7 @@ public class DialogueActivatorCutscene : MonoBehaviour, IInteractable
             PlayerController.mainCamera.SetActive(false);
             //PlayerController.playerCharacter.SetActive(false);
             PlayerController.eventSystem.SetActive(false);
+            afterWave.SetActive(true);
             loadOnce = true;
         }
     }
