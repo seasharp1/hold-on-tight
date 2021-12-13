@@ -183,6 +183,7 @@ public class BattleSystem : MonoBehaviour
                 enemyHUD.SetHUD(enemyUnit);
                 if (isDead == true)
                 {
+                    enemyRB.gravityScale = 1;
                     enemyClone.transform.localRotation = Quaternion.Euler(180, 0, 0);
                     enemyUnit.currentHP = 0;
 
