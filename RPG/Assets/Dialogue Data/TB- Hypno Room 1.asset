@@ -10,21 +10,20 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6051a42f62c8eab4cb99fb54b9249893, type: 3}
-  m_Name: TB- Mind control room 1
+  m_Name: TB- Hypno Room 1
   m_EditorClassIdentifier: 
   dialogue:
   - 'Pepper-
 
-    Leaf, look at this.'
+    Ok, what is this room?'
   - 'Pepper-
 
-    This must be where Jackyll get''s his mind control powers from.'
+    It looks super sinister, like horrible things happen in this room.'
   - 'Pepper-
 
-    I bet if we can shut off this machine he''ll be powerless against
-    our brains.'
+    This is definitely where all the brainwashing happens.'
   - 'Pepper-
 
-    Maybe we can break it somehow. But how can we reach that?'
+    Let''s get to a higher position to get a better look.'
   responses: []
   isDone: 0

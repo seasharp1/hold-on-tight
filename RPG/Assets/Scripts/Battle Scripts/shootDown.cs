@@ -5,6 +5,7 @@ using UnityEngine;
 public class shootDown : MonoBehaviour
 {
     Rigidbody2D otherRB;
+    public GameObject wireDialogue;
     // Start is called before the first frame update
     void Start()
     {
@@ -15,6 +16,7 @@ public class shootDown : MonoBehaviour
     {
         if(other.tag == "bullet")
         {
+            wireDialogue.SetActive(true);
             otherRB.gravityScale = 1;
             Destroy(gameObject);
         }

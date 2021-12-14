@@ -4,13 +4,8 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
-public class battleTutorial : MonoBehaviour
+public class BossBattleSystem : MonoBehaviour
 {
-    [SerializeField] private DialogueObject dialogueObject;
-    [SerializeField] private DialogueObject dialogueObject1;
-    [SerializeField] private DialogueObject dialogueObject2;
-    [SerializeField] private DialogueObject dialogueObject3;
-
 
     public GameObject playerPrefab;
     public GameObject enemyPrefab;
@@ -49,8 +44,6 @@ public class battleTutorial : MonoBehaviour
 
     public PlayerController player;
 
-    public GameObject enemy1;
-    public GameObject enemy2;
 
     public bool isEnemyTurn;
 
@@ -59,21 +52,39 @@ public class battleTutorial : MonoBehaviour
     public GameObject playerClone;
     public GameObject enemyClone;
 
-    public EnemyCombatMovement enemyMove;
-    public enemyShooting enemyShoot;
-
     Vector3 playerLocation;
     Vector3 enemyLocation;
 
     bool isSetUp;
 
+    Bullet bullet;
+
     GameObject dialogueHolder;
     DialogueUI dialogueUI;
-    Canvas theCanvas;
 
-    bool dialogue1Done = false;
-    bool dialogue2Done = false;
-    bool dialogue3Done = false;
+    JackyllHandAttack attack1;
+
+    public Animator jackyllAnim;
+
+    public enemyShooting jackyllShoot;
+    public GameObject jackyllFireHand;
+    public changeSprite handChange;
+    public floatUpAndDown hand;
+    public floatUpAndDown hand2;
+
+    public static GameObject mainCamera;
+    public static GameObject playerCharacter;
+    public static GameObject eventSystem;
+
+    [SerializeField] private DialogueObject below75;
+    [SerializeField] private DialogueObject below50;
+    [SerializeField] private DialogueObject below25;
+    [SerializeField] private DialogueObject noHealth;
+    bool below75Done = false;
+    bool below50Done = false;
+    bool below25Done = false;
+    bool noHealthDone = false;
+
 
     // Start is called before the first frame update
     void Update()
@@ -88,30 +99,42 @@ public class battleTutorial : MonoBehaviour
             GameObject.Find("HealButton").GetComponent<Button>().onClick.Invoke();
             state = BattleState.ENEMYTURN;
         }
+        if (enemyUnit.currentHP <= 75 && below75Done == false && state == BattleState.PLAYERTURN)
+        {
+            player.DialogueUI.ShowDialogue(below75);
+            below75Done = true;
+        }
+        if (enemyUnit.currentHP <= 50 && below50Done == false && state == BattleState.PLAYERTURN)
+        {
+            player.DialogueUI.ShowDialogue(below50);
+            below50Done = true;
+        }
+        if (enemyUnit.currentHP <= 25 && below25Done == false && state == BattleState.PLAYERTURN)
+        {
+            player.DialogueUI.ShowDialogue(below25);
+            below25Done = true;
+        }
+        if (enemyUnit.currentHP <= 0 && noHealthDone == false && state == BattleState.WON)
+        {
+            player.DialogueUI.ShowDialogue(noHealth);
+            noHealthDone = true;
+        }
+        if(playerUnit.currentHP <= 0)
+        {
+            state = BattleState.LOST;
+            StartCoroutine(EndBattle());
+        }
     }
     void Start()
     {
-        theCanvas = GameObject.FindWithTag("dialogueCanvas").GetComponent<Canvas>();
+        mainCamera = GameObject.FindGameObjectWithTag("MainCamera");
+        playerCharacter = GameObject.FindGameObjectWithTag("Player");
+        eventSystem = GameObject.Find("EventSystem");
         dialogueHolder = GameObject.Find("Canvas");
         dialogueUI = dialogueHolder.GetComponent<DialogueUI>();
         isSetUp = false;
         state = BattleState.START;
         player = GameObject.FindWithTag("Player").GetComponent<PlayerController>();
-        if (player.isToyCar == true)
-        {
-            enemyPrefab = enemy1;
-            //enemyMove = enemy1.GetComponent<EnemyCombatMovement>();
-            //enemyPatrol = GameObject.FindWithTag("enemyPatrolTag").GetComponent<Patrol>();
-            player.isToyCar = false;
-        }
-        if (player.isToySoldier == true)
-        {
-            enemyPrefab = enemy2;
-            //enemyMove = enemy2.GetComponent<EnemyCombatMovement>();
-            enemyRB = enemy2.GetComponent<Rigidbody2D>();
-            //enemyPatrol = GameObject.Find("CombatSoldier").GetComponent<Patrol>();
-            player.isToySoldier = false;
-        }
         playerHealth = 20;
 
         originalCamera = PlayerController.mainCamera;
@@ -120,6 +143,9 @@ public class battleTutorial : MonoBehaviour
 
         StartCoroutine(SetupBattle());
         anim = GameObject.FindWithTag("CombatLeaf").GetComponent<Animator>(); //this fixes the combat animation
+        attack1 = GameObject.Find("JackyllHandAttack").GetComponent<JackyllHandAttack>();
+        jackyllShoot = GameObject.Find("shoot").GetComponent<enemyShooting>();
+
     }
 
     IEnumerator SetupBattle()
@@ -132,12 +158,15 @@ public class battleTutorial : MonoBehaviour
         enemyUnit = enemyGO.GetComponent<Unit>();
         enemyRB = enemyGO.GetComponent<Rigidbody2D>();
 
-        enemyMove = enemyGO.GetComponent<EnemyCombatMovement>();
-        enemyMove.isTutorial = true;
-        enemyShoot = enemyGO.GetComponent<enemyShooting>();
+        jackyllAnim = enemyGO.GetComponent<Animator>();
 
         playerClone = playerGO;
         enemyClone = enemyGO;
+
+        jackyllFireHand = GameObject.Find("JackyllHandAttack");
+        hand = GameObject.Find("JackyllHandAttack").GetComponent<floatUpAndDown>();
+        hand2 = GameObject.Find("JackyllHand").GetComponent<floatUpAndDown>();
+        handChange = GameObject.Find("JackyllHandAttack").GetComponent<changeSprite>();
 
         playerLocation = playerGO.transform.position;
         enemyLocation = enemyGO.transform.position;
@@ -157,70 +186,21 @@ public class battleTutorial : MonoBehaviour
 
         //yield return new WaitForSeconds(1f);
         GameObject tempLeaf = GameObject.Find("Leaf"); //added this
-        if (tempLeaf != null)
-        {
-            firstStrikeCheck = tempLeaf.GetComponent<PlayerAttack>();
-            if (firstStrikeCheck.firstStrike == true)
-            {
-                PlayerController.playerCharacter.SetActive(false);
-
-                player.DialogueUI.ShowDialogue(dialogueObject);
-
-                GameObject.Find("AttackButton").GetComponent<Button>().interactable = false;
-                GameObject.Find("HealButton").GetComponent<Button>().interactable = false;
-
-                yield return new WaitForSeconds(.01f);
-
-                anim.SetBool("CombatSwing", true);
-                //AudioSource.PlayClipAtPoint(playerAttackSE, transform.position);
-
-                int displayDamage = 8 + staticHealth.extraDamage;
-
-                dialogueText.text = "First Strike for " + displayDamage + " damage";
-                bool isDead = enemyUnit.TakeDamage(displayDamage);
-                enemyHUD.damageText.text = "-" + displayDamage.ToString();
-                enemyHUD.SetHP(enemyUnit.currentHP, enemyUnit);
-                enemyHUD.SetHUD(enemyUnit);
-                if (isDead == true)
-                {
-                    enemyClone.transform.localRotation = Quaternion.Euler(180, 0, 0);
-                    enemyUnit.currentHP = 0;
-
-                    enemyHUD.SetHP(enemyUnit.currentHP, enemyUnit);
-                    enemyHUD.SetHUD(enemyUnit);
-                    yield return new WaitForSeconds(1f);
-                    enemyHUD.damageText.text = "";
-                    dialogueText.text = enemyUnit.unitName + " was defeated!";
-                    yield return new WaitForSeconds(1f);
-                    state = BattleState.WON;
-                    StartCoroutine(EndBattle());
-                }
-                else
-                {
-                    state = BattleState.PLAYERTURN;
-                }
-
-                GameObject.Find("AttackButton").GetComponent<Button>().interactable = true;
-                GameObject.Find("HealButton").GetComponent<Button>().interactable = true;
-                firstStrikeCheck.firstStrike = false;
-                yield return new WaitForSeconds(.5f);
-                enemyHUD.damageText.text = "";
-            }
-
-        }
-        else
-        {
-            PlayerController.playerCharacter.SetActive(false);
-            yield return new WaitForSeconds(1f);
-        }
+        
         PlayerController.playerCharacter.SetActive(false);
         state = BattleState.PLAYERTURN;
-        StartCoroutine(PlayerTurn());
+        yield return new WaitForSeconds(1f);
+        PlayerTurn();
         isSetUp = true;
+
     }
 
     IEnumerator PlayerAttack()
     {
+        while (dialogueUI.IsOpen)
+        {
+            yield return null;
+        }
         GameObject.Find("AttackButton").GetComponent<Button>().interactable = true;
         GameObject.Find("HealButton").GetComponent<Button>().interactable = true;
         int damage = getDamage();
@@ -230,9 +210,12 @@ public class battleTutorial : MonoBehaviour
 
         if (isDead == true)
         {
-            enemyRB.gravityScale = 1;
-            enemyClone.transform.localRotation = Quaternion.Euler(180, 0, 0);
+            hand.stopMoving = true;
+            hand2.stopMoving = true;
+            hand.transform.position = new Vector2(1.25f, -.35f);
+            hand2.transform.position = new Vector2(4.5f, -.35f);
             enemyUnit.currentHP = 0;
+            
             GameObject.Find("AttackButton").GetComponent<Button>().interactable = false;
             GameObject.Find("HealButton").GetComponent<Button>().interactable = false;
 
@@ -241,7 +224,6 @@ public class battleTutorial : MonoBehaviour
             yield return new WaitForSeconds(1f);
             enemyHUD.damageText.text = "";
             dialogueText.text = enemyUnit.unitName + " was defeated!";
-            Destroy(enemyClone);
             yield return new WaitForSeconds(1f);
             state = BattleState.WON;
             StartCoroutine(EndBattle());
@@ -266,46 +248,47 @@ public class battleTutorial : MonoBehaviour
     {
         if (state == BattleState.WON)
         {
+            Destroy(GameObject.Find("BossTransition"));
             dialogueText.text = "The battle was won! +10Exp!";
-            while (dialogueUI.IsOpen)
-            {
-                yield return null;
-            }
-            if (dialogue3Done == false)
-            {
-                player.DialogueUI.ShowDialogue(dialogueObject3);
-                dialogue2Done = true;
-            }
-            while (dialogueUI.IsOpen)
-            {
-                yield return null;
-            }
             yield return new WaitForSeconds(1f);
             //GameObject leafUnitHealth = GameObject.Find("LeafUnit");
             //GameUnit = leafUnitHealth.GetComponent<Unit>();
             //GameUnit.currentHP = playerUnit.getHP();
 
-            originalCamera.SetActive(true);
-            originalCharacter.SetActive(true);
-            originalEventSystem.SetActive(true);
 
             //int oldMax = staticHealth.maxHealth;
 
             levelUp();
 
-            staticHealth = GameObject.Find("GameManager").GetComponent<ScriptManager>();
+            //staticHealth = GameObject.Find("GameManager").GetComponent<ScriptManager>();
             staticHealth.health = playerUnit.currentHP;
             //staticHealth.health += (staticHealth.maxHealth - oldMax);
             //staticHealth.maxHealth = GameUnit.maxHP;
 
-            SceneManager.UnloadSceneAsync("Battle(Tutorial)");
+            int i = 1;
+            while (i == 1)
+            {
+                yield return null;
+                if (!dialogueUI.IsOpen)
+                {
+                    Destroy(originalCamera);
+                    Destroy(playerCharacter);
+                    SceneManager.LoadSceneAsync("EndGame");
+                    SceneManager.UnloadSceneAsync("BossBattle");
+                    originalCamera.SetActive(true);
+                    originalCharacter.SetActive(true);
+                    originalEventSystem.SetActive(true);
+                    i = 2;
+                }
+            }
         }
         else if (state == BattleState.LOST)
         {
             dialogueText.text = "The battle was lost...";
+            yield return new WaitForSeconds(1f);
             originalCamera.SetActive(false);
-            SceneManager.UnloadSceneAsync("Battle(Tutorial)");
-            SceneManager.LoadScene("BattleLost");
+            SceneManager.UnloadSceneAsync("BossBattle");
+            player.resetBattle();
         }
     }
 
@@ -315,29 +298,57 @@ public class battleTutorial : MonoBehaviour
         {
             yield return null;
         }
-        if (dialogue2Done == false)
-        {
-            player.DialogueUI.ShowDialogue(dialogueObject2);
-            dialogue2Done = true;
-        }
-        while (dialogueUI.IsOpen)
-        {
-            yield return null;
-        }
         isEnemyTurn = true;
-        if (enemyMove != null)
-        {
-            yield return new WaitForSeconds(1f);
-            StartCoroutine(enemyMove.MoveTowards());
-            yield return new WaitForSeconds(3f);
-        }
-        if (enemyShoot != null)
-        {
-            yield return new WaitForSeconds(1f);
-            enemyShoot.Shoot();
-            yield return new WaitForSeconds(2f);
-        }
         bool isDead = playerUnit.TakeDamage(0);
+        int attackNum = Random.Range(0, 3);
+        print(attackNum);
+        if(attackNum == 1)
+        {
+            StartCoroutine(attack1.handAttack());
+            yield return new WaitForSeconds(4f);
+        }
+        if (attackNum == 0)
+        {
+            handChange.change = true;
+            hand.stopMoving = true;
+            Vector2 down = new Vector2(.95f, -.35f);
+            Vector2 up = new Vector2(.95f, 1.4f);
+            jackyllFireHand.transform.position = down;
+            yield return new WaitForSeconds(1f);
+            jackyllShoot.Shoot();
+            jackyllFireHand.transform.position = up;
+            yield return new WaitForSeconds(1f);
+            jackyllShoot.Shoot();
+            jackyllFireHand.transform.position = down;
+            yield return new WaitForSeconds(1f);
+            jackyllShoot.Shoot();
+            yield return new WaitForSeconds(1f);
+            handChange.change = false;
+            hand.stopMoving = false;
+        }
+        if (attackNum == 2)
+        {
+            handChange.change = true;
+            hand.stopMoving = true;
+            Vector2 down = new Vector2(.95f, -.35f);
+            Vector2 up = new Vector2(.95f, 1.4f);
+            jackyllFireHand.transform.position = down;
+            yield return new WaitForSeconds(1f);
+            jackyllShoot.Shoot();
+            jackyllFireHand.transform.position = down;
+            yield return new WaitForSeconds(1.5f);
+            jackyllShoot.Shoot();
+            jackyllFireHand.transform.position = down;
+            yield return new WaitForSeconds(1.5f);
+            jackyllShoot.Shoot();
+            yield return new WaitForSeconds(1f);
+            handChange.change = false;
+            hand.stopMoving = false;
+        }
+        if (playerUnit.currentHP <= 0)
+        {
+            isDead = true;
+        }
         if (isDead)
         {
             yield return new WaitForSeconds(1f);
@@ -346,33 +357,16 @@ public class battleTutorial : MonoBehaviour
         }
         else
         {
+            yield return new WaitForSeconds(.5f);
             state = BattleState.PLAYERTURN;
-            StartCoroutine(PlayerTurn());
-        }
-        //playerClone.transform.position = playerLocation;
-        if (enemyPrefab == enemy1)
-        {
-            enemyClone.transform.position = enemyLocation;
+            PlayerTurn();
         }
         anim.SetBool("CombatSwing", false);
     }
 
-    IEnumerator PlayerTurn()
+    void PlayerTurn()
     {
         dialogueText.text = "Choose an action:";
-        while (dialogueUI.IsOpen)
-        {
-            yield return null;
-        }
-        if (dialogue1Done == false)
-        {
-            player.DialogueUI.ShowDialogue(dialogueObject1);
-            dialogue1Done = true;
-        }
-        while (dialogueUI.IsOpen)
-        {
-            yield return null;
-        }
     }
 
     IEnumerator PlayerHeal()
@@ -458,15 +452,7 @@ public class battleTutorial : MonoBehaviour
         }
 
         // For enemy damage
-        if (enemyUnit.unitName == "Toy Car")
-        {
-            damage = Random.Range(3, 6);
-        }
-        else if (enemyUnit.unitName == "Toy Soldier") // For use when implemented...
-        {
-            damage = Random.Range(3, 8);
-        } // Add more enemies just as done above and specify damage range...
-
+        damage = Random.Range(5, 10);
         // For player damage
         if (state == BattleState.PLAYERTURN)
         {

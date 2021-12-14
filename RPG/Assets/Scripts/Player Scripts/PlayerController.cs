@@ -253,7 +253,7 @@ public class PlayerController : MonoBehaviour
     public void resetBattle()
     {
         mainCamera.SetActive(true);
-        playerCharacter.SetActive(true); //commented out for now
+        playerCharacter.SetActive(true);
         eventSystem.SetActive(true);
         this.transform.position = new Vector2(311.25f, 19.75f);
         manager.health = manager.maxHealth;

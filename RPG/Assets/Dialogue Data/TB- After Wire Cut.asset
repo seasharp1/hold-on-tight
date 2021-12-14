@@ -10,21 +10,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6051a42f62c8eab4cb99fb54b9249893, type: 3}
-  m_Name: TB- Mind control room 1
+  m_Name: TB- After Wire Cut
   m_EditorClassIdentifier: 
   dialogue:
   - 'Pepper-
 
-    Leaf, look at this.'
+    Woah, that was cool!'
   - 'Pepper-
 
-    This must be where Jackyll get''s his mind control powers from.'
-  - 'Pepper-
-
-    I bet if we can shut off this machine he''ll be powerless against
-    our brains.'
-  - 'Pepper-
-
-    Maybe we can break it somehow. But how can we reach that?'
+    Well sweet, now that freak can''t create any more brainwashed soldiers.'
   responses: []
   isDone: 0

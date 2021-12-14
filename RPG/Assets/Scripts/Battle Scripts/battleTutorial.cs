@@ -4,10 +4,13 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
-public enum BattleState { START, PLAYERTURN, ENEMYTURN, WON, LOST }
-
-public class BattleSystem : MonoBehaviour
+public class battleTutorial : MonoBehaviour
 {
+    [SerializeField] private DialogueObject dialogueObject;
+    [SerializeField] private DialogueObject dialogueObject1;
+    [SerializeField] private DialogueObject dialogueObject2;
+    [SerializeField] private DialogueObject dialogueObject3;
+
 
     public GameObject playerPrefab;
     public GameObject enemyPrefab;
@@ -40,8 +43,8 @@ public class BattleSystem : MonoBehaviour
     PlayerAttack firstStrikeCheck;
 
     public AudioClip playerAttackSE;
-    public AudioClip criticalHitSE;
     public AudioClip playerHealSE;
+    public AudioClip criticalHitSE;
     public AudioClip enemyAttack;
 
     public PlayerController player;
@@ -64,12 +67,14 @@ public class BattleSystem : MonoBehaviour
 
     bool isSetUp;
 
-    Bullet bullet;
-
     GameObject dialogueHolder;
     DialogueUI dialogueUI;
+    Canvas theCanvas;
 
-    Animator enemyAnim;
+    bool dialogue1Done = false;
+    bool dialogue2Done = false;
+    bool dialogue3Done = false;
+
     // Start is called before the first frame update
     void Update()
     {
@@ -86,12 +91,13 @@ public class BattleSystem : MonoBehaviour
     }
     void Start()
     {
+        theCanvas = GameObject.FindWithTag("dialogueCanvas").GetComponent<Canvas>();
         dialogueHolder = GameObject.Find("Canvas");
         dialogueUI = dialogueHolder.GetComponent<DialogueUI>();
         isSetUp = false;
         state = BattleState.START;
         player = GameObject.FindWithTag("Player").GetComponent<PlayerController>();
-        if(player.isToyCar == true)
+        if (player.isToyCar == true)
         {
             enemyPrefab = enemy1;
             //enemyMove = enemy1.GetComponent<EnemyCombatMovement>();
@@ -127,9 +133,8 @@ public class BattleSystem : MonoBehaviour
         enemyRB = enemyGO.GetComponent<Rigidbody2D>();
 
         enemyMove = enemyGO.GetComponent<EnemyCombatMovement>();
+        enemyMove.isTutorial = true;
         enemyShoot = enemyGO.GetComponent<enemyShooting>();
-
-        enemyAnim = enemyGO.GetComponent<Animator>();
 
         playerClone = playerGO;
         enemyClone = enemyGO;
@@ -159,6 +164,8 @@ public class BattleSystem : MonoBehaviour
             {
                 PlayerController.playerCharacter.SetActive(false);
 
+                player.DialogueUI.ShowDialogue(dialogueObject);
+
                 GameObject.Find("AttackButton").GetComponent<Button>().interactable = false;
                 GameObject.Find("HealButton").GetComponent<Button>().interactable = false;
 
@@ -166,15 +173,8 @@ public class BattleSystem : MonoBehaviour
 
                 anim.SetBool("CombatSwing", true);
                 //AudioSource.PlayClipAtPoint(playerAttackSE, transform.position);
-                int displayDamage;
-                if (firstStrikeCheck.bulletFirstStrike)
-                {
-                    displayDamage = (8 + staticHealth.extraDamage) / 2;
-                }
-                else
-                {
-                    displayDamage = 8 + staticHealth.extraDamage;
-                }
+
+                int displayDamage = 8 + staticHealth.extraDamage;
 
                 dialogueText.text = "First Strike for " + displayDamage + " damage";
                 bool isDead = enemyUnit.TakeDamage(displayDamage);
@@ -183,6 +183,7 @@ public class BattleSystem : MonoBehaviour
                 enemyHUD.SetHUD(enemyUnit);
                 if (isDead == true)
                 {
+                    enemyRB.gravityScale = 1;
                     enemyClone.transform.localRotation = Quaternion.Euler(180, 0, 0);
                     enemyUnit.currentHP = 0;
 
@@ -202,7 +203,6 @@ public class BattleSystem : MonoBehaviour
 
                 GameObject.Find("AttackButton").GetComponent<Button>().interactable = true;
                 GameObject.Find("HealButton").GetComponent<Button>().interactable = true;
-                firstStrikeCheck.bulletFirstStrike = false;
                 firstStrikeCheck.firstStrike = false;
                 yield return new WaitForSeconds(.5f);
                 enemyHUD.damageText.text = "";
@@ -216,7 +216,7 @@ public class BattleSystem : MonoBehaviour
         }
         PlayerController.playerCharacter.SetActive(false);
         state = BattleState.PLAYERTURN;
-        PlayerTurn();
+        StartCoroutine(PlayerTurn());
         isSetUp = true;
     }
 
@@ -268,6 +268,19 @@ public class BattleSystem : MonoBehaviour
         if (state == BattleState.WON)
         {
             dialogueText.text = "The battle was won! +10Exp!";
+            while (dialogueUI.IsOpen)
+            {
+                yield return null;
+            }
+            if (dialogue3Done == false)
+            {
+                player.DialogueUI.ShowDialogue(dialogueObject3);
+                dialogue2Done = true;
+            }
+            while (dialogueUI.IsOpen)
+            {
+                yield return null;
+            }
             yield return new WaitForSeconds(1f);
             //GameObject leafUnitHealth = GameObject.Find("LeafUnit");
             //GameUnit = leafUnitHealth.GetComponent<Unit>();
@@ -286,55 +299,44 @@ public class BattleSystem : MonoBehaviour
             //staticHealth.health += (staticHealth.maxHealth - oldMax);
             //staticHealth.maxHealth = GameUnit.maxHP;
 
-            SceneManager.UnloadSceneAsync("Battle");
+            SceneManager.UnloadSceneAsync("Battle(Tutorial)");
         }
         else if (state == BattleState.LOST)
         {
             dialogueText.text = "The battle was lost...";
             originalCamera.SetActive(false);
-            SceneManager.UnloadSceneAsync("Battle");
+            SceneManager.UnloadSceneAsync("Battle(Tutorial)");
             SceneManager.LoadScene("BattleLost");
         }
     }
 
     IEnumerator EnemyTurn()
     {
+        while (dialogueUI.IsOpen)
+        {
+            yield return null;
+        }
+        if (dialogue2Done == false)
+        {
+            player.DialogueUI.ShowDialogue(dialogueObject2);
+            dialogue2Done = true;
+        }
+        while (dialogueUI.IsOpen)
+        {
+            yield return null;
+        }
         isEnemyTurn = true;
-        if(enemyMove != null)
+        if (enemyMove != null)
         {
             yield return new WaitForSeconds(1f);
             StartCoroutine(enemyMove.MoveTowards());
             yield return new WaitForSeconds(3f);
         }
-        if(enemyShoot != null)
+        if (enemyShoot != null)
         {
-            int ran = Random.Range(0, 3);
-            print(ran);
-            if(ran == 0)
-            {
-                yield return new WaitForSeconds(.5f);
-                enemyAnim.SetBool("isShooting", true);
-                yield return new WaitForSeconds(.3f);
-                enemyShoot.Shoot();
-                yield return new WaitForSeconds(2f);
-            }
-            if(ran == 1)
-            {
-                yield return new WaitForSeconds(1f);
-                enemyAnim.SetBool("isShooting", true);
-                yield return new WaitForSeconds(.3f);
-                enemyShoot.Shoot();
-                yield return new WaitForSeconds(1.5f);
-            }
-            if (ran == 2)
-            {
-                enemyAnim.SetBool("isShooting", true);
-                yield return new WaitForSeconds(1f);
-                enemyAnim.SetBool("isShooting", true);
-                yield return new WaitForSeconds(.3f);
-                enemyShoot.Shoot();
-                yield return new WaitForSeconds(1.5f);
-            }
+            yield return new WaitForSeconds(1f);
+            enemyShoot.Shoot();
+            yield return new WaitForSeconds(2f);
         }
         bool isDead = playerUnit.TakeDamage(0);
         if (isDead)
@@ -346,19 +348,32 @@ public class BattleSystem : MonoBehaviour
         else
         {
             state = BattleState.PLAYERTURN;
-            PlayerTurn();
+            StartCoroutine(PlayerTurn());
         }
         //playerClone.transform.position = playerLocation;
-        if(enemyPrefab == enemy1)
+        if (enemyPrefab == enemy1)
         {
             enemyClone.transform.position = enemyLocation;
         }
         anim.SetBool("CombatSwing", false);
     }
 
-    void PlayerTurn()
+    IEnumerator PlayerTurn()
     {
         dialogueText.text = "Choose an action:";
+        while (dialogueUI.IsOpen)
+        {
+            yield return null;
+        }
+        if (dialogue1Done == false)
+        {
+            player.DialogueUI.ShowDialogue(dialogueObject1);
+            dialogue1Done = true;
+        }
+        while (dialogueUI.IsOpen)
+        {
+            yield return null;
+        }
     }
 
     IEnumerator PlayerHeal()
@@ -447,7 +462,8 @@ public class BattleSystem : MonoBehaviour
         if (enemyUnit.unitName == "Toy Car")
         {
             damage = Random.Range(3, 6);
-        } else if (enemyUnit.unitName == "Toy Soldier") // For use when implemented...
+        }
+        else if (enemyUnit.unitName == "Toy Soldier") // For use when implemented...
         {
             damage = Random.Range(3, 8);
         } // Add more enemies just as done above and specify damage range...

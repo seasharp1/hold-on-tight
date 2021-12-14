@@ -99,7 +99,7 @@ public class DialogueActivatorCutscene : MonoBehaviour, IInteractable
         {
             jackyllRB.gravityScale = 1;
             yield return new WaitForSeconds(1f);
-            jackyll.SetBool("isBoing", true);
+            //jackyll.SetBool("isBoing", true);
             jackyllGravity = false;
         }
         yield return new WaitForSeconds(timer);
