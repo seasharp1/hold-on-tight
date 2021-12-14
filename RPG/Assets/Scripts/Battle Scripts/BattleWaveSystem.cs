@@ -310,6 +310,8 @@ public class BattleWaveSystem : MonoBehaviour
         else if (state == BattleState.LOST)
         {
             dialogueText.text = "The battle was lost...";
+            Destroy(originalCamera);
+            Destroy(originalCharacter);
             originalCamera.SetActive(false);
             SceneManager.UnloadSceneAsync("Battle(wave)");
             SceneManager.LoadScene("BattleLost");
