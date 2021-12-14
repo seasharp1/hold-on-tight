@@ -17,12 +17,15 @@ public class Shooing : MonoBehaviour
 
     public AudioClip gunshot;
 
+    Animator anim;
+
     // Update is called once per frame
     private void Start()
     {
         canShoot = true;
         dialogueHolder = GameObject.Find("Canvas");
         dialogueUI = dialogueHolder.GetComponent<DialogueUI>();
+        anim = GameObject.FindWithTag("Player").GetComponent<Animator>();
     }
     void Update()
     {
@@ -31,6 +34,7 @@ public class Shooing : MonoBehaviour
             if (Input.GetKeyDown(KeyCode.R) && dialogueUI.IsOpen == false && canShoot)
             {
                 Shoot();
+                anim.SetBool("isShooting", true);
                 AudioSource.PlayClipAtPoint(gunshot, transform.position);
                 nextFireTime = Time.time + cooldownTime;
             }
